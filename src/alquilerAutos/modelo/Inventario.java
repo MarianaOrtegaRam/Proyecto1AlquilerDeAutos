@@ -1,4 +1,4 @@
-package archivos;
+package alquilerAutos.modelo;
 
 public class Inventario {
 
