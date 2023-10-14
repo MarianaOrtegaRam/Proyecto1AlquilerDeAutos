@@ -10,10 +10,10 @@ public class DatosBasicos {
 	private String login;
 	private String contraseña;
 	private String tipoUsuario;
-	private File imagen;
+	//private File imagen;
 	
 	public DatosBasicos(String nombre, String datoContacto, String fechaNacimiento, String nacionalidad, String login,
-			String contraseña, String tipoUsuario, File imagen) {
+			String contraseña, String tipoUsuario) {
 	
 		this.nombre = nombre;
 		this.datoContacto = datoContacto;
@@ -22,7 +22,7 @@ public class DatosBasicos {
 		this.login = login;
 		this.contraseña = contraseña;
 		this.tipoUsuario = tipoUsuario;
-		this.imagen = imagen;
+		//this.imagen = imagen;
 	}
 
 	public String getNombre() {
