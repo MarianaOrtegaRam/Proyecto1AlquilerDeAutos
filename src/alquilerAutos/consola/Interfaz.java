@@ -106,6 +106,7 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 private void ejecutarRegistrarCliente() {
 	SistemaAlquilerAutos sistema = new SistemaAlquilerAutos();
 	sistema.nuevoCliente();
+	
 }
 
 
