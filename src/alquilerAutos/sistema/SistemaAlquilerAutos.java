@@ -6,11 +6,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import alquilerAutos.modelo.Administrador;
 import alquilerAutos.modelo.Categoria;
+import alquilerAutos.modelo.DatosBasicos;
 import alquilerAutos.modelo.DatosCliente;
+import alquilerAutos.modelo.DatosLicencia;
 import alquilerAutos.modelo.InfoCliente;
 import alquilerAutos.modelo.InfoEmpleado;
 import alquilerAutos.modelo.Inventario;
@@ -21,14 +25,66 @@ import alquilerAutos.modelo.Vehiculo;
 public class SistemaAlquilerAutos {
 	
 	private ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+	private ArrayList<DatosCliente> clientes = new ArrayList<>();
+	private Map<String,ArrayList<String>> sedes = new HashMap<>();
+	private Map<String,String[]> condicionesCategoria = new HashMap<>();
 	private Inventario inventario;
 	private Reserva reserva;
 	
 	
 	public void nuevoCliente() {
 		InfoCliente infoCliente = new InfoCliente();
-		ArrayList<DatosCliente> clientes = infoCliente.getClientes();
+		DatosCliente cliente = infoCliente.crearCliente();
+    	this.clientes.add(cliente);
+    	System.out.println(clientes);
 	}
+	
+	public void cargarInformacionCliente()  throws FileNotFoundException, IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/clientes.txt"));
+		String linea = br.readLine(); 
+		
+		while (linea != null) 
+		{
+				
+			String[] partes = linea.split(";");
+			String nombre = partes[0];
+			String datoContacto = partes[1];
+			String fechaNacimiento = partes[2];
+			String nacionalidad = partes[3];
+			String login = partes[4];
+			String contraseña = partes[5];
+			String pais = partes[6];
+			String numero = partes[7];
+			String fechaVencimiento = partes[8];
+				
+			DatosBasicos datosBasicos = new DatosBasicos(nombre,datoContacto,fechaNacimiento,nacionalidad,login,contraseña,"cliente");
+			DatosLicencia datosLicencia = new DatosLicencia(pais,Integer.parseInt(numero),fechaVencimiento);
+			
+			DatosCliente datosCliente = new DatosCliente(datosBasicos,datosLicencia);
+			this.clientes.add(datosCliente);
+			linea = br.readLine(); 
+		}
+			
+		br.close();
+	}
+	
+	public boolean verificarCliente(String login, String contraseña){
+		  
+		boolean verificacion = false;
+		
+	    for (int i = 0; i < clientes.size(); i++){ 
+		String loginUnCliente = clientes.get(i).getDatosBasicos().getLogin();
+		String contraseñaUnCliente = clientes.get(i).getDatosBasicos().getContraseña();
+		
+		if(loginUnCliente.equals(login) && contraseñaUnCliente.equals(contraseña)) {
+			verificacion = true;
+			
+			} 
+		}
+	    return verificacion;
+	  
+	 }
 	
 	public void cargarInformacionVehiculos()  throws FileNotFoundException, IOException {
 
@@ -62,22 +118,84 @@ public class SistemaAlquilerAutos {
 			this.vehiculos.add(elvehiculo);
 			linea = br.readLine(); 
 		}
-		
-		System.out.println(this.vehiculos);
 			
 		br.close();
 		
 }
 	
+	public void cargarInformacionCondicionesCategoria()  throws FileNotFoundException, IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/sedesvehiculos.txt"));
+		String linea = br.readLine(); 
+			
+		while (linea != null) 
+		{
+				
+			String [] partes  = linea.split(";");
+			String nombreCategoria = partes[0];
+			String condiciones = partes[1];
+			String[] condiciones1 = condiciones.split("!");
+			
+			String[] condicionesCate = condicionesCategoria.get(nombreCategoria);
+			if (condicionesCate == null){
+				condicionesCategoria.put(nombreCategoria, condiciones1);
+			}
+				
+			linea = br.readLine(); 
+		}
+			
+		br.close();
+		
+}
+	public void cargarInformacionSedes()  throws FileNotFoundException, IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/sedesvehiculos.txt"));
+		String linea = br.readLine(); 
+			
+		while (linea != null) 
+		{
+				
+			String [] partes  = linea.split(";");
+			String nombreSede = partes[0];
+			String placa = partes[1];
+			ArrayList<String> sedeExiste = sedes.get(nombreSede);
+			if (sedeExiste == null){
+				ArrayList<String> carros = new ArrayList<>();
+				carros.add(placa);
+				sedes.put(nombreSede,carros);
+			}
+			else {
+				ArrayList<String> lista = sedes.get(nombreSede);
+				lista.add(placa);
+			}
+				
+			linea = br.readLine(); 
+		}
+			
+		br.close();
+		
+}
 	public void registrarNuevoVehiculo() {
 		Administrador administrador = new Administrador(); 
 		Vehiculo vehiculo = administrador.registrarNuevoVehiculo();
 		this.vehiculos.add(vehiculo);
-		System.out.println(this.vehiculos);
+		String sede = vehiculo.getsede();
+		
+		ArrayList<String> sedeExiste = sedes.get(sede);
+		if (sedeExiste == null){
+			ArrayList<String> carros = new ArrayList<>();
+			carros.add(vehiculo.getPlaca());
+			sedes.put(sede,carros);
+		}
+		else {
+			ArrayList<String> lista = sedes.get(sede);
+			lista.add(vehiculo.getPlaca());
+		}
+		
 	}
 	
 	
-	public Reserva crearReserva() {
+	public void crearReserva() {
 	
 		Scanner scanner = new Scanner(System.in); 
 		System.out.println("----------------------------------------------------------------------------------------");
@@ -98,7 +216,46 @@ public class SistemaAlquilerAutos {
 		String seguroVehiculo = scanner.nextLine();
 		
 		Reserva reserva = new Reserva(categoriaVehiculo, sedeRecogerVehiculo, sedeEntregarrVehiculo, fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo, seguroVehiculo);
-		return reserva;
+		
+		ArrayList<String> listaPlacas = sedes.get(sedeRecogerVehiculo);
+		
+		Vehiculo candidato = null;
+		Vehiculo categoriaDeseada = null;
+		
+		 for (int i = 0; i < listaPlacas.size(); i++) {
+	            String unaPlaca = listaPlacas.get(i);   
+	            for(int j = 0; j < this.vehiculos.size(); j++) {
+	            	Vehiculo unVehiculo = vehiculos.get(j);
+	            	if(unaPlaca == unVehiculo.getPlaca()) {
+	            		String categoriaUnVehiculo = unVehiculo.getCategoria();
+	            		if(categoriaUnVehiculo == categoriaVehiculo && unVehiculo.getDisponibilidad()){
+	            			categoriaDeseada = unVehiculo;
+	            		}else if(categoriaUnVehiculo != categoriaVehiculo && unVehiculo.getDisponibilidad()) {
+	            			String[] condicionesUnaCategoria = condicionesCategoria.get(categoriaVehiculo);
+	            			boolean cumple = unVehiculo.verificarCondiciones(condicionesUnaCategoria);
+	            			if(cumple) {
+	            				candidato = unVehiculo;
+	            			}
+	            					
+	            		}
+	            	}
+	            }
+	        }
+		 
+		 if(categoriaDeseada != null) {
+			 reserva.setVehiculo(categoriaDeseada);
+			 categoriaDeseada.setDisponible(false);
+			 System.out.println("Reserva exitosa!");
+		 }else if(candidato != null) {
+			 reserva.setVehiculo(candidato);
+			 System.out.println("No se encontro disponible la categoria deseada, sin embargo, este vehiculo cumple sus nececidades");
+			 candidato.setDisponible(false);
+		 }else{
+			 reserva = null;
+			 System.out.println("No se pudo realizar la reserva");
+		 }
+		 
+		 
 	}
 	
 	public void modificarReserva() {
@@ -154,12 +311,35 @@ public class SistemaAlquilerAutos {
 		return precioFinal;
 	}
 	
-	public Sede buscarVehiculo(Vehiculo auto){
-		return null;
+	public String buscarVehiculo(Vehiculo auto){
+		String placa = auto.getPlaca();
+		String sede = "No se encuentra!";
+		
+		 for (int i = 0; i < vehiculos.size(); i++) {
+	            Vehiculo prueba = vehiculos.get(i);
+	            if(placa == prueba.getPlaca()) {
+	            	 sede = auto.getsede();
+	            }
+	        }
+		 
+		 return sede;
+	
+		
 	}
 	
-	public boolean disponibilidadVehiculo(Vehiculo auto){
-		return false;
+	public String disponibilidadVehiculo(Vehiculo auto){
+		
+		String placa = auto.getPlaca();
+		String disponibilidad = "No se encuentra disponible!";
+		
+		 for (int i = 0; i < vehiculos.size(); i++) {
+	            Vehiculo prueba = vehiculos.get(i);
+	            if(placa == prueba.getPlaca() && prueba.getDisponibilidad()){
+	            	 disponibilidad = "Se encuentra disponible";
+	            }
+	        }
+		 
+		 return disponibilidad;
 	}
 	
 	public Vehiculo seleccionarAutoReserva(Categoria categoriaSeleccionada){

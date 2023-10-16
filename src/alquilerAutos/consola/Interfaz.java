@@ -27,14 +27,15 @@ public static void main(String[] args) throws FileNotFoundException, IOException
 }
 
 public void ejecutarOpcion() throws FileNotFoundException, IOException {
+	SistemaAlquilerAutos sistema = new SistemaAlquilerAutos();
 	{
 		boolean continuar = true;
 		while (continuar)
 		{
 			try
 			{
-				SistemaAlquilerAutos sistema = new SistemaAlquilerAutos();
 				sistema.cargarInformacionVehiculos();
+				sistema.cargarInformacionCliente();
 				System.out.println("----------------------------------------------------------------------------------------");
 				System.out.println("\nBienvenido al Sistema Alquiler de Vehiculos");
 				System.out.println("\n1. Iniciar sesion como cliente");
@@ -53,7 +54,19 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 					String loginCliente = scanner.nextLine();
 					System.out.println("\nContraseña: ");
 					String contraseñaCliente = scanner.nextLine();
-				}
+					
+					 if(sistema.verificarCliente(loginCliente, contraseñaCliente)) {
+					 System.out.println(
+					 "----------------------------------------------------------------------------------------"
+					 ); System.out.println("\nBienvenido cliente " + loginCliente );
+					 System.out.println("\n1. Realizar una reserva"); int opcion =
+					 Integer.parseInt(input("\nPor favor seleccione una opcion"));
+					  
+					 if (opcion == 1) { System.out.println("Haciendo reserva..."); }
+					 }else{System.out.println("\nUsuario o contraseña incorrectos");}
+						
+					}
+				
 				
 				if (opcionSeleccionada == 2) {
 					Scanner scanner = new Scanner(System.in); 
@@ -91,7 +104,7 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 			    if (opcionSeleccionada == 4) {
 			    	Scanner scanner = new Scanner(System.in); 
 			    	System.out.println("----------------------------------------------------------------------------------------");
-			    	ejecutarRegistrarCliente();
+			    	sistema.nuevoCliente();
 				
 			    }
 					else if (opcionSeleccionada == 5)
@@ -107,12 +120,6 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 			}
 		}
 	}
-
-private void ejecutarRegistrarCliente() {
-	SistemaAlquilerAutos sistema = new SistemaAlquilerAutos();
-	sistema.nuevoCliente();
-	
-}
 
 
 public String input(String mensaje)

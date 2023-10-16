@@ -44,6 +44,10 @@ public class Vehiculo {
 	public String getPlaca() {
 		return placa;
 	}
+	
+	public String getsede() {
+		return sede;
+	}
 
 
 	public String getTamaño() {
@@ -62,17 +66,27 @@ public class Vehiculo {
 		return precioPorDia;
 	}
 	
+	public String getCategoria() {
+		return categoria;
+	}
+	
 	public String getMarca() {
 		return marca;
+	}
+	
+	public boolean getDisponibilidad() {
+		return disponible;
 	}
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
 	
-	public boolean verificarCondiciones(ArrayList<String> condiciones) {
+	public boolean verificarCondiciones(String[] condiciones) {
 		boolean cumple = false;
-		for (String condition : condiciones) {
+		for(int i = 0; i < condiciones.length ; i++) {
+			
+			String condition = condiciones[i];
 			String[] partes = condition.split("|");
 			String atributo = partes[0];
 			String segunda = partes[1];

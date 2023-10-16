@@ -48,4 +48,8 @@ public class Reserva {
 		this.fechaEntrega = fechaEntrega;
 	}
 	
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
+	
 }
