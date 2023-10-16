@@ -33,6 +33,8 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 		{
 			try
 			{
+				SistemaAlquilerAutos sistema = new SistemaAlquilerAutos();
+				sistema.cargarInformacionVehiculos();
 				System.out.println("----------------------------------------------------------------------------------------");
 				System.out.println("\nBienvenido al Sistema Alquiler de Vehiculos");
 				System.out.println("\n1. Iniciar sesion como cliente");
@@ -74,11 +76,14 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 					if(Administrador.getLogin().equals(loginAdmin) && Administrador.getContraseña().equals(contraseñaAdmin) ){
 						System.out.println("----------------------------------------------------------------------------------------");
 						System.out.println("\nBienvenido administrador " + Administrador.getLogin());
-						System.out.println("\n1. Registrar empleado");			
+						System.out.println("\n1. Registrar empleado");	
+						System.out.println("\n2. Registrar nuevo vehiculo");	
 						int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 						
 						if (opcion == 1) {
 							administrador.registrarEmpleado();
+					}else if(opcion == 2) {
+						sistema.registrarNuevoVehiculo();
 					}
 			    }else{System.out.println("\nUsuario o contraseña incorrectos");}
 		}

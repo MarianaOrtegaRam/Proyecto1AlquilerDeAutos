@@ -1,6 +1,9 @@
 package alquilerAutos.modelo;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Vehiculo {
     private String placa;
@@ -13,11 +16,12 @@ public class Vehiculo {
     private int maletas;
     private int capacidad;
     private boolean disponible;
-    private Sede sede;
-    private Categoria categoria;
+    private String categoria;
+    private String sede;
+   
     
     public Vehiculo(String placa, String marca, String tamaño, String modelo, String color, String caja,
-			int precioPorDia, int maletas, int capacidad, boolean disponible) {
+			int precioPorDia, int maletas, int capacidad, boolean disponible, String categoria, String sede) {
 		
 		this.placa = placa;
 		this.marca = marca;
@@ -29,6 +33,8 @@ public class Vehiculo {
 		this.maletas = maletas;
 		this.capacidad = capacidad;
 		this.disponible = disponible;
+		this.categoria = categoria;
+		this.sede = sede;
 	}
     
     public void asignarTarifaDiaria(float precioPorCategoria){
@@ -43,14 +49,10 @@ public class Vehiculo {
 	public String getTamaño() {
 		return tamaño;
 	}
-
-
-
+	
 	public int getMaletas() {
 		return maletas;
 	}
-
-	
 
 	public int getCapacidad() {
 		return capacidad;
@@ -63,8 +65,6 @@ public class Vehiculo {
 	public String getMarca() {
 		return marca;
 	}
-	
-	
 
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
@@ -93,7 +93,7 @@ public class Vehiculo {
 
 			}
 
-			else if (atributo == "capacidad") {
+			else if (atributo == "capacidad") { 
 				int capacidadVehiculo = getCapacidad();
 				if (segunda.contains("/")) {
 					String[] rango = segunda.split("/");
@@ -127,7 +127,7 @@ public class Vehiculo {
 			}
 			else if (atributo =="marca"){
 				String marca = getMarca();
-				if ((marca == "Mercedes-Benz")|| (marca =="BMV") || (marca=="Audi")||(marca=="Land Rover")|| (marca=="Tesla"))
+				if ((marca == "mercedes-benz")|| (marca =="bmw") || (marca=="audi")||(marca=="land rover")|| (marca=="tesla"))
 				{
 					cumple =true;
 				}
@@ -136,9 +136,6 @@ public class Vehiculo {
 		}
 		return cumple;
 	}
-
-	
+}   
     
-    
-}
 

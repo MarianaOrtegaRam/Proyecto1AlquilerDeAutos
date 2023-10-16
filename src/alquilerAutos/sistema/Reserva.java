@@ -17,7 +17,7 @@ public class Reserva {
 	private Vehiculo vehiculo;
 	
 	public Reserva(String categoriaSeleccionada, String sedeRecoger, String sedeEntrega, String fechaHoraRecoger,
-			String rangoHoraEntrega, String fechaEntrega, String seguro, int precioFinal) {
+			String rangoHoraEntrega, String fechaEntrega, String seguro) {
 	
 		Random rand = new Random();
 		this.idReserva = rand.nextInt(100);
@@ -28,6 +28,10 @@ public class Reserva {
 		this.rangoHoraEntrega = rangoHoraEntrega;
 		this.fechaEntrega = fechaEntrega;
 		this.seguro = seguro;
+	
+	}
+
+	public void setPrecioFinal(int precioFinal) {
 		this.precioFinal = precioFinal;
 	}
 
