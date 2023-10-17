@@ -18,8 +18,9 @@ public class AdministradorSede {
 
 	}
 
-	public float definirTarifa(String categoria, int precioDeseado) {
-		return 0;
-	}
-
+	/*
+	 * public float definirTarifa(String categoria, int precioDeseado) {
+	 * return 0;
+	 * }
+	 */
 }
