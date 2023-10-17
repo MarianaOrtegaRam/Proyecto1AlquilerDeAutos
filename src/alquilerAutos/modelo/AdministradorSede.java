@@ -5,7 +5,7 @@ public class AdministradorSede {
 	private int cedula;
 	private String login;
 	private String contraseña;
-	
+
 	public AdministradorSede(String nombre, int cedula, String login, String contraseña) {
 
 		this.nombre = nombre;
@@ -13,14 +13,13 @@ public class AdministradorSede {
 		this.login = login;
 		this.contraseña = contraseña;
 	}
-	
+
 	public void cobrar30Alquiler() {
-		
+
 	}
-	
-	public float definirTarifa(Categoria categoria) {
-		return 0 ;
+
+	public float definirTarifa(String categoria, int precioDeseado) {
+		return 0;
 	}
-	
-	
+
 }
