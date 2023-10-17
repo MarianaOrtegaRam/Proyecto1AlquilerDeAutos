@@ -18,7 +18,6 @@ import alquilerAutos.modelo.DatosLicencia;
 import alquilerAutos.modelo.Empleado;
 import alquilerAutos.modelo.InfoCliente;
 import alquilerAutos.modelo.InfoEmpleado;
-import alquilerAutos.modelo.Inventario;
 import alquilerAutos.modelo.Sede;
 import alquilerAutos.modelo.Seguro;
 import alquilerAutos.modelo.Vehiculo;
@@ -31,7 +30,6 @@ public class SistemaAlquilerAutos {
 	private ArrayList<Seguro> seguros = new ArrayList<>();
 	private Map<String, ArrayList<String>> sedes = new HashMap<>();
 	private Map<String, String[]> condicionesCategoria = new HashMap<>();
-	private Inventario inventario;
 	private Reserva reserva;
 
 	public void nuevoCliente() {
@@ -302,7 +300,7 @@ public class SistemaAlquilerAutos {
 		System.out.println("\nIngrese seguro (Opcional): ");
 		String seguroVehiculo = scanner.nextLine();
 
-		Reserva reserva = new Reserva(categoriaVehiculo, sedeRecogerVehiculo, sedeEntregarrVehiculo,
+		Reserva reserva = new Reserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
 				fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo, seguroVehiculo);
 
 		ArrayList<String> listaPlacas = sedes.get(sedeRecogerVehiculo);
@@ -334,12 +332,14 @@ public class SistemaAlquilerAutos {
 			reserva.setVehiculo(categoriaDeseada);
 			categoriaDeseada.setDisponible(false);
 			String categoria_ = categoriaDeseada.getCategoria();
+			reserva.setCategoriaSeleccionada(categoria_);
 			int precioFinalReserva = calucularTarifas(categoria_, categoriaDeseada, diasReserva);
 			reserva.setPrecioFinal(precioFinalReserva);
 			System.out.println("Reserva exitosa!");
 		} else if (candidato != null) {
 			reserva.setVehiculo(candidato);
 			String categoria_ = candidato.getCategoria();
+			reserva.setCategoriaSeleccionada(categoria_);
 			int precioFinalReserva = calucularTarifas(categoria_, categoriaDeseada, diasReserva);
 			reserva.setPrecioFinal(precioFinalReserva);
 			System.out.println(

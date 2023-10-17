@@ -15,26 +15,28 @@ public class Reserva {
 	private String seguro;
 	private int precioFinal;
 	private Vehiculo vehiculo;
-	
-	public Reserva(String categoriaSeleccionada, String sedeRecoger, String sedeEntrega, String fechaHoraRecoger,
+
+	public Reserva(String sedeRecoger, String sedeEntrega, String fechaHoraRecoger,
 			String rangoHoraEntrega, String fechaEntrega, String seguro) {
-	
+
 		Random rand = new Random();
 		this.idReserva = rand.nextInt(100);
-		this.categoriaSeleccionada = categoriaSeleccionada;
 		this.sedeRecoger = sedeRecoger;
 		this.sedeEntrega = sedeEntrega;
 		this.fechaHoraRecoger = fechaHoraRecoger;
 		this.rangoHoraEntrega = rangoHoraEntrega;
 		this.fechaEntrega = fechaEntrega;
 		this.seguro = seguro;
-	
+
+	}
+
+	public void setCategoriaSeleccionada(String categoria) {
+		this.categoriaSeleccionada = categoria;
 	}
 
 	public void setPrecioFinal(int precioFinal) {
 		this.precioFinal = precioFinal;
 	}
-
 
 	public void setSedeEntrega(String sedeEntrega) {
 		this.sedeEntrega = sedeEntrega;
@@ -47,9 +49,9 @@ public class Reserva {
 	public void setFechaEntrega(String fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
 	}
-	
+
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
-	
+
 }
