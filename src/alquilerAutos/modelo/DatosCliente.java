@@ -9,8 +9,8 @@ import alquilerAutos.sistema.Reserva;
 public class DatosCliente {
 	private DatosBasicos datosBasicos;
 	private DatosLicencia datosLicencia;
-	//private Reserva reservaActiva;
-	//private String metodoPago;
+	private Reserva reservaActiva;
+
 	public DatosCliente(DatosBasicos datosBasicos, DatosLicencia datosLicencia) {
 	
 		this.datosBasicos = datosBasicos;
@@ -21,6 +21,10 @@ public class DatosCliente {
 	}
 	public DatosLicencia getDatosLicencia() {
 		return datosLicencia;
+	}
+	
+	public void setReservaActiva(Reserva reservaActiva) {
+		this.reservaActiva = reservaActiva;
 	}
 	
 }

@@ -12,9 +12,10 @@ public class Administrador {
 	public static String contraseña = "veronica62";
 	
 	
-	public void registrarEmpleado() {
+	public DatosBasicos registrarEmpleado() {
 		InfoEmpleado infoEmpleado = new InfoEmpleado();
-		infoEmpleado.crearEmpleado();
+		DatosBasicos datosBasicoEmpleado = infoEmpleado.crearEmpleado();
+		return datosBasicoEmpleado;
 	}
 	
 	public Vehiculo registrarNuevoVehiculo() {
@@ -63,8 +64,21 @@ public class Administrador {
 		
 	}
 	
-	public void configurarSeguro(String nombre, ArrayList<String> beneficios, float precio){
+	public Seguro configurarSeguro(){
+		Scanner scanner = new Scanner(System.in); 
+		System.out.println("----------------------------------------------------------------------------------------");
+		System.out.println("\t\t\tConfiguracion nuevo seguro\n");
+		System.out.println("Ingrese nombre: ");
+		String nombreSeguro = scanner.nextLine();
+		System.out.println("\nIngrese precio: ");
+		String precioSeguro = scanner.nextLine();
+		System.out.println("\nIngrese beneficios: ");
+		String beneficiosVehiculo = scanner.nextLine();
 		
+		guardarSeguro(nombreSeguro+";"+precioSeguro+";"+beneficiosVehiculo);
+		
+		Seguro seguro = new Seguro(nombreSeguro,Integer.parseInt(precioSeguro),beneficiosVehiculo);
+		return seguro;
 	}
 
 	public static String getLogin() {
@@ -79,6 +93,17 @@ public class Administrador {
 		FileWriter filewriter;
 		try {
 			filewriter = new FileWriter("./inventario/vehiculos.txt",true);
+			filewriter.write("\n"+texto.toLowerCase());
+			filewriter.close();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void guardarSeguro(String texto) {
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/seguros.txt",true);
 			filewriter.write("\n"+texto.toLowerCase());
 			filewriter.close();
 		}catch (IOException e) {

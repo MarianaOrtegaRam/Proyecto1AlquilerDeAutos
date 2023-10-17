@@ -15,10 +15,12 @@ import alquilerAutos.modelo.Categoria;
 import alquilerAutos.modelo.DatosBasicos;
 import alquilerAutos.modelo.DatosCliente;
 import alquilerAutos.modelo.DatosLicencia;
+import alquilerAutos.modelo.Empleado;
 import alquilerAutos.modelo.InfoCliente;
 import alquilerAutos.modelo.InfoEmpleado;
 import alquilerAutos.modelo.Inventario;
 import alquilerAutos.modelo.Sede;
+import alquilerAutos.modelo.Seguro;
 import alquilerAutos.modelo.Vehiculo;
 
 
@@ -26,6 +28,8 @@ public class SistemaAlquilerAutos {
 	
 	private ArrayList<Vehiculo> vehiculos = new ArrayList<>();
 	private ArrayList<DatosCliente> clientes = new ArrayList<>();
+	private ArrayList<DatosBasicos> empleados = new ArrayList<>();
+	private ArrayList<Seguro> seguros = new ArrayList<>();
 	private Map<String,ArrayList<String>> sedes = new HashMap<>();
 	private Map<String,String[]> condicionesCategoria = new HashMap<>();
 	private Inventario inventario;
@@ -36,7 +40,37 @@ public class SistemaAlquilerAutos {
 		InfoCliente infoCliente = new InfoCliente();
 		DatosCliente cliente = infoCliente.crearCliente();
     	this.clientes.add(cliente);
-    	System.out.println(clientes);
+	}
+	
+	public void nuevoEmpleado() {
+    	Administrador administrador = new Administrador();
+		DatosBasicos empleado = administrador.registrarEmpleado();
+    	this.empleados.add(empleado);
+	}
+	
+	public void nuevoSeguro() {
+    	Administrador administrador = new Administrador();
+		Seguro seguro = administrador.configurarSeguro();
+    	this.seguros.add(seguro);
+	}
+	
+	public void registrarNuevoVehiculo() {
+		Administrador administrador = new Administrador(); 
+		Vehiculo vehiculo = administrador.registrarNuevoVehiculo();
+		this.vehiculos.add(vehiculo);
+		String sede = vehiculo.getsede();
+		
+		ArrayList<String> sedeExiste = sedes.get(sede);
+		if (sedeExiste == null){
+			ArrayList<String> carros = new ArrayList<>();
+			carros.add(vehiculo.getPlaca());
+			sedes.put(sede,carros);
+		}
+		else {
+			ArrayList<String> lista = sedes.get(sede);
+			lista.add(vehiculo.getPlaca());
+		}
+		
 	}
 	
 	public void cargarInformacionCliente()  throws FileNotFoundException, IOException {
@@ -63,7 +97,7 @@ public class SistemaAlquilerAutos {
 			
 			DatosCliente datosCliente = new DatosCliente(datosBasicos,datosLicencia);
 			this.clientes.add(datosCliente);
-			linea = br.readLine(); 
+			linea = br.readLine(); 	
 		}
 			
 		br.close();
@@ -78,6 +112,48 @@ public class SistemaAlquilerAutos {
 		String contraseñaUnCliente = clientes.get(i).getDatosBasicos().getContraseña();
 		
 		if(loginUnCliente.equals(login) && contraseñaUnCliente.equals(contraseña)) {
+			verificacion = true;
+			
+			} 
+		}
+	    return verificacion;
+	  
+	 }
+	
+	public void cargarInformacionEmpleado()  throws FileNotFoundException, IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/empleados.txt"));
+		String linea = br.readLine(); 
+		
+		while (linea != null) 
+		{
+				
+			String[] partes = linea.split(";");
+			String nombre = partes[0];
+			String datoContacto = partes[1];
+			String fechaNacimiento = partes[2];
+			String nacionalidad = partes[3];
+			String login = partes[4];
+			String contraseña = partes[5];
+		
+			DatosBasicos datosBasicos = new DatosBasicos(nombre,datoContacto,fechaNacimiento,nacionalidad,login,contraseña,"empleado");
+			
+			this.empleados.add(datosBasicos);
+			linea = br.readLine(); 	
+		}
+			
+		br.close();
+	}
+	
+	public boolean verificarEmpleado(String login, String contraseña){
+		  
+		boolean verificacion = false;
+		
+	    for (int i = 0; i < empleados.size(); i++){ 
+		String loginUnEmpleado = empleados.get(i).getLogin();
+		String contraseñaEmpleado = empleados.get(i).getContraseña();
+		
+		if(loginUnEmpleado.equals(login) && contraseñaEmpleado.equals(contraseña)) {
 			verificacion = true;
 			
 			} 
@@ -174,28 +250,48 @@ public class SistemaAlquilerAutos {
 			
 		br.close();
 		
-}
-	public void registrarNuevoVehiculo() {
-		Administrador administrador = new Administrador(); 
-		Vehiculo vehiculo = administrador.registrarNuevoVehiculo();
-		this.vehiculos.add(vehiculo);
-		String sede = vehiculo.getsede();
+}	
+	
+	public void cargarInformacionSeguros() throws FileNotFoundException, IOException{
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/seguros.txt"));
+		String linea = br.readLine(); 
 		
-		ArrayList<String> sedeExiste = sedes.get(sede);
-		if (sedeExiste == null){
-			ArrayList<String> carros = new ArrayList<>();
-			carros.add(vehiculo.getPlaca());
-			sedes.put(sede,carros);
-		}
-		else {
-			ArrayList<String> lista = sedes.get(sede);
-			lista.add(vehiculo.getPlaca());
-		}
+		while (linea != null) 
+		{
+				
+			String[] partes = linea.split(";");
+			String nombreSeguro = partes[0];
+			String precioSeguro = partes[1];
+			String descripcionSeguro = partes[2];
+			
+				
+			Seguro seguro = new Seguro(nombreSeguro,Integer.parseInt(precioSeguro),descripcionSeguro);
+			
 		
+			this.seguros.add(seguro);
+			linea = br.readLine(); 	
+		}
+			
+		br.close();
 	}
 	
 	
-	public void crearReserva() {
+	public void ofrecerSeguro(){
+		 for (int i = 0; i < seguros.size(); i++) {
+	            String nombreSeguro = seguros.get(i).getNombreSeguro();
+	            int precioSeguro = seguros.get(i).getPrecio();
+	            String beneficiosSeguro = seguros.get(i).getBeneficios();
+	            
+	            System.out.println("\n- Nombre del seguro: "+nombreSeguro);
+	            System.out.println("\n- Precio del seguro: "+String.valueOf(precioSeguro));
+	            System.out.println("\n- Beneficios del seguro: "+beneficiosSeguro);  
+	            System.out.println("\n----------------------------------------------------------------------------------------"); 
+		 }
+		
+		
+}	
+	
+	public Reserva crearReserva() {
 	
 		Scanner scanner = new Scanner(System.in); 
 		System.out.println("----------------------------------------------------------------------------------------");
@@ -204,9 +300,9 @@ public class SistemaAlquilerAutos {
 		String categoriaVehiculo = scanner.nextLine();
 		System.out.println("\nIngrese sede para recoger: ");
 		String sedeRecogerVehiculo = scanner.nextLine();
-		System.out.println("\nIngrese sede para entragar: ");
+		System.out.println("\nIngrese sede para entregar: ");
 		String sedeEntregarrVehiculo = scanner.nextLine();
-		System.out.println("\nIngrese fecha-hora para recoger (DD-MM-AA-HH): ");
+		System.out.println("\nIngrese fecha para recoger (DD-MM-AA): ");
 		String fechaHoraRecogerVehiculo = scanner.nextLine();
 		System.out.println("\nIngrese un rango de hora para recoger (N-N): ");
 		String rangoHoraRecogerVehiculo = scanner.nextLine();
@@ -254,6 +350,8 @@ public class SistemaAlquilerAutos {
 			 reserva = null;
 			 System.out.println("No se pudo realizar la reserva");
 		 }
+		 
+		 return reserva;
 		 
 		 
 	}
@@ -342,8 +440,41 @@ public class SistemaAlquilerAutos {
 		 return disponibilidad;
 	}
 	
-	public Vehiculo seleccionarAutoReserva(Categoria categoriaSeleccionada){
-		return null;
+	public void entregaVehiculo(){
+		
+		Empleado empleado = new Empleado();
+		
+		String placa = empleado.entregarAuto();		
+		 for (int i = 0; i < vehiculos.size(); i++) {
+	            Vehiculo prueba = vehiculos.get(i);
+	            if(placa == prueba.getPlaca()){
+	            	 prueba.setDisponible(false);
+	            }
+	        }
+	}
+	
+	public void recibirVehiculo(){
+		
+		Empleado empleado = new Empleado();
+		
+		String placa = empleado.recibirAuto();		
+		 for (int i = 0; i < vehiculos.size(); i++) {
+	            Vehiculo prueba = vehiculos.get(i);
+	            if(placa == prueba.getPlaca()){
+	            	 prueba.setDisponible(true);
+	            }
+	        }
+	}
+	
+	public void setReserva(String login, Reserva reserva){
+		
+	    for (int i = 0; i < clientes.size(); i++){ 
+		String loginUnCliente = clientes.get(i).getDatosBasicos().getLogin();
+		
+		if(loginUnCliente.equals(login)) {
+			clientes.get(i).setReservaActiva(reserva);
+			} 
+		}
 	}
 	
 	public String input(String mensaje)

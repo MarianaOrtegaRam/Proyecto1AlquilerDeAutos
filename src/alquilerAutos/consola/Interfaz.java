@@ -10,6 +10,7 @@ import java.util.Scanner;
 import alquilerAutos.modelo.Administrador;
 import alquilerAutos.modelo.InfoEmpleado;
 import alquilerAutos.modelo.Vehiculo;
+import alquilerAutos.sistema.Reserva;
 import alquilerAutos.sistema.SistemaAlquilerAutos;
 
 	
@@ -36,13 +37,18 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 			{
 				sistema.cargarInformacionVehiculos();
 				sistema.cargarInformacionCliente();
+				sistema.cargarInformacionEmpleado();
+				sistema.cargarInformacionCondicionesCategoria();
+				sistema.cargarInformacionSeguros();
+				
 				System.out.println("----------------------------------------------------------------------------------------");
 				System.out.println("\nBienvenido al Sistema Alquiler de Vehiculos");
 				System.out.println("\n1. Iniciar sesion como cliente");
 				System.out.println("2. Iniciar sesion como empleado");
 				System.out.println("3. Iniciar sesion como administrador");
-				System.out.println("4. Registrarse como nuevo cliente");
-				System.out.println("5. Salir de la aplicacion");
+				System.out.println("4. Iniciar sesion como administrador de sede");
+				System.out.println("5. Registrarse como nuevo cliente");
+				System.out.println("6. Salir de la aplicacion");
 				
 				int opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 				
@@ -62,7 +68,10 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 					 System.out.println("\n1. Realizar una reserva"); int opcion =
 					 Integer.parseInt(input("\nPor favor seleccione una opcion"));
 					  
-					 if (opcion == 1) { System.out.println("Haciendo reserva..."); }
+					 if (opcion == 1) { 
+						 Reserva reserva = sistema.crearReserva(); 
+						 sistema.setReserva(loginCliente, reserva);
+					 }
 					 }else{System.out.println("\nUsuario o contraseña incorrectos");}
 						
 					}
@@ -72,11 +81,26 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 					Scanner scanner = new Scanner(System.in); 
 					System.out.println("----------------------------------------------------------------------------------------");
 					System.out.println("\nLogin: ");
-					String loginCliente = scanner.nextLine();
+					String loginEmpleado = scanner.nextLine();
 					System.out.println("\nContraseña: ");
-					String contraseñaCliente = scanner.nextLine();
+					String contraseñaEmpleado = scanner.nextLine();
+					
+					if(sistema.verificarEmpleado(loginEmpleado, contraseñaEmpleado)) {
+						 System.out.println("----------------------------------------------------------------------------------------"); 
+						 System.out.println("\nBienvenido empleado " + loginEmpleado );
+						 System.out.println("\n1. Entregar vehiculo"); 
+						 System.out.println("\n1. Recibir vehiculo"); 
+						 int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
+						  
+						 if (opcion == 1){
+						 sistema.entregaVehiculo();}else if(opcion == 2) {
+						 sistema.recibirVehiculo();}
+						 }else{System.out.println("\nUsuario o contraseña incorrectos");}
+					
 				}
 			
+				
+				
 			    if (opcionSeleccionada == 3) {
 			    	Scanner scanner = new Scanner(System.in); 
 			    	Administrador administrador = new Administrador();
@@ -85,29 +109,52 @@ public void ejecutarOpcion() throws FileNotFoundException, IOException {
 					String loginAdmin = scanner.nextLine();
 					System.out.println("\nContraseña: ");
 					String contraseñaAdmin = scanner.nextLine();
-					System.out.println();
+					
 					if(Administrador.getLogin().equals(loginAdmin) && Administrador.getContraseña().equals(contraseñaAdmin) ){
 						System.out.println("----------------------------------------------------------------------------------------");
 						System.out.println("\nBienvenido administrador " + Administrador.getLogin());
 						System.out.println("\n1. Registrar empleado");	
-						System.out.println("\n2. Registrar nuevo vehiculo");	
+						System.out.println("\n2. Registrar nuevo vehiculo");
+						System.out.println("\n3. Configurar seguro");
 						int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 						
 						if (opcion == 1) {
-							administrador.registrarEmpleado();
+							sistema.nuevoEmpleado();
 					}else if(opcion == 2) {
 						sistema.registrarNuevoVehiculo();
+					}else if(opcion == 3) {
+						sistema.nuevoSeguro();
 					}
 			    }else{System.out.println("\nUsuario o contraseña incorrectos");}
 		}
-			
 			    if (opcionSeleccionada == 4) {
+					Scanner scanner = new Scanner(System.in); 
+					System.out.println("----------------------------------------------------------------------------------------");
+					System.out.println("\nLogin: ");
+					String loginAdminSede = scanner.nextLine();
+					System.out.println("\nContraseña: ");
+					String contraseñaAdminSede = scanner.nextLine();
+					
+					System.out.println("----------------------------------------------------------------------------------------"); 
+					System.out.println("\nBienvenido ");
+					System.out.println("\n1. Ofrecer Seguros"); 
+					int opcion =Integer.parseInt(input("\nPor favor seleccione una opcion"));
+					  
+					if (opcion == 1){ 
+						sistema.ofrecerSeguro();
+					}		
+				}
+					
+
+			    
+			
+			    if (opcionSeleccionada == 5) {
 			    	Scanner scanner = new Scanner(System.in); 
 			    	System.out.println("----------------------------------------------------------------------------------------");
 			    	sistema.nuevoCliente();
 				
 			    }
-					else if (opcionSeleccionada == 5)
+					else if (opcionSeleccionada == 6)
 					{
 						System.out.println("Saliendo de la aplicacion ...");
 						continuar = false;

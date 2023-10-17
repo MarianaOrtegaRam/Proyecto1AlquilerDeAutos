@@ -14,10 +14,6 @@ public class AdministradorSede {
 		this.contraseña = contraseña;
 	}
 	
-	public void registrarEmpleadoSede() {
-		
-	}
-	
 	public void cobrar30Alquiler() {
 		
 	}
@@ -25,5 +21,6 @@ public class AdministradorSede {
 	public float definirTarifa(Categoria categoria) {
 		return 0 ;
 	}
+	
 	
 }
