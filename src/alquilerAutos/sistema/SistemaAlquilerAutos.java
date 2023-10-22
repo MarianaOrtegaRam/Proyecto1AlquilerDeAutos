@@ -297,6 +297,7 @@ public class SistemaAlquilerAutos {
 		String rangoHoraRecogerVehiculo = scanner.nextLine();
 		System.out.println("\nIngrese fecha para entrega (DD-MM-AA): ");
 		String fechaEntregaVehiculo = scanner.nextLine();
+		ofrecerSeguro();
 		System.out.println("\nIngrese seguro (Opcional): ");
 		String seguroVehiculo = scanner.nextLine();
 

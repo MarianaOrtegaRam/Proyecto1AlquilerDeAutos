@@ -1,4 +1,4 @@
-Protección contra Robo;300000;Este seguro te protege en caso de que el vehículo sea robado durante el período de alquiler
-Accidente Personal;250000;Ofrece cobertura en caso de lesiones personales o gastos médicos para ti y tus pasajeros en caso de un accidente
-Cobertura de neumáticos y parabrisas;130000; cubre daños a los neumáticos y al parabrisas
+Proteccion contra Robo;300000;Este seguro te protege en caso de que el vehiculo sea robado durante el periodo de alquiler
+Accidente Personal;250000;Ofrece cobertura en caso de lesiones personales o gastos medicos para ti y tus pasajeros en caso de un accidente
+Cobertura de neumaticos y parabrisas;130000; cubre daños a los neumaticos y al parabrisas
 Responsabilidad Civil;350000;Este seguro cubre daños a terceros y al vehículo alquilado en caso de un accidente
