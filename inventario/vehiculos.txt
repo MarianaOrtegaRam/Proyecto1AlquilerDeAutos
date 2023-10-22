@@ -2,3 +2,4 @@ ABC-123;Kia;pequeño;Picanto;rojo;mecanica;1100000;1;4;true;economico;Aeropuerto
 STU-961;Renault;mediano;Twingo;gris;mecanica;1800000;1;5;true;intermedio;Oficina Central
 ZAB-703;Ford;grande;Transit;blanco;automatico;2000000;8;10;true;transportemultiple;Oficina Central
 WXY-374;BMV;mediano;Serie 5;marron;automatico;3000000;1;5;true;vehiculolujo;Oficina Central
+POR-445;bmw;grande;Serie 7;azul;automatica;3700000;1;5;true;vehiculolujo;Zona Costera

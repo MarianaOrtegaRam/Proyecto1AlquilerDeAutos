@@ -176,7 +176,7 @@ public class SistemaAlquilerAutos {
 			int capacidad = Integer.parseInt(partes[8]);
 			boolean disponible;
 			String disponibilidadDoc = partes[9];
-			if (disponibilidadDoc == "true") {
+			if (disponibilidadDoc.equals("true")) {
 				disponible = true;
 			} else {
 				disponible = false;
@@ -312,9 +312,10 @@ public class SistemaAlquilerAutos {
 			String unaPlaca = listaPlacas.get(i);
 			for (int j = 0; j < this.vehiculos.size(); j++) {
 				Vehiculo unVehiculo = vehiculos.get(j);
-				if (unaPlaca == unVehiculo.getPlaca()) {
+				String placa_vehiculo = unVehiculo.getPlaca();
+				if (unaPlaca.equals(placa_vehiculo)) {
 					String categoriaUnVehiculo = unVehiculo.getCategoria();
-					if (categoriaUnVehiculo == categoriaVehiculo && unVehiculo.getDisponibilidad()) {
+					if (categoriaUnVehiculo.equals(categoriaVehiculo) && unVehiculo.getDisponibilidad()) {
 						categoriaDeseada = unVehiculo;
 					} else if (categoriaUnVehiculo != categoriaVehiculo && unVehiculo.getDisponibilidad()) {
 						String[] condicionesUnaCategoria = condicionesCategoria.get(categoriaVehiculo);
@@ -389,16 +390,16 @@ public class SistemaAlquilerAutos {
 		int precioFinal = 0;
 		// String nombreCategoria = categoria.getNombreCategoria();
 
-		if (nombreCategoria == "economico") {
+		if (nombreCategoria.equals("economico")) {
 			excedente += 50000;
 			precioFinal = precioInicial + excedente;
-		} else if (nombreCategoria == "intermedio") {
+		} else if (nombreCategoria.equals("intermedio")) {
 			excedente += 70000;
 			precioFinal = precioInicial + excedente;
-		} else if (nombreCategoria == "tranportemultiple") {
+		} else if (nombreCategoria.equals("tranportemultiple")) {
 			excedente += 90000;
 			precioFinal = precioInicial + excedente;
-		} else if (nombreCategoria == "vehiculolujo") {
+		} else if (nombreCategoria.equals("vehiculolujo")) {
 			excedente += 100000;
 			precioFinal = precioInicial + excedente;
 		}
@@ -412,7 +413,7 @@ public class SistemaAlquilerAutos {
 
 		for (int i = 0; i < vehiculos.size(); i++) {
 			Vehiculo prueba = vehiculos.get(i);
-			if (placa == prueba.getPlaca()) {
+			if (placa.equals(prueba.getPlaca())) {
 				sede = auto.getsede();
 			}
 		}
@@ -428,7 +429,7 @@ public class SistemaAlquilerAutos {
 
 		for (int i = 0; i < vehiculos.size(); i++) {
 			Vehiculo prueba = vehiculos.get(i);
-			if (placa == prueba.getPlaca() && prueba.getDisponibilidad()) {
+			if (placa.equals(prueba.getPlaca()) && prueba.getDisponibilidad()) {
 				disponibilidad = "Se encuentra disponible";
 			}
 		}
@@ -443,7 +444,7 @@ public class SistemaAlquilerAutos {
 		String placa = empleado.entregarAuto();
 		for (int i = 0; i < vehiculos.size(); i++) {
 			Vehiculo prueba = vehiculos.get(i);
-			if (placa == prueba.getPlaca()) {
+			if (placa.equals(prueba.getPlaca())) {
 				prueba.setDisponible(false);
 			}
 		}
@@ -456,7 +457,7 @@ public class SistemaAlquilerAutos {
 		String placa = empleado.recibirAuto();
 		for (int i = 0; i < vehiculos.size(); i++) {
 			Vehiculo prueba = vehiculos.get(i);
-			if (placa == prueba.getPlaca()) {
+			if (placa.equals(prueba.getPlaca())) {
 				prueba.setDisponible(true);
 			}
 		}

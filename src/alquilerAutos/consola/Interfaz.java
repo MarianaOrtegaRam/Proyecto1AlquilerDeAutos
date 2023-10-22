@@ -87,7 +87,7 @@ public class Interfaz {
 									"----------------------------------------------------------------------------------------");
 							System.out.println("\nBienvenido empleado " + loginEmpleado);
 							System.out.println("\n1. Entregar vehiculo");
-							System.out.println("\n1. Recibir vehiculo");
+							System.out.println("\n2. Recibir vehiculo");
 							int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
 							if (opcion == 1) {
