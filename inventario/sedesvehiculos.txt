@@ -3,3 +3,8 @@ Oficina Central;STU-961
 Oficina Central;ZAB-703
 Oficina Central;WXY-374
 Zona Costera;POR-445
+Oficina Central;JKO-605
+Zona Costera;ULM-882
+Aeropuerto Internacional;WWL-739
+Aeropuerto Internacional;UET-002
+Oficina Central;MOR-196
