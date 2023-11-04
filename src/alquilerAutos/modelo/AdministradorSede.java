@@ -14,13 +14,4 @@ public class AdministradorSede {
 		this.contraseña = contraseña;
 	}
 
-	public void cobrar30Alquiler() {
-
-	}
-
-	/*
-	 * public float definirTarifa(String categoria, int precioDeseado) {
-	 * return 0;
-	 * }
-	 */
 }

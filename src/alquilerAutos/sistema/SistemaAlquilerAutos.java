@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 import alquilerAutos.modelo.Administrador;
 import alquilerAutos.modelo.Categoria;
@@ -32,27 +31,49 @@ public class SistemaAlquilerAutos {
 	private Map<String, String[]> condicionesCategoria = new HashMap<>();
 	private Reserva reserva;
 
-	public void nuevoCliente() {
+	public void nuevoCliente(String nombreCliente, String datoContactoCliente, String fechaNacimientoCliente,
+			String nacionalidadCliente,
+			String loginCliente, String contraseñaCliente, String paisLicenciaCliente, String numeroLicenciaCliente,
+			String fechaVencimientoLicenciaCliente) {
+
 		InfoCliente infoCliente = new InfoCliente();
-		DatosCliente cliente = infoCliente.crearCliente();
+		DatosCliente cliente = infoCliente.crearCliente(nombreCliente, datoContactoCliente, fechaNacimientoCliente,
+				nacionalidadCliente, loginCliente, contraseñaCliente, paisLicenciaCliente, numeroLicenciaCliente,
+				fechaVencimientoLicenciaCliente);
+
 		this.clientes.add(cliente);
 	}
 
-	public void nuevoEmpleado() {
+	public void nuevoEmpleado(String nombreEmpleado, String datoContactoEmpleado, String fechaNacimientoEmpleado,
+			String nacionalidadEmplado,
+			String loginEmpleado, String contraseñaEmpleado) {
+
 		Administrador administrador = new Administrador();
-		DatosBasicos empleado = administrador.registrarEmpleado();
+
+		DatosBasicos empleado = administrador.registrarEmpleado(nombreEmpleado, datoContactoEmpleado,
+				fechaNacimientoEmpleado, nacionalidadEmplado,
+				loginEmpleado, contraseñaEmpleado);
+
 		this.empleados.add(empleado);
 	}
 
-	public void nuevoSeguro() {
+	public void nuevoSeguro(String nombreSeguro, String precioSeguro, String beneficiosVehiculo) {
 		Administrador administrador = new Administrador();
-		Seguro seguro = administrador.configurarSeguro();
+		Seguro seguro = administrador.configurarSeguro(nombreSeguro, precioSeguro, beneficiosVehiculo);
 		this.seguros.add(seguro);
 	}
 
-	public void registrarNuevoVehiculo() {
+	public void registrarNuevoVehiculo(String placaVehiculo, String marcaVehiculo, String tamañoVehiculo,
+			String modeloVehiculo, String colorVehiculo, String cajaVehiculo, String precioPorDiaVehiculo,
+			String maletasVehiculo,
+			String capacidadVehiculo, String categoriaVehiculo, String sedeVehiculo) {
+
 		Administrador administrador = new Administrador();
-		Vehiculo vehiculo = administrador.registrarNuevoVehiculo();
+
+		Vehiculo vehiculo = administrador.registrarNuevoVehiculo(placaVehiculo, marcaVehiculo, tamañoVehiculo,
+				modeloVehiculo, colorVehiculo, cajaVehiculo,
+				precioPorDiaVehiculo, maletasVehiculo, capacidadVehiculo, categoriaVehiculo, sedeVehiculo);
+
 		this.vehiculos.add(vehiculo);
 		String sede = vehiculo.getsede();
 
@@ -280,26 +301,9 @@ public class SistemaAlquilerAutos {
 
 	}
 
-	public Reserva crearReserva() {
-
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("----------------------------------------------------------------------------------------");
-		System.out.println("\t\t\tCrear Reserva\n");
-		System.out.println("\nIngrese la categoria: ");
-		String categoriaVehiculo = scanner.nextLine();
-		System.out.println("\nIngrese sede para recoger: ");
-		String sedeRecogerVehiculo = scanner.nextLine();
-		System.out.println("\nIngrese sede para entregar: ");
-		String sedeEntregarrVehiculo = scanner.nextLine();
-		System.out.println("\nIngrese fecha para recoger (DD-MM-AA): ");
-		String fechaHoraRecogerVehiculo = scanner.nextLine();
-		System.out.println("\nIngrese un rango de hora para recoger (N-N): ");
-		String rangoHoraRecogerVehiculo = scanner.nextLine();
-		System.out.println("\nIngrese fecha para entrega (DD-MM-AA): ");
-		String fechaEntregaVehiculo = scanner.nextLine();
-		ofrecerSeguro();
-		System.out.println("\nIngrese seguro (Opcional): ");
-		String seguroVehiculo = scanner.nextLine();
+	public Reserva crearReserva(String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
+			String fechaHoraRecogerVehiculo, String rangoHoraRecogerVehiculo, String fechaEntregaVehiculo,
+			String seguroVehiculo, String categoriaVehiculo) {
 
 		Reserva reserva = new Reserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
 				fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo, seguroVehiculo);
@@ -356,32 +360,16 @@ public class SistemaAlquilerAutos {
 
 	}
 
-	public void modificarReserva() {
+	public void modificarSedeEntrega(String sedeEntrega) {
+		this.reserva.setSedeEntrega(sedeEntrega);
+	}
 
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("----------------------------------------------------------------------------------------");
-		System.out.println("\t\t\tModificar Reserva\n");
-		System.out.println("\n1. Modificar la sede de entrega");
-		System.out.println("2. Modificar Rango de hora de entrega");
-		System.out.println("3. Modicar fecha entrega");
+	public void modificarRangoEntrega(String rangoEntrega) {
+		this.reserva.setRangoHoraEntrega(rangoEntrega);
+	}
 
-		int opcionSeleccionada = Integer.parseInt(input("\nPor favor seleccione una opcion"));
-
-		if (opcionSeleccionada == 1) {
-			String sedeEntrega = scanner.nextLine();
-			this.reserva.setSedeEntrega(sedeEntrega);
-
-		}
-
-		if (opcionSeleccionada == 2) {
-			String rangoEntrega = scanner.nextLine();
-			this.reserva.setRangoHoraEntrega(rangoEntrega);
-		}
-
-		if (opcionSeleccionada == 3) {
-			String fechaEntrega = scanner.nextLine();
-			this.reserva.setFechaEntrega(fechaEntrega);
-		}
+	public void modificarFechaEntrega(String fechaEntrega) {
+		this.reserva.setFechaEntrega(fechaEntrega);
 	}
 
 	public int calucularTarifas(String nombreCategoria, Vehiculo carro, int dias) {
@@ -438,11 +426,10 @@ public class SistemaAlquilerAutos {
 		return disponibilidad;
 	}
 
-	public void entregaVehiculo() {
+	public void entregaVehiculo(String placaAuto) {
 
 		Empleado empleado = new Empleado();
-
-		String placa = empleado.entregarAuto();
+		String placa = empleado.entregarAuto(placaAuto);
 		for (int i = 0; i < vehiculos.size(); i++) {
 			Vehiculo prueba = vehiculos.get(i);
 			if (placa.equals(prueba.getPlaca())) {
@@ -451,11 +438,11 @@ public class SistemaAlquilerAutos {
 		}
 	}
 
-	public void recibirVehiculo() {
+	public void recibirVehiculo(String placaAuto) {
 
 		Empleado empleado = new Empleado();
 
-		String placa = empleado.recibirAuto();
+		String placa = empleado.recibirAuto(placaAuto);
 		for (int i = 0; i < vehiculos.size(); i++) {
 			Vehiculo prueba = vehiculos.get(i);
 			if (placa.equals(prueba.getPlaca())) {

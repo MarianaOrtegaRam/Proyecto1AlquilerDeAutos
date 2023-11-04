@@ -12,6 +12,7 @@ import alquilerAutos.modelo.InfoEmpleado;
 import alquilerAutos.modelo.Vehiculo;
 import alquilerAutos.sistema.Reserva;
 import alquilerAutos.sistema.SistemaAlquilerAutos;
+import alquilerAutos.modelo.AdministradorSede;
 
 public class Interfaz {
 
@@ -61,13 +62,65 @@ public class Interfaz {
 									"----------------------------------------------------------------------------------------");
 							System.out.println("\nBienvenido cliente " + loginCliente);
 							System.out.println("\n1. Realizar una reserva");
+							System.out.println("\n2. Modificar su reserva");
 							int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
 							if (opcion == 1) {
-								Reserva reserva = sistema.crearReserva();
+								Scanner scanner_reserva = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\t\t\tCrear Reserva\n");
+								System.out.println("\nIngrese la categoria: ");
+								String categoriaVehiculo = scanner_reserva.nextLine();
+								System.out.println("\nIngrese sede para recoger: ");
+								String sedeRecogerVehiculo = scanner_reserva.nextLine();
+								System.out.println("\nIngrese sede para entregar: ");
+								String sedeEntregarrVehiculo = scanner_reserva.nextLine();
+								System.out.println("\nIngrese fecha para recoger (DD-MM-AA): ");
+								String fechaHoraRecogerVehiculo = scanner_reserva.nextLine();
+								System.out.println("\nIngrese un rango de hora para recoger (N-N): ");
+								String rangoHoraRecogerVehiculo = scanner_reserva.nextLine();
+								System.out.println("\nIngrese fecha para entrega (DD-MM-AA): ");
+								String fechaEntregaVehiculo = scanner_reserva.nextLine();
+								sistema.ofrecerSeguro();
+								System.out.println("\nIngrese seguro (Opcional): ");
+								String seguroVehiculo = scanner_reserva.nextLine();
+
+								Reserva reserva = sistema.crearReserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
+										fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
+										seguroVehiculo, categoriaVehiculo);
+
 								sistema.setReserva(loginCliente, reserva);
+							} else if (opcion == 2) {
+								Scanner scanner_modificar_reserva = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\t\t\tModificar Reserva\n");
+								System.out.println("\n1. Modificar la sede de entrega");
+								System.out.println("2. Modificar Rango de hora de entrega");
+								System.out.println("3. Modicar fecha entrega");
+
+								int opcionSeleccionada_ = Integer.parseInt(input("\nPor favor seleccione una opcion"));
+
+								if (opcionSeleccionada_ == 1) {
+									String sedeEntrega = scanner_modificar_reserva.nextLine();
+									sistema.modificarSedeEntrega(sedeEntrega);
+
+								}
+
+								if (opcionSeleccionada_ == 2) {
+									String rangoEntrega = scanner_modificar_reserva.nextLine();
+									sistema.modificarRangoEntrega(rangoEntrega);
+								}
+
+								if (opcionSeleccionada_ == 3) {
+									String fechaEntrega = scanner_modificar_reserva.nextLine();
+									sistema.modificarFechaEntrega(fechaEntrega);
+								}
 							}
-						} else {
+						}
+
+						else {
 							System.out.println("\nUsuario o contraseña incorrectos");
 						}
 
@@ -91,9 +144,19 @@ public class Interfaz {
 							int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
 							if (opcion == 1) {
-								sistema.entregaVehiculo();
+								Scanner scanner_entregar = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\nIngrese la placa del vehiculo a entregar: ");
+								String placaAuto = scanner_entregar.nextLine();
+								sistema.entregaVehiculo(placaAuto);
 							} else if (opcion == 2) {
-								sistema.recibirVehiculo();
+								Scanner scanner_recibir = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\nIngrese la placa del vehiculo a recibir: ");
+								String placaAuto = scanner_recibir.nextLine();
+								sistema.recibirVehiculo(placaAuto);
 							}
 						} else {
 							System.out.println("\nUsuario o contraseña incorrectos");
@@ -122,12 +185,72 @@ public class Interfaz {
 							int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
 							if (opcion == 1) {
-								sistema.nuevoEmpleado();
+								Scanner scanner_n_empleado = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\t\t\tDatos Basicos Empleado\n");
+								System.out.println("Ingrese su nombre: ");
+								String nombreEmpleado = scanner_n_empleado.nextLine();
+								System.out.println("\nIngrese dato de contacto: ");
+								String datoContactoEmpleado = scanner_n_empleado.nextLine();
+								System.out.println("\nIngrese fecha de nacimiento(DD-MM-AA): ");
+								String fechaNacimientoEmpleado = scanner_n_empleado.nextLine();
+								System.out.println("\nIngrese Nacionalidad: ");
+								String nacionalidadEmplado = scanner_n_empleado.nextLine();
+								System.out.println("\nIngrese login para registrarse: ");
+								String loginEmpleado = scanner_n_empleado.nextLine();
+								System.out.println("\nIngrese contraseña: ");
+								String contraseñaEmpleado = scanner_n_empleado.nextLine();
+
+								sistema.nuevoEmpleado(nombreEmpleado, datoContactoEmpleado, fechaNacimientoEmpleado,
+										nacionalidadEmplado, loginEmpleado, contraseñaEmpleado);
+
 							} else if (opcion == 2) {
-								sistema.registrarNuevoVehiculo();
+								Scanner scanner_auto = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\t\t\tDatos Vehiculo\n");
+								System.out.println("Ingrese placa: ");
+								String placaVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese marca: ");
+								String marcaVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese tamaño: ");
+								String tamañoVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese modelo: ");
+								String modeloVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese color: ");
+								String colorVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese caja: ");
+								String cajaVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese precio por dia: ");
+								String precioPorDiaVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese maletas: ");
+								String maletasVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese capacidad: ");
+								String capacidadVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese categoria: ");
+								String categoriaVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese sede: ");
+								String sedeVehiculo = scanner_auto.nextLine();
+								sistema.registrarNuevoVehiculo(placaVehiculo, marcaVehiculo, tamañoVehiculo,
+										modeloVehiculo, colorVehiculo, cajaVehiculo,
+										precioPorDiaVehiculo, maletasVehiculo, capacidadVehiculo, categoriaVehiculo,
+										sedeVehiculo);
+
 							} else if (opcion == 3) {
-								sistema.nuevoSeguro();
+								Scanner scanner_seguro = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\t\t\tConfiguracion nuevo seguro\n");
+								System.out.println("Ingrese nombre: ");
+								String nombreSeguro = scanner_seguro.nextLine();
+								System.out.println("\nIngrese precio: ");
+								String precioSeguro = scanner_seguro.nextLine();
+								System.out.println("\nIngrese beneficios: ");
+								String beneficiosVehiculo = scanner_seguro.nextLine();
+								sistema.nuevoSeguro(nombreSeguro, precioSeguro, beneficiosVehiculo);
 							}
+
 						} else {
 							System.out.println("\nUsuario o contraseña incorrectos");
 						}
@@ -153,10 +276,38 @@ public class Interfaz {
 					}
 
 					if (opcionSeleccionada == 5) {
-						Scanner scanner = new Scanner(System.in);
+						Scanner scanner_nuevo_cliente = new Scanner(System.in);
 						System.out.println(
 								"----------------------------------------------------------------------------------------");
-						sistema.nuevoCliente();
+						System.out.println("\t\t\tDatos Basicos\n");
+						System.out.println("Ingrese su nombre: ");
+						String nombreCliente = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese su dato de contacto: ");
+						String datoContactoCliente = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese fecha de nacimiento(DD-MM-AA): ");
+						String fechaNacimientoCliente = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese Nacionalidad: ");
+						String nacionalidadCliente = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese un login para registrarse: ");
+						String loginCliente = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese contraseña: ");
+						String contraseñaCliente = scanner_nuevo_cliente.nextLine();
+
+						System.out.println(
+								"----------------------------------------------------------------------------------------");
+						System.out.println("\t\t\tDatos Licencia\n");
+						System.out.println("Ingrese el pais: ");
+						String paisLicenciaCliente = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese el numero: ");
+						String numeroLicenciaCliente = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese fecha de vencimiento(MM-AA): ");
+						String fechaVencimientoLicenciaCliente = scanner_nuevo_cliente.nextLine();
+
+						sistema.nuevoCliente(nombreCliente, datoContactoCliente, fechaNacimientoCliente,
+								nacionalidadCliente, loginCliente, contraseñaCliente, paisLicenciaCliente,
+								numeroLicenciaCliente, fechaVencimientoLicenciaCliente);
+
+						System.out.println("\nDatos Cliente y Licencia registrados!");
 
 					} else if (opcionSeleccionada == 6) {
 						System.out.println("Saliendo de la aplicacion ...");
