@@ -18,6 +18,7 @@ public class Vehiculo {
     private boolean disponible;
     private String categoria;
     private String sede;
+    private boolean existe;
    
     
     public Vehiculo(String placa, String marca, String tamaño, String modelo, String color, String caja,
@@ -35,6 +36,7 @@ public class Vehiculo {
 		this.disponible = disponible;
 		this.categoria = categoria;
 		this.sede = sede;
+		this.existe = true;
 	}
     
     public void asignarTarifaDiaria(float precioPorCategoria){
@@ -81,7 +83,11 @@ public class Vehiculo {
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
-	
+
+	public void setExiste(boolean existe) {
+		this.existe = existe;
+	}
+
 	public boolean verificarCondiciones(String[] condiciones) {
 		boolean cumple = false;
 		for(int i = 0; i < condiciones.length ; i++) {

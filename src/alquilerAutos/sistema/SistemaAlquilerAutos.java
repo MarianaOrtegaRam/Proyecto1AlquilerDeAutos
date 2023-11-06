@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import alquilerAutos.modelo.Administrador;
+import alquilerAutos.modelo.AdministradorSede;
 import alquilerAutos.modelo.Categoria;
 import alquilerAutos.modelo.DatosBasicos;
 import alquilerAutos.modelo.DatosCliente;
@@ -23,6 +24,7 @@ import alquilerAutos.modelo.Vehiculo;
 
 public class SistemaAlquilerAutos {
 
+	private ArrayList<Reserva> reservas = new ArrayList<>();
 	private ArrayList<Vehiculo> vehiculos = new ArrayList<>();
 	private ArrayList<DatosCliente> clientes = new ArrayList<>();
 	private ArrayList<DatosBasicos> empleados = new ArrayList<>();
@@ -86,7 +88,6 @@ public class SistemaAlquilerAutos {
 			ArrayList<String> lista = sedes.get(sede);
 			lista.add(vehiculo.getPlaca());
 		}
-
 	}
 
 	public void cargarInformacionCliente() throws FileNotFoundException, IOException {
@@ -285,6 +286,31 @@ public class SistemaAlquilerAutos {
 
 		br.close();
 	}
+	
+	public void cargarInformacionReservas() throws FileNotFoundException, IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/reservas.txt"));
+		String linea = br.readLine();
+
+		while (linea != null) {
+
+			String[] partes = linea.split(";");
+			String sedeRecoger = partes[0];
+			String sedeEntrega = partes[1];
+			String fechaHoraRecoger = partes[2];
+			String rangoHoraEntrega = partes[3];
+			String fechaEntrega = partes[4];
+			String seguro = partes[5];
+
+			Reserva laReserva = new Reserva(sedeRecoger, sedeEntrega, fechaHoraRecoger, rangoHoraEntrega
+					, fechaEntrega, seguro);
+			this.reservas.add(laReserva);
+			linea = br.readLine();
+		}
+
+		br.close();
+
+	}
 
 	public void ofrecerSeguro() {
 		for (int i = 0; i < seguros.size(); i++) {
@@ -327,6 +353,8 @@ public class SistemaAlquilerAutos {
 						boolean cumple = unVehiculo.verificarCondiciones(condicionesUnaCategoria);
 						if (cumple) {
 							candidato = unVehiculo;
+							reserva.registrarReserva(reserva);
+							reservas.add(reserva);
 						}
 
 					}
@@ -461,6 +489,12 @@ public class SistemaAlquilerAutos {
 			}
 		}
 	}
+	
+	public void cambiarVehiculoSede(String placa, String sede) {
+
+		AdministradorSede adminSede = new AdministradorSede(placa, 0, placa, placa);
+		adminSede.cambiarSede(placa,sede , sedes);
+	}
 
 	public String input(String mensaje) {
 		try {
@@ -488,5 +522,9 @@ public class SistemaAlquilerAutos {
 
 		int diasTotales = diasEntregar - diasRecoger;
 		return diasTotales;
+	}
+	
+	public void printSede()  {
+		System.out.print(sedes);
 	}
 }

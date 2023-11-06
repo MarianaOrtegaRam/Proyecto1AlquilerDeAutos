@@ -1,5 +1,7 @@
 package alquilerAutos.sistema;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 import alquilerAutos.modelo.Vehiculo;
@@ -53,5 +55,61 @@ public class Reserva {
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
+	////////////////////////////////////////////////////////
+	public int getIdReserva() {
+		return idReserva;
+	}
+	
+	public String getSedeRecoger() {
+		return sedeRecoger;
+	}
+	
+	public String getSedeEntrega() {
+		return sedeEntrega;
+	}
+	
+	public String getFechaHoraRecoger() {
+		return fechaHoraRecoger;
+	}
+	
+	public String getRangoHoraEntrega() {
+		return rangoHoraEntrega;
+	}
+	
+	public String getFechaEntrega() {
+		return fechaEntrega;
+	}
+	
+	public String getSeguro() {
+		return seguro;
+	}
+
+	
+	public void registrarReserva(Reserva reserva) {
+		
+		String sedeRecoger = reserva.getSedeRecoger();
+		String sedeEntrega = reserva.getSedeEntrega();
+		String fechaHoraRecoger = reserva.getFechaHoraRecoger();
+		String rangoHoraEntrega = reserva.getRangoHoraEntrega();
+		String fechaEntrega = reserva.getFechaEntrega();
+		String seguro = reserva.getSeguro();
+		
+		agregarResreva(sedeRecoger + ";" + sedeEntrega + ";" + fechaHoraRecoger + ";"
+				+ rangoHoraEntrega + ";" + fechaEntrega + ";" + seguro);
+		
+	}
+	
+	public void agregarResreva(String texto) {
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/reservas.txt", true);
+			filewriter.write(texto.toLowerCase() + "\n");
+			filewriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 
 }

@@ -35,9 +35,10 @@ public class Interfaz {
 					sistema.cargarInformacionCondicionesCategoria();
 					sistema.cargarInformacionSeguros();
 					sistema.cargarInformacionSedes();
+					//sistema.printSede();
 
 					System.out.println(
-							"----------------------------------------------------------------------------------------");
+							"\n----------------------------------------------------------------------------------------");
 					System.out.println("\nBienvenido al Sistema Alquiler de Vehiculos");
 					System.out.println("\n1. Iniciar sesion como cliente");
 					System.out.println("2. Iniciar sesion como empleado");
@@ -91,6 +92,8 @@ public class Interfaz {
 										seguroVehiculo, categoriaVehiculo);
 
 								sistema.setReserva(loginCliente, reserva);
+								
+								
 							} else if (opcion == 2) {
 								Scanner scanner_modificar_reserva = new Scanner(System.in);
 								System.out.println(
@@ -268,10 +271,17 @@ public class Interfaz {
 								"----------------------------------------------------------------------------------------");
 						System.out.println("\nBienvenido ");
 						System.out.println("\n1. Ofrecer Seguros");
+						System.out.println("\n2. Cambiar de sede un vehiculo");
 						int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
 						if (opcion == 1) {
 							sistema.ofrecerSeguro();
+						} else if(opcion == 2) {
+							System.out.println("Ingrese la placa del vehiculo: ");
+							String placa = scanner.nextLine();
+							System.out.println("Ingrese la sede a la que va a ser ingresado: ");
+							String sede = scanner.nextLine();
+							sistema.cambiarVehiculoSede(placa,sede);
 						}
 					}
 
