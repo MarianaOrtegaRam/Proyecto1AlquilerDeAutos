@@ -36,48 +36,33 @@ public class PanelTabb extends JPanel {
 		sistema.cargarInformacionSeguros();
 		sistema.cargarInformacionSedes();
 		sistema.cargarAdminSedes();
-		/*
+		
 		PaginaInicioDeSesion inicioSesionCliente = new PaginaInicioDeSesion(sistema,"cliente"); 
 		PaginaInicioDeSesion inicioSesionAdmin = new PaginaInicioDeSesion(sistema,"administrador"); 
-		PaginaInicioDeSesion inicioSesionAdminSede = new PaginaInicioDeSesion(sistema,"administrador sede"); 
+		PaginaInicioDeSesion inicioSesionAdminSede = new PaginaInicioDeSesion(sistema,"administradorSede"); 
 		PaginaInicioDeSesion inicioSesionEmpleado = new PaginaInicioDeSesion(sistema,"empleado"); 
-		*/
+		
+		//LOS QUE SIRVEN 
+		/*
 		InicioEmpleado inicioEmpleado = new InicioEmpleado(sistema);
 		InicioAdmin inicioAdmin = new InicioAdmin(sistema);
 		InicioAdminSede inicioAdminSede = new InicioAdminSede(sistema);
 		InicioCliente inicioCliente = new InicioCliente(sistema);
-		
+		*/
         JTabbedPane tabbedPane = new JTabbedPane();
-        
-        JComponent panel1 = makeTextPanel("Panel #1");
-        tabbedPane.addTab("Tab 1", panel1);
-        tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-         
-        JComponent panel2 = makeTextPanel("Panel #2");
-        tabbedPane.addTab("Tab 2", panel2);
-        tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-         
-        JComponent panel3 = makeTextPanel("Panel #3");
-        tabbedPane.addTab("Tab 3", panel3);
-        tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-        
-        JComponent panel4 = makeTextPanel(
-                "Panel #4 (has a preferred size of 410 x 50).");
-        panel4.setPreferredSize(new Dimension(410, 50));
-        tabbedPane.addTab("Tab 4",panel4);
-        tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-        /*
+    
+        //los que no sirven
         tabbedPane.addTab("inicio cliente",inicioSesionCliente);
-        tabbedPane.addTab("inicio empleado1",inicioEmpleado);
         tabbedPane.addTab("inicio admin",inicioSesionAdmin);
         tabbedPane.addTab("inicio admin sede",inicioSesionAdminSede);
         tabbedPane.addTab("inicio empleado",inicioSesionEmpleado);
-        */
+        
+        /*
         tabbedPane.addTab("inicio cliente",inicioCliente);
         tabbedPane.addTab("inicio empleado",inicioEmpleado);
         tabbedPane.addTab("inicio admin",inicioAdmin);
         tabbedPane.addTab("inicio admin sede",inicioAdminSede);
-       
+       */
         //Add the tabbed pane to this panel.
         add(tabbedPane);
          

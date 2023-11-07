@@ -76,7 +76,6 @@ public class SistemaAlquilerAutos {
 		String linea = br.readLine();
 
 		while (linea != null) {
-			System.out.println(linea);
 			String[] partes = linea.split(";");
 			String nombre = partes[0];
 			String cedula = partes[1];

@@ -19,15 +19,18 @@ public class PaginaInicioDeSesion extends JPanel {
     public SistemaAlquilerAutos sistema;
     final static String PANEL_LOGIN = "Inicio de Sesión";
     final static String PANEL_CONTENIDO = "Cliente";
-    public static Container pane;
     
     
     public PaginaInicioDeSesion (SistemaAlquilerAutos sistema, String usuario) {
     	this.sistema = sistema;
     	//this.pane = new Container();
+    	JPanel interfaz = new JPanel();
+        interfaz.add(new JLabel("¡Inicio de Sesión Exitoso!"));
+
     	JPanel inicio_sesion = new JPanel();
     	inicio_sesion.setPreferredSize(new Dimension(300, 200));
     	inicio_sesion.add(new JLabel("Ingrese su nombre de usuario y contraseña:"));
+    	
         JTextField usernameField = new JTextField(20);
         JTextField passwordField = new JTextField(20);
         JButton loginButton = new JButton("Iniciar Sesión");
@@ -49,7 +52,7 @@ public class PaginaInicioDeSesion extends JPanel {
             	else if (usuario.equals("administrador")) {
             		verificado = sistema.verificarAdministrador(username, password);
             	}
-            	else if(usuario.equals("administrador sede")) {
+            	else if(usuario.equals("administradorSede")) {
             		verificado = sistema.verificarAdminSede(username, password);
             	}
 
@@ -57,7 +60,6 @@ public class PaginaInicioDeSesion extends JPanel {
                 	System.out.println("whyyyyyyyyyyyyyyyyyy");
                 	CardLayout cardLayout = (CardLayout) cards.getLayout();
                     cardLayout.show(cards, PANEL_CONTENIDO);
-        
                 }
             }
         });
@@ -66,13 +68,11 @@ public class PaginaInicioDeSesion extends JPanel {
         inicio_sesion.add(passwordField);
         inicio_sesion.add(loginButton);
 
-        JPanel interfazCliente = new JPanel();
-        interfazCliente.add(new JLabel("¡Inicio de Sesión Exitoso!"));
-
+        
         // Crear el panel que usa CardLayout
         cards = new JPanel(new CardLayout());
         cards.add(inicio_sesion, PANEL_LOGIN);
-        cards.add(interfazCliente, PANEL_CONTENIDO);
+        cards.add(interfaz, PANEL_CONTENIDO);
 
         add(cards, BorderLayout.CENTER);
     }
