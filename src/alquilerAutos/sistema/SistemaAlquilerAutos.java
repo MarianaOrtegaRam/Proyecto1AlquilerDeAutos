@@ -24,14 +24,14 @@ import alquilerAutos.modelo.Vehiculo;
 
 public class SistemaAlquilerAutos {
 
-	private ArrayList<Reserva> reservas = new ArrayList<>();
-	private ArrayList<Vehiculo> vehiculos = new ArrayList<>();
-	private ArrayList<DatosCliente> clientes = new ArrayList<>();
-	private ArrayList<DatosBasicos> empleados = new ArrayList<>();
-	private ArrayList<Seguro> seguros = new ArrayList<>();
-	private Map<String, ArrayList<String>> sedes = new HashMap<>();
-	private Map<String, String[]> condicionesCategoria = new HashMap<>();
-	private Reserva reserva;
+	public ArrayList<Reserva> reservas = new ArrayList<>();
+	public ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+	public ArrayList<DatosCliente> clientes = new ArrayList<>();
+	public ArrayList<DatosBasicos> empleados = new ArrayList<>();
+	public ArrayList<Seguro> seguros = new ArrayList<>();
+	public Map<String, ArrayList<String>> sedes = new HashMap<>();
+	public Map<String, String[]> condicionesCategoria = new HashMap<>();
+	public Reserva reserva;
 
 	public void nuevoCliente(String nombreCliente, String datoContactoCliente, String fechaNacimientoCliente,
 			String nacionalidadCliente,
