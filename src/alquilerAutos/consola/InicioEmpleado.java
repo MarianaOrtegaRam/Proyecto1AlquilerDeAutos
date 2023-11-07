@@ -6,24 +6,17 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import alquilerAutos.sistema.SistemaAlquilerAutos;
-
 public class InicioEmpleado extends JPanel {
-	
-	
     private static JPanel cards;
     public SistemaAlquilerAutos sistema;
     final static String PANEL_LOGIN = "Inicio de Sesión";
     final static String PANEL_CONTENIDO = "Empleado";
-    public static Container pane;
-    
-    
     public InicioEmpleado (SistemaAlquilerAutos sistema) {
     	this.sistema = sistema;
     	JPanel inicio_sesion = new JPanel();

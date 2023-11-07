@@ -1,40 +1,36 @@
 package alquilerAutos.consola;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import javax.swing.*;
 
-import alquilerAutos.modelo.Administrador;
 import alquilerAutos.sistema.SistemaAlquilerAutos;
 
 
 public class PaginaInicioDeSesion extends JPanel {
-	
-	
     private static JPanel cards;
     public SistemaAlquilerAutos sistema;
     final static String PANEL_LOGIN = "Inicio de Sesión";
     final static String PANEL_CONTENIDO = "Cliente";
-    
-    
     public PaginaInicioDeSesion (SistemaAlquilerAutos sistema, String usuario) {
     	this.sistema = sistema;
     	//this.pane = new Container();
     	JPanel interfaz = new JPanel();
         interfaz.add(new JLabel("¡Inicio de Sesión Exitoso!"));
-
     	JPanel inicio_sesion = new JPanel();
     	inicio_sesion.setPreferredSize(new Dimension(300, 200));
     	inicio_sesion.add(new JLabel("Ingrese su nombre de usuario y contraseña:"));
-    	
         JTextField usernameField = new JTextField(20);
         JTextField passwordField = new JTextField(20);
         JButton loginButton = new JButton("Iniciar Sesión");
-
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,7 +38,6 @@ public class PaginaInicioDeSesion extends JPanel {
                 String password = passwordField.getText();
                 //boolean verificado  = verificarLoginContraseña(username, password,usuario);
                 boolean verificado  = false;
-
                 if (usuario.equals("cliente")) {
             		verificado = sistema.verificarCliente(username, password);
             	}
@@ -55,7 +50,6 @@ public class PaginaInicioDeSesion extends JPanel {
             	else if(usuario.equals("administradorSede")) {
             		verificado = sistema.verificarAdminSede(username, password);
             	}
-
                 if (verificado) {
                 	System.out.println("whyyyyyyyyyyyyyyyyyy");
                 	CardLayout cardLayout = (CardLayout) cards.getLayout();
@@ -63,12 +57,9 @@ public class PaginaInicioDeSesion extends JPanel {
                 }
             }
         });
-
         inicio_sesion.add(usernameField);
         inicio_sesion.add(passwordField);
         inicio_sesion.add(loginButton);
-
-        
         // Crear el panel que usa CardLayout
         cards = new JPanel(new CardLayout());
         cards.add(inicio_sesion, PANEL_LOGIN);

@@ -76,7 +76,8 @@ public class PanelInfoInicial extends JPanel{
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel, BorderLayout.CENTER);
     }
-
+}
+/*
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -91,3 +92,4 @@ public class PanelInfoInicial extends JPanel{
         });
     }
 }
+*/

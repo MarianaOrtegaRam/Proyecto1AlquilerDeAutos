@@ -37,6 +37,9 @@ public class PanelTabb extends JPanel {
 		sistema.cargarInformacionSedes();
 		sistema.cargarAdminSedes();
 		
+		JTabbedPane tabbedPane = new JTabbedPane();
+		PanelInfoInicial panelInicial = new PanelInfoInicial();
+		tabbedPane.addTab("About Us",panelInicial);
 		PaginaInicioDeSesion inicioSesionCliente = new PaginaInicioDeSesion(sistema,"cliente"); 
 		PaginaInicioDeSesion inicioSesionAdmin = new PaginaInicioDeSesion(sistema,"administrador"); 
 		PaginaInicioDeSesion inicioSesionAdminSede = new PaginaInicioDeSesion(sistema,"administradorSede"); 
@@ -49,7 +52,7 @@ public class PanelTabb extends JPanel {
 		InicioAdminSede inicioAdminSede = new InicioAdminSede(sistema);
 		InicioCliente inicioCliente = new InicioCliente(sistema);
 		*/
-        JTabbedPane tabbedPane = new JTabbedPane();
+        
     
         //los que no sirven
         tabbedPane.addTab("inicio cliente",inicioSesionCliente);
