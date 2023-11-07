@@ -8,12 +8,11 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import alquilerAutos.modelo.DatosCliente;
+import alquilerAutos.modelo.Administrador;
 import alquilerAutos.sistema.SistemaAlquilerAutos;
 
 
 public class PaginaInicioDeSesion extends JPanel {
-	
 	
 	
     private static JPanel cards;
@@ -23,7 +22,7 @@ public class PaginaInicioDeSesion extends JPanel {
     public static Container pane;
     
     
-    public PaginaInicioDeSesion (SistemaAlquilerAutos sistema) {
+    public PaginaInicioDeSesion (SistemaAlquilerAutos sistema, String usuario) {
     	this.sistema = sistema;
     	//this.pane = new Container();
     	JPanel inicio_sesion = new JPanel();
@@ -38,10 +37,27 @@ public class PaginaInicioDeSesion extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameField.getText();
                 String password = passwordField.getText();
-                boolean verificado  = sistema.verificarCliente(username, password);
+                //boolean verificado  = verificarLoginContraseña(username, password,usuario);
+                boolean verificado  = false;
+
+                if (usuario.equals("cliente")) {
+            		verificado = sistema.verificarCliente(username, password);
+            	}
+            	else if (usuario.equals("empleado")) {
+            		verificado = sistema.verificarEmpleado(username, password);
+            	}
+            	else if (usuario.equals("administrador")) {
+            		verificado = sistema.verificarAdministrador(username, password);
+            	}
+            	else if(usuario.equals("administrador sede")) {
+            		verificado = sistema.verificarAdminSede(username, password);
+            	}
+
                 if (verificado) {
-                    CardLayout cardLayout = (CardLayout) cards.getLayout();
+                	System.out.println("whyyyyyyyyyyyyyyyyyy");
+                	CardLayout cardLayout = (CardLayout) cards.getLayout();
                     cardLayout.show(cards, PANEL_CONTENIDO);
+        
                 }
             }
         });
@@ -60,6 +76,31 @@ public class PaginaInicioDeSesion extends JPanel {
 
         add(cards, BorderLayout.CENTER);
     }
+}
+
+//NO QUISO SERVIR
+    
+
+/*
+public boolean verificarLoginContraseña(String login, String password, String usuario) {
+	boolean verificado = false;
+	if (usuario.equals("cliente")) {
+		verificado = sistema.verificarCliente(login, password);
+	}
+	else if (usuario.equals("empleado")) {
+		verificado = sistema.verificarEmpleado(login, password);
+	}
+	else if (usuario.equals("administrador")) {
+		verificado = sistema.verificarAdministrador(login, password);
+	}
+	else if(usuario.equals("administrador sede")) {
+		verificado = sistema.verificarAdminSede(login, password);
+	}
+
+	return verificado;
+}
+}
+*/
 
 /*   
     private static void createAndShowGUI() throws FileNotFoundException, IOException {
@@ -93,5 +134,5 @@ public class PaginaInicioDeSesion extends JPanel {
         });
     }
    */
-}
+
 

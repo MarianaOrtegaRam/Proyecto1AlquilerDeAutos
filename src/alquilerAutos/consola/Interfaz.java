@@ -35,6 +35,7 @@ public class Interfaz {
 					sistema.cargarInformacionCondicionesCategoria();
 					sistema.cargarInformacionSeguros();
 					sistema.cargarInformacionSedes();
+					sistema.cargarAdminSedes();
 					//sistema.printSede();
 
 					System.out.println(
@@ -185,6 +186,7 @@ public class Interfaz {
 							System.out.println("\n1. Registrar empleado");
 							System.out.println("\n2. Registrar nuevo vehiculo");
 							System.out.println("\n3. Configurar seguro");
+							System.out.println("\n4. Registrar nuevo AdminSede");
 							int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
 							if (opcion == 1) {
@@ -253,11 +255,30 @@ public class Interfaz {
 								String beneficiosVehiculo = scanner_seguro.nextLine();
 								sistema.nuevoSeguro(nombreSeguro, precioSeguro, beneficiosVehiculo);
 							}
+							else if (opcion == 4) {
+								Scanner scanner_admin = new Scanner(System.in);
+								System.out.println(
+										"----------------------------------------------------------------------------------------");
+								System.out.println("\t\t\tConfiguracion nuevo seguro\n");
+								System.out.println("Ingrese nombre: ");
+								String nombre = scanner_admin.nextLine();
+								System.out.println("\nIngrese cedula: ");
+								String cedula = scanner_admin.nextLine();
+								System.out.println("\nIngrese login: ");
+								String login = scanner_admin.nextLine();
+								System.out.println("\nIngrese contraseña: ");
+								String contraseña = scanner_admin.nextLine();
+								System.out.println("\nIngrese sede: ");
+								String sede = scanner_admin.nextLine();
+								
+								sistema.registrarAdminSede(nombre, cedula, login, contraseña,sede);
+							}
+							}
 
 						} else {
 							System.out.println("\nUsuario o contraseña incorrectos");
 						}
-					}
+					
 					if (opcionSeleccionada == 4) {
 						Scanner scanner = new Scanner(System.in);
 						System.out.println(
@@ -266,7 +287,9 @@ public class Interfaz {
 						String loginAdminSede = scanner.nextLine();
 						System.out.println("\nContraseña: ");
 						String contraseñaAdminSede = scanner.nextLine();
-
+						if (sistema.verificarAdminSede(loginAdminSede, contraseñaAdminSede)) {
+							
+						
 						System.out.println(
 								"----------------------------------------------------------------------------------------");
 						System.out.println("\nBienvenido ");
@@ -282,6 +305,11 @@ public class Interfaz {
 							System.out.println("Ingrese la sede a la que va a ser ingresado: ");
 							String sede = scanner.nextLine();
 							sistema.cambiarVehiculoSede(placa,sede);
+						}
+						
+					}
+						else {
+							System.out.println("\nUsuario o contraseña incorrectos");
 						}
 					}
 

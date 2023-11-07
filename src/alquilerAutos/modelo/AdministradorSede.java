@@ -13,16 +13,18 @@ import java.util.Map;
 
 public class AdministradorSede {
 	private String nombre;
-	private int cedula;
+	private String cedula;
 	private String login;
 	private String contraseña;
+	private String sede;
 
-	public AdministradorSede(String nombre, int cedula, String login, String contraseña) {
+	public AdministradorSede(String nombre, String cedula, String login, String contraseña, String sede) {
 
 		this.nombre = nombre;
 		this.cedula = cedula;
 		this.login = login;
 		this.contraseña = contraseña;
+		this.sede = sede;
 	}
 	
 	public void cambiarSede(String placa, String sede, Map<String, ArrayList<String>> sedes){
@@ -46,6 +48,30 @@ public class AdministradorSede {
 		System.out.println(sedes);
 	}
 	
+	public String getSede() {
+		return sede;
+	}
+
+	public void setSede(String sede) {
+		this.sede = sede;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
 	public void eliminarVehiculo(){
 		
 	}

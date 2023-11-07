@@ -24,9 +24,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class PanelTabb extends JPanel {
-	public SistemaAlquilerAutos sistema =  new SistemaAlquilerAutos();
+	public SistemaAlquilerAutos sistema;
 	
-	public PanelTabb() throws FileNotFoundException, IOException {
+	public PanelTabb(SistemaAlquilerAutos sistema) throws FileNotFoundException, IOException {
 		
 		super(new GridLayout(1, 1)); 
 		sistema.cargarInformacionVehiculos();
@@ -35,9 +35,20 @@ public class PanelTabb extends JPanel {
 		sistema.cargarInformacionCondicionesCategoria();
 		sistema.cargarInformacionSeguros();
 		sistema.cargarInformacionSedes();
-		PaginaInicioDeSesion inicio_sesion = new PaginaInicioDeSesion(sistema);        
+		sistema.cargarAdminSedes();
+		/*
+		PaginaInicioDeSesion inicioSesionCliente = new PaginaInicioDeSesion(sistema,"cliente"); 
+		PaginaInicioDeSesion inicioSesionAdmin = new PaginaInicioDeSesion(sistema,"administrador"); 
+		PaginaInicioDeSesion inicioSesionAdminSede = new PaginaInicioDeSesion(sistema,"administrador sede"); 
+		PaginaInicioDeSesion inicioSesionEmpleado = new PaginaInicioDeSesion(sistema,"empleado"); 
+		*/
+		InicioEmpleado inicioEmpleado = new InicioEmpleado(sistema);
+		InicioAdmin inicioAdmin = new InicioAdmin(sistema);
+		InicioAdminSede inicioAdminSede = new InicioAdminSede(sistema);
+		InicioCliente inicioCliente = new InicioCliente(sistema);
+		
         JTabbedPane tabbedPane = new JTabbedPane();
-         
+        
         JComponent panel1 = makeTextPanel("Panel #1");
         tabbedPane.addTab("Tab 1", panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
@@ -49,14 +60,24 @@ public class PanelTabb extends JPanel {
         JComponent panel3 = makeTextPanel("Panel #3");
         tabbedPane.addTab("Tab 3", panel3);
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
-         
+        
         JComponent panel4 = makeTextPanel(
                 "Panel #4 (has a preferred size of 410 x 50).");
         panel4.setPreferredSize(new Dimension(410, 50));
         tabbedPane.addTab("Tab 4",panel4);
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
-        tabbedPane.addTab("inicio",inicio_sesion);
-         
+        /*
+        tabbedPane.addTab("inicio cliente",inicioSesionCliente);
+        tabbedPane.addTab("inicio empleado1",inicioEmpleado);
+        tabbedPane.addTab("inicio admin",inicioSesionAdmin);
+        tabbedPane.addTab("inicio admin sede",inicioSesionAdminSede);
+        tabbedPane.addTab("inicio empleado",inicioSesionEmpleado);
+        */
+        tabbedPane.addTab("inicio cliente",inicioCliente);
+        tabbedPane.addTab("inicio empleado",inicioEmpleado);
+        tabbedPane.addTab("inicio admin",inicioAdmin);
+        tabbedPane.addTab("inicio admin sede",inicioAdminSede);
+       
         //Add the tabbed pane to this panel.
         add(tabbedPane);
          
@@ -91,13 +112,13 @@ public class PanelTabb extends JPanel {
      * @throws IOException 
      * @throws FileNotFoundException 
      */
-    private static void createAndShowGUI() throws FileNotFoundException, IOException {
+    private static void createAndShowGUI(SistemaAlquilerAutos sistema) throws FileNotFoundException, IOException {
         //Create and set up the window.
-        JFrame frame = new JFrame("TabbedPaneDemo");
+        JFrame frame = new JFrame("Alquiler De Autos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
          
         //Add content to the window.
-        frame.add(new PanelTabb(), BorderLayout.CENTER);
+        frame.add(new PanelTabb(sistema), BorderLayout.CENTER);
          
         //Display the window.
         frame.pack();
@@ -129,9 +150,12 @@ public class PanelTabb extends JPanel {
     public static void main(String[] args)throws IOException, ClassNotFoundException, InstantiationException,
 	IllegalAccessException, UnsupportedLookAndFeelException {
     	
-    	PanelTabb principal = new PanelTabb();
     	SistemaAlquilerAutos sistema =  new SistemaAlquilerAutos();
+    
+    	PanelTabb principal = new PanelTabb(sistema);
     	principal.cargarArchivos(sistema);
+    	
+    	
     	
     	
     		
@@ -141,7 +165,7 @@ public class PanelTabb extends JPanel {
                 //Turn off metal's use of bold fonts
         UIManager.put("swing.boldMetal", Boolean.FALSE);
         try {
-			createAndShowGUI();
+			createAndShowGUI(sistema);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

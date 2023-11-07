@@ -44,6 +44,12 @@ public class Administrador {
 		return vehiculo;
 	}
 
+	public AdministradorSede registrarAdminSede(String nombre, String cedula, String login, String contraseña, String sede) {
+		
+		AdministradorSede adminSede = new AdministradorSede(nombre,cedula,login,contraseña,sede);
+		guardarAdminSede(nombre + ";" + cedula + ";" + login + ";" + contraseña + ";" + sede);
+		return adminSede;
+	}
 	public void darVehiculoDeBaja(String placaVehiculo) {
 
 	}
@@ -92,6 +98,16 @@ public class Administrador {
 		try {
 			filewriter = new FileWriter("./inventario/seguros.txt", true);
 			filewriter.write("\n" + texto.toLowerCase());
+			filewriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void guardarAdminSede(String texto) {
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/adminsedes.txt", true);
+			filewriter.write("\n" + texto);
 			filewriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();

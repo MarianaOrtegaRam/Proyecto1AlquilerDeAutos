@@ -32,6 +32,7 @@ public class SistemaAlquilerAutos {
 	public Map<String, ArrayList<String>> sedes = new HashMap<>();
 	public Map<String, String[]> condicionesCategoria = new HashMap<>();
 	public Reserva reserva;
+	public ArrayList<AdministradorSede> adminsedes = new ArrayList<>();
 
 	public void nuevoCliente(String nombreCliente, String datoContactoCliente, String fechaNacimientoCliente,
 			String nacionalidadCliente,
@@ -57,6 +58,39 @@ public class SistemaAlquilerAutos {
 				loginEmpleado, contraseñaEmpleado);
 
 		this.empleados.add(empleado);
+	}
+	
+	public void registrarAdminSede(String nombre, String cedula,String login, String contraseña,String sede) {
+
+		Administrador administrador = new Administrador();
+
+		AdministradorSede adminsede= administrador.registrarAdminSede(nombre, cedula, login, contraseña,sede);
+
+		this.adminsedes.add(adminsede);
+	}
+	
+	
+	public void cargarAdminSedes() throws FileNotFoundException, IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/adminsedes.txt"));
+		String linea = br.readLine();
+
+		while (linea != null) {
+			System.out.println(linea);
+			String[] partes = linea.split(";");
+			String nombre = partes[0];
+			String cedula = partes[1];
+			String login = partes[2];
+			String contraseña = partes[3];
+			String sede = partes[4];
+			AdministradorSede adminSede = new AdministradorSede(nombre,cedula,login,contraseña,"a");
+			
+			
+			this.adminsedes.add(adminSede);
+			linea = br.readLine();
+		}
+
+		br.close();
 	}
 
 	public void nuevoSeguro(String nombreSeguro, String precioSeguro, String beneficiosVehiculo) {
@@ -127,7 +161,6 @@ public class SistemaAlquilerAutos {
 		for (int i = 0; i < clientes.size(); i++) {
 			String loginUnCliente = clientes.get(i).getDatosBasicos().getLogin();
 			String contraseñaUnCliente = clientes.get(i).getDatosBasicos().getContraseña();
-
 			if (loginUnCliente.equals(login) && contraseñaUnCliente.equals(contraseña)) {
 				verificacion = true;
 
@@ -135,6 +168,31 @@ public class SistemaAlquilerAutos {
 		}
 		return verificacion;
 
+	}
+	
+	public boolean verificarAdminSede(String login, String contraseña) {
+
+		boolean verificacion = false;
+
+		for (int i = 0; i < adminsedes.size(); i++) {
+			String loginAdminSede = adminsedes.get(i).getLogin();
+			String contraseñaAdminSede = adminsedes.get(i).getContraseña();
+
+			if (loginAdminSede.equals(login) && contraseñaAdminSede.equals(contraseña)) {
+				verificacion = true;
+
+			}
+		}
+		return verificacion;
+
+	}
+	public boolean verificarAdministrador(String login, String contraseña) {
+		boolean verificacion =false;
+		if (Administrador.getLogin().equals(login)
+		&& Administrador.getContraseña().equals(contraseña)) {
+			verificacion = true;
+		}
+		return verificacion;
 	}
 
 	public void cargarInformacionEmpleado() throws FileNotFoundException, IOException {
@@ -491,9 +549,14 @@ public class SistemaAlquilerAutos {
 	}
 	
 	public void cambiarVehiculoSede(String placa, String sede) {
-
-		AdministradorSede adminSede = new AdministradorSede(placa, 0, placa, placa);
-		adminSede.cambiarSede(placa,sede , sedes);
+		for (int i = 0; i < adminsedes.size(); i++) {
+			String sede_ = adminsedes.get(i).getSede();
+			if (sede_.equals(sede)) {
+				AdministradorSede adminSede = adminsedes.get(i);
+				adminSede.cambiarSede(placa,sede,sedes);
+			}
+		
+		}
 	}
 
 	public String input(String mensaje) {
