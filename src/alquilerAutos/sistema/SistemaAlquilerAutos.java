@@ -275,7 +275,7 @@ public class SistemaAlquilerAutos {
 
 	public void cargarInformacionCondicionesCategoria() throws FileNotFoundException, IOException {
 
-		BufferedReader br = new BufferedReader(new FileReader("./inventario/sedesvehiculos.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/condicionesCategoria.txt"));
 		String linea = br.readLine();
 
 		while (linea != null) {
@@ -410,8 +410,7 @@ public class SistemaAlquilerAutos {
 						boolean cumple = unVehiculo.verificarCondiciones(condicionesUnaCategoria);
 						if (cumple) {
 							candidato = unVehiculo;
-							reserva.registrarReserva(reserva);
-							reservas.add(reserva);
+						
 						}
 
 					}
@@ -427,6 +426,8 @@ public class SistemaAlquilerAutos {
 			int precioFinalReserva = calucularTarifas(categoria_, categoriaDeseada, diasReserva);
 			reserva.setPrecioFinal(precioFinalReserva);
 			System.out.println("Reserva exitosa!");
+			reserva.registrarReserva(reserva);
+			reservas.add(reserva);
 		} else if (candidato != null) {
 			reserva.setVehiculo(candidato);
 			String categoria_ = candidato.getCategoria();
@@ -435,6 +436,8 @@ public class SistemaAlquilerAutos {
 			reserva.setPrecioFinal(precioFinalReserva);
 			System.out.println(
 					"No se encontro disponible la categoria deseada, sin embargo, este vehiculo cumple sus nececidades");
+			reserva.registrarReserva(reserva);
+			reservas.add(reserva);
 			candidato.setDisponible(false);
 		} else {
 			reserva = null;
@@ -584,6 +587,21 @@ public class SistemaAlquilerAutos {
 
 		int diasTotales = diasEntregar - diasRecoger;
 		return diasTotales;
+	}
+	
+	public DatosCliente getDatosCliente(String usuario) {
+		
+		for (int i = 0; i < clientes.size(); i++) {
+			
+            String userName = clientes.get(i).getDatosBasicos().getLogin();
+            if(usuario.equals(userName)) {
+            	return clientes.get(i);
+            }else {
+            	System.out.println("No se encontró el cliente");
+            }
+		}
+		return null;
+		
 	}
 	
 	public void printSede()  {

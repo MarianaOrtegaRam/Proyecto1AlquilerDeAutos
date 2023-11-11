@@ -65,6 +65,7 @@ public class Interfaz {
 							System.out.println("\nBienvenido cliente " + loginCliente);
 							System.out.println("\n1. Realizar una reserva");
 							System.out.println("\n2. Modificar su reserva");
+							System.out.println("\n3. saber datosCliente");
 							int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
 							if (opcion == 1) {

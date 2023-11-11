@@ -134,7 +134,7 @@ public class PanelTabb extends JPanel {
 		}
 
 	}
-    
+    	
 
     public static void main(String[] args)throws IOException, ClassNotFoundException, InstantiationException,
 	IllegalAccessException, UnsupportedLookAndFeelException {
@@ -144,10 +144,6 @@ public class PanelTabb extends JPanel {
     	PanelTabb principal = new PanelTabb(sistema);
     	principal.cargarArchivos(sistema);
     	
-    	
-    	
-    	
-    		
     	
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

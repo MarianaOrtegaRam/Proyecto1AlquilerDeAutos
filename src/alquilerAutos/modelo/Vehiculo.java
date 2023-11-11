@@ -93,10 +93,10 @@ public class Vehiculo {
 		for(int i = 0; i < condiciones.length ; i++) {
 			
 			String condition = condiciones[i];
-			String[] partes = condition.split("|");
+			String[] partes = condition.split("A");
 			String atributo = partes[0];
 			String segunda = partes[1];
-			if (atributo == "maletas") {
+			if (atributo.equals("maletas")) {
 				int maletasVehiculo = getMaletas();
 				if (segunda.contains("/")) {
 					String[] rango = segunda.split("/");
@@ -113,7 +113,7 @@ public class Vehiculo {
 
 			}
 
-			else if (atributo == "capacidad") { 
+			else if (atributo.equals("capacidad")) { 
 				int capacidadVehiculo = getCapacidad();
 				if (segunda.contains("/")) {
 					String[] rango = segunda.split("/");
@@ -128,7 +128,7 @@ public class Vehiculo {
 					}
 				}
 
-			} else if (atributo == "precioPorDia") {
+			} else if (atributo.equals("precioPorDia")) {
 				int precioPorDia = getPrecioPorDia();
 
 				if (segunda.contains("/")) {
@@ -145,9 +145,9 @@ public class Vehiculo {
 					}
 				}
 			}
-			else if (atributo =="marca"){
+			else if (atributo.equals("marca")){
 				String marca = getMarca();
-				if ((marca == "mercedes-benz")|| (marca =="bmw") || (marca=="audi")||(marca=="land rover")|| (marca=="tesla"))
+				if ((marca.equals("mercedes-benz"))|| (marca.equals("mercedes-benz")) || (marca.equals("audi"))||(marca.equals("land rover"))|| (marca.equals("tesla")))
 				{
 					cumple =true;
 				}
