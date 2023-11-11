@@ -12,14 +12,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.ImageIcon;
 
-public class PanelInfoInicial extends JPanel{
-	
-	private JPanel leftPanel;
+public class PanelInfoInicial extends JPanel {
+
+    private JPanel leftPanel;
     private JPanel rightPanel;
     private JLabel logoLabel;
     private JLabel infoLabel;
 
-    public PanelInfoInicial() {
+    public PanelInfoInicial(JPanel panelCategorias, JPanel panelInfoSedes) {
         // Configurar el panel principal
         setLayout(new BorderLayout());
 
@@ -43,8 +43,8 @@ public class PanelInfoInicial extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 rightPanel.removeAll();
-                infoLabel = new JLabel("Mostrando Categorías Disponibles");
-                rightPanel.add(infoLabel);
+                rightPanel.add(panelCategorias);
+
                 revalidate();
                 repaint();
             }
@@ -54,8 +54,7 @@ public class PanelInfoInicial extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 rightPanel.removeAll();
-                infoLabel = new JLabel("Mostrando Nuestras Sedes");
-                rightPanel.add(infoLabel);
+                rightPanel.add(panelInfoSedes);
                 revalidate();
                 repaint();
             }
@@ -77,19 +76,3 @@ public class PanelInfoInicial extends JPanel{
         add(rightPanel, BorderLayout.CENTER);
     }
 }
-/*
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame frame = new JFrame("Car Rental Panel Example");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                PanelInfoInicial carRentalPanel = new PanelInfoInicial();
-                frame.add(carRentalPanel);
-                frame.setSize(800, 600);
-                frame.setVisible(true);
-            }
-        });
-    }
-}
-*/

@@ -82,7 +82,7 @@ public class SistemaAlquilerAutos {
 			String login = partes[2];
 			String contraseña = partes[3];
 			String sede = partes[4];
-			AdministradorSede adminSede = new AdministradorSede(nombre,cedula,login,contraseña,"a");
+			AdministradorSede adminSede = new AdministradorSede(nombre,cedula,login,contraseña,sede);
 			
 			
 			this.adminsedes.add(adminSede);

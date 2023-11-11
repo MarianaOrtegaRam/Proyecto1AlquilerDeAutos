@@ -38,30 +38,14 @@ public class PanelTabb extends JPanel {
 		sistema.cargarAdminSedes();
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
-		PanelInfoInicial panelInicial = new PanelInfoInicial();
-		tabbedPane.addTab("About Us",panelInicial);
-		/*
-		PaginaInicioDeSesion inicioSesionCliente = new PaginaInicioDeSesion(sistema,"cliente"); 
-		PaginaInicioDeSesion inicioSesionAdmin = new PaginaInicioDeSesion(sistema,"administrador"); 
-		PaginaInicioDeSesion inicioSesionAdminSede = new PaginaInicioDeSesion(sistema,"administradorSede"); 
-		PaginaInicioDeSesion inicioSesionEmpleado = new PaginaInicioDeSesion(sistema,"empleado"); 
-		*/
-		//LOS QUE SIRVEN 
-		
+		JPanel panelCategorias = new PanelCategoria(sistema);
+        JPanel panelInfoSedes = new PanelInfoSedes(sistema);
+        PanelInfoInicial panelInicial = new PanelInfoInicial(panelCategorias, panelInfoSedes);
+        tabbedPane.addTab("About Us", panelInicial);
 		InicioEmpleado inicioEmpleado = new InicioEmpleado(sistema);
 		InicioAdmin inicioAdmin = new InicioAdmin(sistema);
 		InicioAdminSede inicioAdminSede = new InicioAdminSede(sistema);
 		InicioCliente inicioCliente = new InicioCliente(sistema);
-		
-        
-    /*
-        //los que no sirven
-        tabbedPane.addTab("inicio cliente",inicioSesionCliente);
-        tabbedPane.addTab("inicio admin",inicioSesionAdmin);
-        tabbedPane.addTab("inicio admin sede",inicioSesionAdminSede);
-        tabbedPane.addTab("inicio empleado",inicioSesionEmpleado);
-      */  
-        
         tabbedPane.addTab("inicio cliente",inicioCliente);
         tabbedPane.addTab("inicio empleado",inicioEmpleado);
         tabbedPane.addTab("inicio admin",inicioAdmin);

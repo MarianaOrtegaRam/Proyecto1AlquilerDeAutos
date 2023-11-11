@@ -1,4 +1,4 @@
-economico;capacidad|4/5!precioPorDia|max(1700000)
-intermedio;capacidad|5/7!precioPorDia|1700000/2800000|!maletas[1/2]
-transportemultiple;capacidad|7/15!maletas|2/15
-vehiculolujo;marca|Mercedes-Benz,BMV,Audi,Land Rover,Tesla
+economico;capacidadA4/5!precioPorDiaAmax(1700000)
+intermedio;capacidadA5/7!precioPorDiaA1700000/2800000A!maletasA[1/2]
+transportemultiple;capacidadA7/15!maletasA2/15
+vehiculolujo;marcaAmercedes-benz,bmw,audi,land rover,tesla
