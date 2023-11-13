@@ -86,20 +86,13 @@ public class PanelRealizarReserva extends JPanel {
         String seguro = (String) seguros.getSelectedItem();
         String categoriaDeseada = (String) categorias.getSelectedItem();
         Reserva reserva = sistema.crearReserva(sedeRecoger, sedeEntrega, fechaRecoger, rangoHoraEntrega, fechaEntrega,
-                seguro, categoriaDeseada,login);
+                seguro, categoriaDeseada, login);
         if (reserva != null) {
-        	ArrayList<String> datosReserva = sistema.getDatosReserva(reserva);
-        	new ReservaCorrecta(datosReserva);	
-        }
-        else {
-        	JFrame error = new JFrame("error en reserva");
-        	JPanel mensajeError = new JPanel();
-            mensajeError.add(new JLabel("Intente de nuevo!"));
-            error.add(mensajeError);
-            error.setLocationRelativeTo(null);
-	        error.setResizable(true);
-	        error.setVisible(true);
-            
+            ArrayList<String> datosReserva = sistema.getDatosReserva(reserva);
+            new ReservaCorrecta(datosReserva);
+        } else {
+            new ReservaIncorrecta();
+
         }
 
     }
