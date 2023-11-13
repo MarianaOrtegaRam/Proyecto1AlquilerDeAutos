@@ -91,7 +91,7 @@ public class Interfaz {
 
 								Reserva reserva = sistema.crearReserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
 										fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
-										seguroVehiculo, categoriaVehiculo);
+										seguroVehiculo, categoriaVehiculo,loginCliente);
 
 								sistema.setReserva(loginCliente, reserva);
 								

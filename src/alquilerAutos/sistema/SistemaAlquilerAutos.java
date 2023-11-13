@@ -373,9 +373,21 @@ public class SistemaAlquilerAutos {
 			String rangoHoraEntrega = partes[3];
 			String fechaEntrega = partes[4];
 			String seguro = partes[5];
+			String login = partes[6];
+			String placa = partes[7];
 
 			Reserva laReserva = new Reserva(sedeRecoger, sedeEntrega, fechaHoraRecoger, rangoHoraEntrega
 					, fechaEntrega, seguro);
+			laReserva.setLoginCliente(login);
+			for (Vehiculo unVehiculo : vehiculos) {
+				String unaPlaca = unVehiculo.getPlaca();
+				if (placa.equals(unaPlaca)) {
+					unVehiculo.setDisponible(false);
+					laReserva.setVehiculo(unVehiculo);
+					
+				}
+			}
+			setReserva(login,laReserva);
 			this.reservas.add(laReserva);
 			linea = br.readLine();
 		}
@@ -401,11 +413,15 @@ public class SistemaAlquilerAutos {
 
 	public Reserva crearReserva(String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
 			String fechaHoraRecogerVehiculo, String rangoHoraRecogerVehiculo, String fechaEntregaVehiculo,
-			String seguroVehiculo, String categoriaVehiculo) {
+			String seguroVehiculo, String categoriaVehiculo, String login) {
 
 		Reserva reserva = new Reserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
 				fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo, seguroVehiculo);
-
+		reserva.setLoginCliente(login);
+		
+		
+		
+		
 		ArrayList<String> listaPlacas = sedes.get(sedeRecogerVehiculo);
 
 		Vehiculo candidato = null;
@@ -443,6 +459,8 @@ public class SistemaAlquilerAutos {
 			System.out.println("Reserva exitosa!");
 			reserva.registrarReserva(reserva);
 			reservas.add(reserva);
+			setReserva(login,reserva);
+			
 		} else if (candidato != null) {
 			reserva.setVehiculo(candidato);
 			String categoria_ = candidato.getCategoria();
@@ -453,6 +471,7 @@ public class SistemaAlquilerAutos {
 					"No se encontro disponible la categoria deseada, sin embargo, este vehiculo cumple sus nececidades");
 			reserva.registrarReserva(reserva);
 			reservas.add(reserva);
+			setReserva(login,reserva);
 			candidato.setDisponible(false);
 		} else {
 			reserva = null;
@@ -625,20 +644,46 @@ public class SistemaAlquilerAutos {
 	}
 	
 	public DatosCliente getDatosCliente(String usuario) {
-		
+		DatosCliente elCliente = null;
 		for (int i = 0; i < clientes.size(); i++) {
 			
             String userName = clientes.get(i).getDatosBasicos().getLogin();
             if(usuario.equals(userName)) {
-            	return clientes.get(i);
-            }else {
-            	System.out.println("No se encontró el cliente");
+            	elCliente = clientes.get(i);
             }
 		}
-		return null;
+		System.out.println(elCliente.getDatosBasicos().getLogin());
+		return elCliente;
 		
 	}
-	
+	public ArrayList<String> getDatosReserva(Reserva reserva) {
+		String sedeRecoger = reserva.getSedeRecoger();
+		String sedeEntregar = reserva.getSedeEntrega();
+		String fechaRecoger  = reserva.getFechaHoraRecoger();
+		String rango = reserva.getRangoHoraEntrega();
+		String fechaEntrega  = reserva.getFechaEntrega();
+		String seguro = reserva.getSeguro();
+		String idReserva = String.valueOf(reserva.getIdReserva());
+		String categoria = reserva.getCategoria();
+		String loginCliente = reserva.getLoginCliente();
+		String placa = reserva.getVehiculo().getPlaca();
+		String precio = String.valueOf(reserva.getPrecioFinal());
+		ArrayList<String> datos = new ArrayList<>();
+		datos.add(idReserva);
+		datos.add(sedeRecoger);
+		datos.add(sedeEntregar);
+		datos.add(fechaRecoger);
+		datos.add(rango);
+		datos.add(fechaEntrega);
+		datos.add(seguro);
+		datos.add(categoria);
+		datos.add(loginCliente);
+		datos.add(placa);
+		datos.add(precio);
+		
+		return datos;
+		
+	}
 	public void printSede()  {
 		System.out.print(sedes);
 	}

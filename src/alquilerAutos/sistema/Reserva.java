@@ -17,6 +17,7 @@ public class Reserva {
 	private String seguro;
 	private int precioFinal;
 	private Vehiculo vehiculo;
+	private String loginCliente;
 
 	public Reserva(String sedeRecoger, String sedeEntrega, String fechaHoraRecoger,
 			String rangoHoraEntrega, String fechaEntrega, String seguro) {
@@ -31,7 +32,9 @@ public class Reserva {
 		this.seguro = seguro;
 
 	}
-
+	public void setLoginCliente(String login) {
+		this.loginCliente = login;
+	}
 	public void setCategoriaSeleccionada(String categoria) {
 		this.categoriaSeleccionada = categoria;
 	}
@@ -83,6 +86,20 @@ public class Reserva {
 	public String getSeguro() {
 		return seguro;
 	}
+	
+	public String getCategoria() {
+		return categoriaSeleccionada;
+	}
+	public String getLoginCliente() {
+		return loginCliente;
+	}
+	
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+	public int getPrecioFinal() {
+		return precioFinal;
+	}
 
 	
 	public void registrarReserva(Reserva reserva) {
@@ -93,9 +110,12 @@ public class Reserva {
 		String rangoHoraEntrega = reserva.getRangoHoraEntrega();
 		String fechaEntrega = reserva.getFechaEntrega();
 		String seguro = reserva.getSeguro();
+		String login = reserva.getLoginCliente();
+		String placa = reserva.getVehiculo().getPlaca();
+		
 		
 		agregarResreva(sedeRecoger + ";" + sedeEntrega + ";" + fechaHoraRecoger + ";"
-				+ rangoHoraEntrega + ";" + fechaEntrega + ";" + seguro);
+				+ rangoHoraEntrega + ";" + fechaEntrega + ";" + seguro + ";" + login + ";" + placa);
 		
 	}
 	
@@ -103,7 +123,7 @@ public class Reserva {
 		FileWriter filewriter;
 		try {
 			filewriter = new FileWriter("./inventario/reservas.txt", true);
-			filewriter.write(texto.toLowerCase() + "\n");
+			filewriter.write(texto + "\n");
 			filewriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();

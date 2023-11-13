@@ -36,6 +36,7 @@ public class PanelTabb extends JPanel {
 		sistema.cargarInformacionSeguros();
 		sistema.cargarInformacionSedes();
 		sistema.cargarAdminSedes();
+		sistema.cargarInformacionReservas();
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		JPanel panelCategorias = new PanelCategoria(sistema);
