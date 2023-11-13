@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -13,18 +15,24 @@ import javax.swing.JTextField;
 
 import alquilerAutos.sistema.SistemaAlquilerAutos;
 public class InicioEmpleado extends JPanel {
+	
     private static JPanel cards;
     public SistemaAlquilerAutos sistema;
     final static String PANEL_LOGIN = "Inicio de Sesión";
     final static String PANEL_CONTENIDO = "Empleado";
+    final static String PANEL_ERROR = "error";
+    public static Container pane;
+
+    
     public InicioEmpleado (SistemaAlquilerAutos sistema) {
     	this.sistema = sistema;
+    	//PANEL INICIO DE SESION
     	JPanel inicio_sesion = new JPanel();
-    	inicio_sesion.setPreferredSize(new Dimension(300, 200));
-    	inicio_sesion.add(new JLabel("Ingrese su nombre de usuario y contraseña:"));
+    	inicio_sesion.setLayout(new GridLayout(12,1));
         JTextField usernameField = new JTextField(20);
         JTextField passwordField = new JTextField(20);
         JButton loginButton = new JButton("Iniciar Sesión");
+        //
 
         loginButton.addActionListener(new ActionListener() {
             @Override
@@ -35,21 +43,41 @@ public class InicioEmpleado extends JPanel {
                 if (verificado) {
                     CardLayout cardLayout = (CardLayout) cards.getLayout();
                     cardLayout.show(cards, PANEL_CONTENIDO);
+                }else {
+                	CardLayout cardLayout = (CardLayout) cards.getLayout();
+                    cardLayout.show(cards, PANEL_ERROR);
                 }
             }
         });
 
+        Font fuente = new Font("verdana", Font.BOLD, 12); 
+        
+        inicio_sesion.add(new JLabel(""));
+        JLabel titulo = new JLabel("                   "
+        		+ "                                           Inicio de sesion Empleado");
+        titulo.setFont(fuente);
+        inicio_sesion.add(titulo);
+        inicio_sesion.add(new JLabel(""));
+        inicio_sesion.add(new JLabel("Usuario"));
         inicio_sesion.add(usernameField);
+        inicio_sesion.add(new JLabel(""));
+        inicio_sesion.add(new JLabel("Contraseña"));
         inicio_sesion.add(passwordField);
+        inicio_sesion.add(new JLabel(""));
         inicio_sesion.add(loginButton);
-
-        JPanel interfazEmpleado = new JPanel();
-        interfazEmpleado.add(new JLabel("¡Inicio de Sesión Exitoso!"));
+        
+        //PANEL MENU EMPLEADO
+        PanelEmpleadoInicial panelInicial = new PanelEmpleadoInicial(sistema);
+        //
+  
+        JPanel mensajeError = new JPanel();
+        mensajeError.add(new JLabel("Intente de nuevo!"));
 
         // Crear el panel que usa CardLayout
         cards = new JPanel(new CardLayout());
-        cards.add(inicio_sesion, PANEL_LOGIN);
-        cards.add(interfazEmpleado, PANEL_CONTENIDO);
+        cards.add(inicio_sesion, PANEL_LOGIN );
+        cards.add(panelInicial, PANEL_CONTENIDO);
+        cards.add(mensajeError, PANEL_ERROR);
 
         add(cards, BorderLayout.CENTER);
     }

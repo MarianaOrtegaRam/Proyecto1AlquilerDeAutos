@@ -24,7 +24,6 @@ public class InicioAdmin extends JPanel {
     public SistemaAlquilerAutos sistema;
     final static String PANEL_LOGIN = "Inicio de Sesión";
     final static String PANEL_CONTENIDO = "contenido";
-    final static String PANEL_ELIMINARVEHICULO = "eliminar vehiculos";
     final static String PANEL_ERROR = "error";
     public static Container pane;
     
@@ -60,7 +59,7 @@ public class InicioAdmin extends JPanel {
         
         inicio_sesion.add(new JLabel(""));
         JLabel titulo = new JLabel("                   "
-        		+ "                Inicio de sesion Administrador General");
+        		+ "                                 Inicio de sesion Administrador General");
         titulo.setFont(fuente);
         inicio_sesion.add(titulo);
         inicio_sesion.add(new JLabel(""));
@@ -73,47 +72,16 @@ public class InicioAdmin extends JPanel {
         inicio_sesion.add(loginButton);
         
         //PANEL MENU ADMINISTRADOR
-        JPanel menuAdmin = new JPanel();
-        menuAdmin.setPreferredSize(new Dimension(620, 600));
-        menuAdmin.setLayout(new GridLayout(9,1));
-        
-        menuAdmin.add(new JLabel(""));
-        JButton botonRq1 = new JButton("Dar de baja un vehiculo");
-        menuAdmin.add(botonRq1);
-        menuAdmin.add(new JLabel(""));
-
-    
-        JButton botonRq2 = new JButton("Agregar vehiculo");
-        menuAdmin.add(botonRq2);
-        menuAdmin.add(new JLabel(""));
-    
-        JButton botonRq3 = new JButton("Agregar Empleado");
-        menuAdmin.add(botonRq3);
-        menuAdmin.add(new JLabel(""));
-     
-        JButton botonRq4 = new JButton("Configurar seguro");
-        menuAdmin.add(botonRq4);
-        menuAdmin.add(new JLabel(""));
-       //
-        
-        botonRq1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	CardLayout cardLayout = (CardLayout) cards.getLayout();
-                cardLayout.show(cards, PANEL_CONTENIDO);
-            }
-            
-        });
-       
-        
-        
+        PanelAdminInicial panelInicial = new PanelAdminInicial(sistema);
+        //
+  
         JPanel mensajeError = new JPanel();
         mensajeError.add(new JLabel("Intente de nuevo!"));
 
         // Crear el panel que usa CardLayout
         cards = new JPanel(new CardLayout());
-        cards.add(inicio_sesion);
-        cards.add(menuAdmin, PANEL_CONTENIDO);
+        cards.add(inicio_sesion, PANEL_LOGIN );
+        cards.add(panelInicial, PANEL_CONTENIDO);
         cards.add(mensajeError, PANEL_ERROR);
 
         add(cards, BorderLayout.CENTER);

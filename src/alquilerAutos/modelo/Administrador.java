@@ -50,9 +50,6 @@ public class Administrador {
 		guardarAdminSede(nombre + ";" + cedula + ";" + login + ";" + contraseña + ";" + sede);
 		return adminSede;
 	}
-	public void darVehiculoDeBaja(String placaVehiculo) {
-
-	}
 
 	public Seguro configurarSeguro(String nombreSeguro, String precioSeguro, String beneficiosVehiculo) {
 
