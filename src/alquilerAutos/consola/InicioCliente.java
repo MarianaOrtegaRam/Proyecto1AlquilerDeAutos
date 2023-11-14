@@ -57,7 +57,7 @@ public class InicioCliente extends JPanel {
 
         inicio_sesion.add(new JLabel(""));
         JLabel titulo = new JLabel("                   "
-                + "                Inicio de sesion Cliente");
+                + "                                              Inicio de sesion Cliente");
         titulo.setFont(fuente);
         inicio_sesion.add(titulo);
         inicio_sesion.add(new JLabel(""));
@@ -74,7 +74,7 @@ public class InicioCliente extends JPanel {
         contenidoPanel.setLayout(new BorderLayout());
         JPanel menuCliente = new JPanel();
 
-        menuCliente.setLayout(new GridLayout(2, 1));
+        menuCliente.setLayout(new GridLayout(3, 1));
 
         JButton botonRq1 = new JButton("Realizar Reserva");
         menuCliente.add(botonRq1);
@@ -84,6 +84,10 @@ public class InicioCliente extends JPanel {
         JPanel panelEjecutar = new JPanel();
         JLabel logoLabel = new JLabel(new ImageIcon("./data/imagen.png")); // Reemplaza con la ruta real de tu logo
         panelEjecutar.add(logoLabel);
+        
+        JButton botonRq3 = new JButton("Registrar cliente");
+        menuCliente.add(botonRq3);
+
 
         botonRq1.addActionListener(new ActionListener() {
             @Override
@@ -91,6 +95,18 @@ public class InicioCliente extends JPanel {
                 panelEjecutar.removeAll();
                 PanelRealizarReserva panelReserva = new PanelRealizarReserva(sistema,elCliente);
                 panelEjecutar.add(panelReserva);
+                revalidate();
+                repaint();
+            }
+
+        });
+        
+        botonRq3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelEjecutar.removeAll();
+                PanelRegistrarCliente panelRegistrar = new PanelRegistrarCliente(sistema);
+                panelEjecutar.add(panelRegistrar);
                 revalidate();
                 repaint();
             }

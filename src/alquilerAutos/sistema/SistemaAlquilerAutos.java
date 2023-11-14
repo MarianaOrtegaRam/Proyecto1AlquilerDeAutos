@@ -34,7 +34,7 @@ public class SistemaAlquilerAutos {
 	public Reserva reserva;
 	public ArrayList<AdministradorSede> adminsedes = new ArrayList<>();
 
-	public void nuevoCliente(String nombreCliente, String datoContactoCliente, String fechaNacimientoCliente,
+	public boolean nuevoCliente(String nombreCliente, String datoContactoCliente, String fechaNacimientoCliente,
 			String nacionalidadCliente,
 			String loginCliente, String contraseñaCliente, String paisLicenciaCliente, String numeroLicenciaCliente,
 			String fechaVencimientoLicenciaCliente) {
@@ -43,8 +43,13 @@ public class SistemaAlquilerAutos {
 		DatosCliente cliente = infoCliente.crearCliente(nombreCliente, datoContactoCliente, fechaNacimientoCliente,
 				nacionalidadCliente, loginCliente, contraseñaCliente, paisLicenciaCliente, numeroLicenciaCliente,
 				fechaVencimientoLicenciaCliente);
-
-		this.clientes.add(cliente);
+		
+		if (cliente != null) {
+			this.clientes.add(cliente);
+			return true; // Se registró exitosamente
+		} else {
+			return false; // No se pudo registrar (puedes agregar más lógica según sea necesario)
+		}
 	}
 
 	public boolean nuevoEmpleado(String nombreEmpleado, String datoContactoEmpleado, String fechaNacimientoEmpleado,
