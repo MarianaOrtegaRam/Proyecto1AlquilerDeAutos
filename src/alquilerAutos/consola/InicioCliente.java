@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -47,8 +48,7 @@ public class InicioCliente extends JPanel {
                     cardLayout.show(cards, PANEL_CONTENIDO);
                     elCliente = sistema.getDatosCliente(username);
                 } else {
-                    CardLayout cardLayout = (CardLayout) cards.getLayout();
-                    cardLayout.show(cards, PANEL_ERROR);
+                	JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });

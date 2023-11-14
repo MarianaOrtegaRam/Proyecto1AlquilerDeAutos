@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -47,8 +48,7 @@ public class InicioAdminSede extends JPanel {
                     CardLayout cardLayout = (CardLayout) cards.getLayout();
                     cardLayout.show(cards, PANEL_CONTENIDO);
                 }else {
-                	CardLayout cardLayout = (CardLayout) cards.getLayout();
-                    cardLayout.show(cards, PANEL_ERROR);
+                	JOptionPane.showMessageDialog(null, "INTENTE DE NUEVO", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
