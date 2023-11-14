@@ -458,7 +458,7 @@ public class SistemaAlquilerAutos {
 			reserva.setCategoriaSeleccionada(categoria_);
 			int precioFinalReserva = calucularTarifas(categoria_, categoriaDeseada, diasReserva);
 			reserva.setPrecioFinal(precioFinalReserva);
-			System.out.println("Reserva exitosa!");
+			//System.out.println("Reserva exitosa!");
 			reserva.registrarReserva(reserva);
 			reservas.add(reserva);
 			setReserva(login, reserva);
@@ -469,15 +469,15 @@ public class SistemaAlquilerAutos {
 			reserva.setCategoriaSeleccionada(categoria_);
 			int precioFinalReserva = calucularTarifas(categoria_, candidato, diasReserva);
 			reserva.setPrecioFinal(precioFinalReserva);
-			System.out.println(
-					"No se encontro disponible la categoria deseada, sin embargo, este vehiculo cumple sus nececidades");
+			//System.out.println(
+					//"No se encontro disponible la categoria deseada, sin embargo, este vehiculo cumple sus nececidades");
 			reserva.registrarReserva(reserva);
 			reservas.add(reserva);
 			setReserva(login, reserva);
 			candidato.setDisponible(false);
 		} else {
 			reserva = null;
-			System.out.println("No se pudo realizar la reserva");
+			//System.out.println("No se pudo realizar la reserva");
 		}
 
 		return reserva;
@@ -654,7 +654,7 @@ public class SistemaAlquilerAutos {
 				elCliente = clientes.get(i);
 			}
 		}
-		System.out.println(elCliente.getDatosBasicos().getLogin());
+		
 		return elCliente;
 
 	}

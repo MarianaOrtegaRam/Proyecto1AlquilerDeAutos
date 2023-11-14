@@ -65,7 +65,7 @@ public class PanelInfoSedes extends JPanel {
         JPanel panelImagenC1 = new JPanel();
         panelImagenC1.setLayout(new BorderLayout());
         ImageIcon fotoVehiculo = new ImageIcon(
-                new ImageIcon("./data/sede" + numSede + ".png").getImage().getScaledInstance(250, 150,
+                new ImageIcon("./data/sede" + numSede + ".png").getImage().getScaledInstance(200, 130,
                         Image.SCALE_DEFAULT));
 
         JLabel temp = new JLabel();
