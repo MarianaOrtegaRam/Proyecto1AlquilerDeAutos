@@ -1,4 +1,2 @@
 Aeropuerto Internacional;Aeropuerto Internacional;12-10-23;3-5;14-10-23;Responsabilidad Civil;alejo7;ABC-123
-Aeropuerto Internacional;Aeropuerto Internacional;13-11-23;9-11;18-11-23;Cobertura de neumaticos y parabrisas;manana2515;UET-002
 Aeropuerto Internacional;Aeropuerto Internacional;14-11-23;8-9;18-11-23;Cobertura de neumaticos y parabrisas;andreita;WWL-739
-Oficina Central;Oficina Central;12-12-31;3;12-02-31;Proteccion contra Robo;alejo7;MOR-196
