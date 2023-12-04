@@ -24,14 +24,15 @@ public class Administrador {
 	}
 
 	public Vehiculo registrarNuevoVehiculo(String placaVehiculo, String marcaVehiculo, String tamañoVehiculo,
-			String modeloVehiculo, String colorVehiculo, String cajaVehiculo, String precioPorDiaVehiculo,
+			String modeloVehiculo, String colorVehiculo, String precioPorDiaVehiculo,
 			String maletasVehiculo,
-			String capacidadVehiculo, String categoriaVehiculo, String sedeVehiculo) {
+			String capacidadVehiculo, String categoriaVehiculo, String sedeVehiculo, String tipoVehiculo) {
 
 		guardarVehiculo(placaVehiculo + ";" + marcaVehiculo.toLowerCase() + ";" + tamañoVehiculo.toLowerCase() + ";"
 				+ modeloVehiculo + ";"
-				+ colorVehiculo + ";" + cajaVehiculo + ";" + precioPorDiaVehiculo + ";" + maletasVehiculo + ";"
-				+ capacidadVehiculo + ";" + "true" + ";" + categoriaVehiculo.toLowerCase() + ";" + sedeVehiculo);
+				+ colorVehiculo + ";" + precioPorDiaVehiculo + ";" + maletasVehiculo + ";"
+				+ capacidadVehiculo + ";" + "true" + ";" + categoriaVehiculo.toLowerCase() + ";" + sedeVehiculo + ";"
+				+ tipoVehiculo);
 		guardarSede(sedeVehiculo + ";" + placaVehiculo);
 
 		int precioPorDia = Integer.parseInt(precioPorDiaVehiculo);
@@ -39,14 +40,15 @@ public class Administrador {
 		int capacidad = Integer.parseInt(capacidadVehiculo);
 
 		Vehiculo vehiculo = new Vehiculo(placaVehiculo, marcaVehiculo, tamañoVehiculo, modeloVehiculo, colorVehiculo,
-				cajaVehiculo, precioPorDia, maletas, capacidad, true, categoriaVehiculo, sedeVehiculo);
+				precioPorDia, maletas, capacidad, true, categoriaVehiculo, sedeVehiculo, tipoVehiculo);
 		System.out.println("\nSe ha registrado el vehiculo!\n");
 		return vehiculo;
 	}
 
-	public AdministradorSede registrarAdminSede(String nombre, String cedula, String login, String contraseña, String sede) {
-		
-		AdministradorSede adminSede = new AdministradorSede(nombre,cedula,login,contraseña,sede);
+	public AdministradorSede registrarAdminSede(String nombre, String cedula, String login, String contraseña,
+			String sede) {
+
+		AdministradorSede adminSede = new AdministradorSede(nombre, cedula, login, contraseña, sede);
 		guardarAdminSede(nombre + ";" + cedula + ";" + login + ";" + contraseña + ";" + sede);
 		return adminSede;
 	}
@@ -100,6 +102,7 @@ public class Administrador {
 			e.printStackTrace();
 		}
 	}
+
 	public void guardarAdminSede(String texto) {
 		FileWriter filewriter;
 		try {

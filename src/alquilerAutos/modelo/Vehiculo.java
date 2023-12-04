@@ -6,29 +6,30 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Vehiculo {
-    private String placa;
-    private String marca;
-    private String tamaño;
-    private String modelo;
-    private String color;
-    private String caja;
-    private int precioPorDia;
-    private int maletas;
-    private int capacidad;
-    private boolean disponible;
-    private String categoria;
-    private String sede;
-    private boolean existe;
-   
-    
-    public Vehiculo(String placa, String marca, String tamaño, String modelo, String color, String caja,
-			int precioPorDia, int maletas, int capacidad, boolean disponible, String categoria, String sede) {
-		
+	private String placa;
+	private String marca;
+	private String tamaño;
+	private String modelo;
+	private String color;
+	private String caja;
+	private int precioPorDia;
+	private int maletas;
+	private int capacidad;
+	private boolean disponible;
+	private String categoria;
+	private String sede;
+	private boolean existe;
+	private TipoVehiculo tipoVehiculo;
+
+	public Vehiculo(String placa, String marca, String tamaño, String modelo, String color,
+			int precioPorDia, int maletas, int capacidad, boolean disponible, String categoria, String sede,
+			String tipoVehiculo) {
+
 		this.placa = placa;
 		this.marca = marca;
 		this.tamaño = tamaño;
 		this.modelo = modelo;
-		this.color = color;
+		// this.color = color;
 		this.caja = caja;
 		this.precioPorDia = precioPorDia;
 		this.maletas = maletas;
@@ -37,25 +38,25 @@ public class Vehiculo {
 		this.categoria = categoria;
 		this.sede = sede;
 		this.existe = true;
+		this.tipoVehiculo = new TipoVehiculo(tipoVehiculo);
 	}
-    
-    public void asignarTarifaDiaria(float precioPorCategoria){
-    	
-    }
+
+	public void asignarTarifaDiaria(float precioPorCategoria) {
+
+	}
 
 	public String getPlaca() {
 		return placa;
 	}
-	
+
 	public String getsede() {
 		return sede;
 	}
 
-
 	public String getTamaño() {
 		return tamaño;
 	}
-	
+
 	public int getMaletas() {
 		return maletas;
 	}
@@ -63,19 +64,19 @@ public class Vehiculo {
 	public int getCapacidad() {
 		return capacidad;
 	}
-	
+
 	public int getPrecioPorDia() {
 		return precioPorDia;
 	}
-	
+
 	public String getCategoria() {
 		return categoria;
 	}
-	
+
 	public String getMarca() {
 		return marca;
 	}
-	
+
 	public boolean getDisponibilidad() {
 		return disponible;
 	}
@@ -90,8 +91,8 @@ public class Vehiculo {
 
 	public boolean verificarCondiciones(String[] condiciones) {
 		boolean cumple = false;
-		for(int i = 0; i < condiciones.length ; i++) {
-			
+		for (int i = 0; i < condiciones.length; i++) {
+
 			String condition = condiciones[i];
 			String[] partes = condition.split("A");
 			String atributo = partes[0];
@@ -113,7 +114,7 @@ public class Vehiculo {
 
 			}
 
-			else if (atributo.equals("capacidad")) { 
+			else if (atributo.equals("capacidad")) {
 				int capacidadVehiculo = getCapacidad();
 				if (segunda.contains("/")) {
 					String[] rango = segunda.split("/");
@@ -144,18 +145,15 @@ public class Vehiculo {
 						cumple = true;
 					}
 				}
-			}
-			else if (atributo.equals("marca")){
+			} else if (atributo.equals("marca")) {
 				String marca = getMarca();
-				if ((marca.equals("mercedes-benz"))|| (marca.equals("mercedes-benz")) || (marca.equals("audi"))||(marca.equals("land rover"))|| (marca.equals("tesla")))
-				{
-					cumple =true;
+				if ((marca.equals("mercedes-benz")) || (marca.equals("mercedes-benz")) || (marca.equals("audi"))
+						|| (marca.equals("land rover")) || (marca.equals("tesla"))) {
+					cumple = true;
 				}
 			}
 
 		}
 		return cumple;
 	}
-}   
-    
-
+}

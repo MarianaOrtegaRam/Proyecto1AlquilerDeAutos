@@ -10,7 +10,9 @@ public class InfoCliente {
 	public DatosCliente crearCliente(String nombreCliente, String datoContactoCliente, String fechaNacimientoCliente,
 			String nacionalidadCliente, String loginCliente, String contraseñaCliente, String paisLicenciaCliente,
 			String numeroLicenciaCliente,
-			String fechaVencimientoLicenciaCliente) {
+			String fechaVencimientoLicenciaCliente, String metodoDePago, int numTarjeta,
+			String fechaVencimiento,
+			int codigoSeguridad, String password) {
 
 		DatosBasicos datosBasicos = datosBasicosCliente(nombreCliente, datoContactoCliente, fechaNacimientoCliente,
 				nacionalidadCliente, loginCliente, contraseñaCliente);
@@ -18,7 +20,11 @@ public class InfoCliente {
 		DatosLicencia datosLicencia = datoslicenciaCliente(paisLicenciaCliente, numeroLicenciaCliente,
 				fechaVencimientoLicenciaCliente);
 
-		DatosCliente datosCliente = new DatosCliente(datosBasicos, datosLicencia);
+		agregarClienteMetodoPago(metodoDePago + ";" + String.valueOf(numTarjeta) + ";" + fechaVencimiento + ";"
+				+ String.valueOf(codigoSeguridad) + ";" + password);
+		DatosCliente datosCliente = new DatosCliente(datosBasicos, datosLicencia, metodoDePago, numTarjeta,
+				fechaVencimiento,
+				codigoSeguridad, password);
 		return datosCliente;
 	}
 
@@ -65,7 +71,7 @@ public class InfoCliente {
 		FileWriter filewriter;
 		try {
 			filewriter = new FileWriter("./inventario/clientes.txt", true);
-			filewriter.write(texto.toLowerCase() + "\n");
+			filewriter.write(texto.toLowerCase() + ";");
 			filewriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -73,4 +79,15 @@ public class InfoCliente {
 
 	}
 
+	public void agregarClienteMetodoPago(String texto) {
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/clientes.txt", true);
+			filewriter.write(texto.toLowerCase() + "\n");
+			filewriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
 }

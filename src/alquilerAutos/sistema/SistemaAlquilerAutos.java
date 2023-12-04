@@ -37,13 +37,17 @@ public class SistemaAlquilerAutos {
 	public boolean nuevoCliente(String nombreCliente, String datoContactoCliente, String fechaNacimientoCliente,
 			String nacionalidadCliente,
 			String loginCliente, String contraseñaCliente, String paisLicenciaCliente, String numeroLicenciaCliente,
-			String fechaVencimientoLicenciaCliente) {
+			String fechaVencimientoLicenciaCliente, String metodoDePago, int numTarjeta,
+			String fechaVencimiento,
+			int codigoSeguridad, String password) {
 
 		InfoCliente infoCliente = new InfoCliente();
 		DatosCliente cliente = infoCliente.crearCliente(nombreCliente, datoContactoCliente, fechaNacimientoCliente,
 				nacionalidadCliente, loginCliente, contraseñaCliente, paisLicenciaCliente, numeroLicenciaCliente,
-				fechaVencimientoLicenciaCliente);
-		
+				fechaVencimientoLicenciaCliente, metodoDePago, numTarjeta,
+				fechaVencimiento,
+				codigoSeguridad, password);
+
 		if (cliente != null) {
 			this.clientes.add(cliente);
 			return true; // Se registró exitosamente
@@ -159,12 +163,18 @@ public class SistemaAlquilerAutos {
 			String pais = partes[6];
 			String numero = partes[7];
 			String fechaVencimiento = partes[8];
+			String metodoDePago = partes[9];
+			int numTarjeta = Integer.parseInt(partes[10]);
+			String fechaVencimientoTarjeta = partes[11];
+			int codigoSeguridad = Integer.parseInt(partes[12]);
+			String contraseñaTarjeta = partes[13];
 
 			DatosBasicos datosBasicos = new DatosBasicos(nombre, datoContacto, fechaNacimiento, nacionalidad, login,
 					contraseña, "cliente");
 			DatosLicencia datosLicencia = new DatosLicencia(pais, Integer.parseInt(numero), fechaVencimiento);
 
-			DatosCliente datosCliente = new DatosCliente(datosBasicos, datosLicencia);
+			DatosCliente datosCliente = new DatosCliente(datosBasicos, datosLicencia, metodoDePago, numTarjeta,
+					fechaVencimientoTarjeta, codigoSeguridad, contraseñaTarjeta);
 			this.clientes.add(datosCliente);
 			linea = br.readLine();
 		}
@@ -269,22 +279,23 @@ public class SistemaAlquilerAutos {
 			String tamaño = partes[2];
 			String modelo = partes[3];
 			String color = partes[4];
-			String caja = partes[5];
-			int precioPorDia = Integer.parseInt(partes[6]);
-			int maletas = Integer.parseInt(partes[7]);
-			int capacidad = Integer.parseInt(partes[8]);
+			// String caja = partes[5]; una cicla no tiene caja
+			int precioPorDia = Integer.parseInt(partes[5]);
+			int maletas = Integer.parseInt(partes[6]);
+			int capacidad = Integer.parseInt(partes[7]);
 			boolean disponible;
-			String disponibilidadDoc = partes[9];
+			String disponibilidadDoc = partes[8];
 			if (disponibilidadDoc.equals("true")) {
 				disponible = true;
 			} else {
 				disponible = false;
 			}
-			String categoria = partes[10];
-			String sede = partes[11];
+			String categoria = partes[9];
+			String sede = partes[10];
+			String tipoVehiculo = partes[11];
 
-			Vehiculo elvehiculo = new Vehiculo(placa, marca, tamaño, modelo, color, caja, precioPorDia, maletas,
-					capacidad, disponible, categoria, sede);
+			Vehiculo elvehiculo = new Vehiculo(placa, marca, tamaño, modelo, color, precioPorDia, maletas,
+					capacidad, disponible, categoria, sede, tipoVehiculo);
 			this.vehiculos.add(elvehiculo);
 			linea = br.readLine();
 		}
@@ -458,7 +469,7 @@ public class SistemaAlquilerAutos {
 			reserva.setCategoriaSeleccionada(categoria_);
 			int precioFinalReserva = calucularTarifas(categoria_, categoriaDeseada, diasReserva);
 			reserva.setPrecioFinal(precioFinalReserva);
-			//System.out.println("Reserva exitosa!");
+			// System.out.println("Reserva exitosa!");
 			reserva.registrarReserva(reserva);
 			reservas.add(reserva);
 			setReserva(login, reserva);
@@ -469,15 +480,16 @@ public class SistemaAlquilerAutos {
 			reserva.setCategoriaSeleccionada(categoria_);
 			int precioFinalReserva = calucularTarifas(categoria_, candidato, diasReserva);
 			reserva.setPrecioFinal(precioFinalReserva);
-			//System.out.println(
-					//"No se encontro disponible la categoria deseada, sin embargo, este vehiculo cumple sus nececidades");
+			// System.out.println(
+			// "No se encontro disponible la categoria deseada, sin embargo, este vehiculo
+			// cumple sus nececidades");
 			reserva.registrarReserva(reserva);
 			reservas.add(reserva);
 			setReserva(login, reserva);
 			candidato.setDisponible(false);
 		} else {
 			reserva = null;
-			//System.out.println("No se pudo realizar la reserva");
+			// System.out.println("No se pudo realizar la reserva");
 		}
 
 		return reserva;
@@ -654,7 +666,7 @@ public class SistemaAlquilerAutos {
 				elCliente = clientes.get(i);
 			}
 		}
-		
+
 		return elCliente;
 
 	}
