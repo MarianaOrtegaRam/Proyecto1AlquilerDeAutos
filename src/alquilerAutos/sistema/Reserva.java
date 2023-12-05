@@ -109,8 +109,12 @@ public class Reserva {
 		return precioFinal;
 	}
 
-	public void registrarReserva(Reserva reserva) {
+	public TipoVehiculo getTipoVehiculo() {
+		return tipoVehiculo;
+	}
 
+	public void registrarReserva(Reserva reserva) {
+		String tipoVehiculo = reserva.getTipoVehiculo().getNombreTipo();
 		String sedeRecoger = reserva.getSedeRecoger();
 		String sedeEntrega = reserva.getSedeEntrega();
 		String fechaHoraRecoger = reserva.getFechaHoraRecoger();
@@ -120,7 +124,7 @@ public class Reserva {
 		String login = reserva.getLoginCliente();
 		String placa = reserva.getVehiculo().getPlaca();
 
-		agregarResreva(sedeRecoger + ";" + sedeEntrega + ";" + fechaHoraRecoger + ";"
+		agregarResreva(tipoVehiculo + ";" + sedeRecoger + ";" + sedeEntrega + ";" + fechaHoraRecoger + ";"
 				+ rangoHoraEntrega + ";" + fechaEntrega + ";" + seguro + ";" + login + ";" + placa);
 
 	}

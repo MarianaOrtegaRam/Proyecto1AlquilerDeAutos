@@ -25,6 +25,7 @@ import alquilerAutos.modelo.Vehiculo;
 public class SistemaAlquilerAutos {
 
 	public ArrayList<Reserva> reservas = new ArrayList<>();
+	public ArrayList<Vehiculo> todosLosVehiculos = new ArrayList<>();
 	public ArrayList<Vehiculo> vehiculos = new ArrayList<>();
 	public ArrayList<Vehiculo> motos = new ArrayList<>();
 	public ArrayList<Vehiculo> motoDeportiva = new ArrayList<>();
@@ -309,6 +310,7 @@ public class SistemaAlquilerAutos {
 			Vehiculo elvehiculo = new Vehiculo(placa, marca, tamaño, modelo, color, precioPorDia, maletas,
 					capacidad, disponible, categoria, sede, tipoVehiculo);
 			this.vehiculos.add(elvehiculo);
+			this.todosLosVehiculos.add(elvehiculo);
 			linea = br.readLine();
 		}
 
@@ -316,40 +318,59 @@ public class SistemaAlquilerAutos {
 
 	}
 
-	public void cargarInformacionMoto() throws FileNotFoundException, IOException {
+	public void cargarInformacionOtros() throws FileNotFoundException, IOException {
+		ArrayList<String> listaTipos = new ArrayList<>();
+		listaTipos.add("moto");
+		listaTipos.add("motocicleta deportiva");
+		listaTipos.add("bicicleta");
+		listaTipos.add("bicicleta electrica");
+		listaTipos.add("patineta electrica");
+		for (String tipoEsp : listaTipos) {
 
-		BufferedReader br = new BufferedReader(new FileReader("./inventario/moto.txt"));
-		String linea = br.readLine();
+			BufferedReader br = new BufferedReader(new FileReader("./inventario/" + tipoEsp + ".txt"));
+			String linea = br.readLine();
 
-		while (linea != null) {
+			while (linea != null) {
 
-			String[] partes = linea.split(";");
-			String placa = partes[0];
-			String marca = partes[1];
-			String tamaño = partes[2];
-			String modelo = partes[3];
-			String color = partes[4];
-			int precioPorDia = Integer.parseInt(partes[5]);
-			int maletas = Integer.parseInt(partes[6]);
-			int capacidad = Integer.parseInt(partes[7]);
-			boolean disponible;
-			String disponibilidadDoc = partes[8];
-			if (disponibilidadDoc.equals("true")) {
-				disponible = true;
-			} else {
-				disponible = false;
+				String[] partes = linea.split(";");
+				String placa = partes[0];
+				String marca = partes[1];
+				String tamaño = partes[2];
+				String modelo = partes[3];
+				String color = partes[4];
+				int precioPorDia = Integer.parseInt(partes[5]);
+				int maletas = Integer.parseInt(partes[6]);
+				int capacidad = Integer.parseInt(partes[7]);
+				boolean disponible;
+				String disponibilidadDoc = partes[8];
+				if (disponibilidadDoc.equals("true")) {
+					disponible = true;
+				} else {
+					disponible = false;
+				}
+				String categoria = partes[9];
+				String sede = partes[10];
+				String tipoVehiculo = partes[11];
+
+				Vehiculo elvehiculo = new Vehiculo(placa, marca, tamaño, modelo, color, precioPorDia, maletas,
+						capacidad, disponible, categoria, sede, tipoVehiculo);
+				if (tipoEsp.equals("moto")) {
+					this.motos.add(elvehiculo);
+				} else if (tipoEsp.equals("motocicleta deportiva")) {
+					this.motoDeportiva.add(elvehiculo);
+				} else if (tipoEsp.equals("bicicleta")) {
+					this.bicicleta.add(elvehiculo);
+				} else if (tipoEsp.equals("bicicleta electrica")) {
+					this.bicicletaElec.add(elvehiculo);
+				} else if (tipoEsp.equals("patineta electrica")) {
+					this.patinetaElec.add(elvehiculo);
+				}
+				this.todosLosVehiculos.add(elvehiculo);
+				linea = br.readLine();
 			}
-			String categoria = partes[9];
-			String sede = partes[10];
-			String tipoVehiculo = partes[11];
 
-			Vehiculo elvehiculo = new Vehiculo(placa, marca, tamaño, modelo, color, precioPorDia, maletas,
-					capacidad, disponible, categoria, sede, tipoVehiculo);
-			this.vehiculos.add(elvehiculo);
-			linea = br.readLine();
+			br.close();
 		}
-
-		br.close();
 
 	}
 
@@ -404,6 +425,91 @@ public class SistemaAlquilerAutos {
 
 	}
 
+	public void cargarInformacionSedesOtras() throws FileNotFoundException, IOException {
+		ArrayList<String> listaTipos = new ArrayList<>();
+		listaTipos.add("moto");
+		listaTipos.add("motocicleta deportiva");
+		listaTipos.add("bicicleta");
+		listaTipos.add("bicicleta electrica");
+		listaTipos.add("patineta electrica");
+		for (String tipoEsp : listaTipos) {
+			BufferedReader br = new BufferedReader(new FileReader("./inventario/sedes" + tipoEsp + ".txt"));
+			String linea = br.readLine();
+
+			while (linea != null) {
+
+				String[] partes = linea.split(";");
+				String nombreSede = partes[0];
+				String placa = partes[1];
+
+				if (tipoEsp.equals("moto")) {
+					ArrayList<String> sedeExiste = sedesMoto.get(nombreSede);
+					if (sedeExiste == null) {
+						ArrayList<String> motos = new ArrayList<>();
+						motos.add(placa);
+						sedesMoto.put(nombreSede, motos);
+					} else {
+						ArrayList<String> lista = sedesMoto.get(nombreSede);
+						lista.add(placa);
+					}
+				}
+
+				else if (tipoEsp.equals("motocicleta deportiva")) {
+					ArrayList<String> sedeExiste = sedesMotoDepor.get(nombreSede);
+					if (sedeExiste == null) {
+						ArrayList<String> motos = new ArrayList<>();
+						motos.add(placa);
+						sedesMotoDepor.put(nombreSede, motos);
+					} else {
+						ArrayList<String> lista = sedesMotoDepor.get(nombreSede);
+						lista.add(placa);
+					}
+				}
+
+				else if (tipoEsp.equals("bicicleta")) {
+					ArrayList<String> sedeExiste = sedesBicicleta.get(nombreSede);
+					if (sedeExiste == null) {
+						ArrayList<String> bicis = new ArrayList<>();
+						bicis.add(placa);
+						sedesBicicleta.put(nombreSede, bicis);
+					} else {
+						ArrayList<String> lista = sedesBicicleta.get(nombreSede);
+						lista.add(placa);
+					}
+				}
+
+				else if (tipoEsp.equals("bicicleta electrica")) {
+					ArrayList<String> sedeExiste = sedesBicicletaElec.get(nombreSede);
+					if (sedeExiste == null) {
+						ArrayList<String> bicis = new ArrayList<>();
+						bicis.add(placa);
+						sedesBicicletaElec.put(nombreSede, bicis);
+					} else {
+						ArrayList<String> lista = sedesBicicletaElec.get(nombreSede);
+						lista.add(placa);
+					}
+				}
+
+				else if (tipoEsp.equals("patineta electrica")) {
+					ArrayList<String> sedeExiste = sedesPatinetaEle.get(nombreSede);
+					if (sedeExiste == null) {
+						ArrayList<String> patineta = new ArrayList<>();
+						patineta.add(placa);
+						sedesPatinetaEle.put(nombreSede, patineta);
+					} else {
+						ArrayList<String> lista = sedesPatinetaEle.get(nombreSede);
+						lista.add(placa);
+					}
+				}
+
+				linea = br.readLine();
+			}
+
+			br.close();
+		}
+
+	}
+
 	public void cargarInformacionSeguros() throws FileNotFoundException, IOException {
 		BufferedReader br = new BufferedReader(new FileReader("./inventario/seguros.txt"));
 		String linea = br.readLine();
@@ -432,19 +538,21 @@ public class SistemaAlquilerAutos {
 		while (linea != null) {
 
 			String[] partes = linea.split(";");
-			String sedeRecoger = partes[0];
-			String sedeEntrega = partes[1];
-			String fechaHoraRecoger = partes[2];
-			String rangoHoraEntrega = partes[3];
-			String fechaEntrega = partes[4];
-			String seguro = partes[5];
-			String login = partes[6];
-			String placa = partes[7];
+			String tipoVehiculo = partes[0];
+			String sedeRecoger = partes[1];
+			String sedeEntrega = partes[2];
+			String fechaHoraRecoger = partes[3];
+			String rangoHoraEntrega = partes[4];
+			String fechaEntrega = partes[5];
+			String seguro = partes[6];
+			String login = partes[7];
+			String placa = partes[8];
 
-			Reserva laReserva = new Reserva(sedeRecoger, sedeEntrega, fechaHoraRecoger, rangoHoraEntrega, fechaEntrega,
+			Reserva laReserva = new Reserva(tipoVehiculo, sedeRecoger, sedeEntrega, fechaHoraRecoger, rangoHoraEntrega,
+					fechaEntrega,
 					seguro);
 			laReserva.setLoginCliente(login);
-			for (Vehiculo unVehiculo : vehiculos) {
+			for (Vehiculo unVehiculo : todosLosVehiculos) {
 				String unaPlaca = unVehiculo.getPlaca();
 				if (placa.equals(unaPlaca)) {
 					unVehiculo.setDisponible(false);
@@ -476,7 +584,14 @@ public class SistemaAlquilerAutos {
 
 	}
 
-	public Reserva crearReservaNoAuto()
+	public Reserva crearReservaNoAuto(String tipoVehiculo, String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
+			String fechaHoraRecogerVehiculo, String rangoHoraRecogerVehiculo, String fechaEntregaVehiculo,
+			String seguroVehiculo, String categoriaVehiculo, String login) {
+
+		Reserva reserva = new Reserva(tipoVehiculo, sedeRecogerVehiculo, sedeEntregarrVehiculo,
+				fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo, seguroVehiculo);
+		reserva.setLoginCliente(login);
+	}
 
 	public Reserva crearReserva(String tipoVehiculo, String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
 			String fechaHoraRecogerVehiculo, String rangoHoraRecogerVehiculo, String fechaEntregaVehiculo,
