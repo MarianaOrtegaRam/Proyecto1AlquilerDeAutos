@@ -1,0 +1,3 @@
+SVB-443;cube;mediano;touring hybrid one 400;rojo;90000;0;1;true;na;Aeropuerto Internacional;bicicleta electrica
+YMO-799;bull;mediano;cross lite e step-thru;gris;70000;0;1;true;na;Oficina Central;bicicleta electrica
+RCI-251;kaabo;mediano;wolf warrior;blanco;95000;0;1;true;na;Zona Costera;bicicleta electrica

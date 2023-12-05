@@ -17,7 +17,7 @@ public class TipoVehiculo {
     }
 
     public void setNivelPeligro() {
-        if ((nombreTipo.equals("automovil")) || (nombreTipo.equals("moto")) || (nombreTipo.equals("atv"))
+        if ((nombreTipo.equals("automovil")) || (nombreTipo.equals("moto"))
                 || (nombreTipo.equals("motocicleta deportiva"))) {
             this.nivelPeligro = 3;
         } else if ((nombreTipo.equals("bicicleta")) || (nombreTipo.equals("bicicleta electrica"))) {

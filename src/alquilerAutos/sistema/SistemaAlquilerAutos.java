@@ -429,11 +429,11 @@ public class SistemaAlquilerAutos {
 
 	}
 
-	public Reserva crearReserva(String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
+	public Reserva crearReserva(String tipoVehiculo, String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
 			String fechaHoraRecogerVehiculo, String rangoHoraRecogerVehiculo, String fechaEntregaVehiculo,
 			String seguroVehiculo, String categoriaVehiculo, String login) {
 
-		Reserva reserva = new Reserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
+		Reserva reserva = new Reserva(tipoVehiculo, sedeRecogerVehiculo, sedeEntregarrVehiculo,
 				fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo, seguroVehiculo);
 		reserva.setLoginCliente(login);
 

@@ -1,0 +1,3 @@
+AAB-143;gotrax;mediano;kaabo mantisz;rojo;50000;0;1;true;na;Aeropuerto Internacional;patineta electrica
+OLO-759;apollo;mediano;city;gris;70000;1;1;true;na;Oficina Central;patineta electrica
+QII-003;kaabo;mediano;wolf warrior;blanco;60000;0;1;true;na;Zona Costera;patineta electrica

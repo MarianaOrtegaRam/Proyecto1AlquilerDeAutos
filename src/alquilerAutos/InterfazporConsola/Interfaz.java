@@ -73,27 +73,34 @@ public class Interfaz {
                                 System.out.println(
                                         "----------------------------------------------------------------------------------------");
                                 System.out.println("\t\t\tCrear Reserva\n");
-                                System.out.println("\nIngrese la categoria: ");
-                                String categoriaVehiculo = scanner_reserva.nextLine();
-                                System.out.println("\nIngrese sede para recoger: ");
-                                String sedeRecogerVehiculo = scanner_reserva.nextLine();
-                                System.out.println("\nIngrese sede para entregar: ");
-                                String sedeEntregarrVehiculo = scanner_reserva.nextLine();
-                                System.out.println("\nIngrese fecha para recoger (DD-MM-AA): ");
-                                String fechaHoraRecogerVehiculo = scanner_reserva.nextLine();
-                                System.out.println("\nIngrese un rango de hora para recoger (N-N): ");
-                                String rangoHoraRecogerVehiculo = scanner_reserva.nextLine();
-                                System.out.println("\nIngrese fecha para entrega (DD-MM-AA): ");
-                                String fechaEntregaVehiculo = scanner_reserva.nextLine();
-                                sistema.ofrecerSeguro();
-                                System.out.println("\nIngrese seguro (Opcional): ");
-                                String seguroVehiculo = scanner_reserva.nextLine();
+                                System.out.println("\nIngrese el tipo de vehiculo: ");
+                                String tipo = scanner_reserva.nextLine();
+                                if (tipo.equals("automovil")) {
 
-                                Reserva reserva = sistema.crearReserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
-                                        fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
-                                        seguroVehiculo, categoriaVehiculo, loginCliente);
+                                    System.out.println("\nIngrese la categoria: ");
+                                    String categoriaVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese sede para recoger: ");
+                                    String sedeRecogerVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese sede para entregar: ");
+                                    String sedeEntregarrVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese fecha para recoger (DD-MM-AA): ");
+                                    String fechaHoraRecogerVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese un rango de hora para recoger (N-N): ");
+                                    String rangoHoraRecogerVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese fecha para entrega (DD-MM-AA): ");
+                                    String fechaEntregaVehiculo = scanner_reserva.nextLine();
+                                    sistema.ofrecerSeguro();
+                                    System.out.println("\nIngrese seguro (Opcional): ");
+                                    String seguroVehiculo = scanner_reserva.nextLine();
 
-                                sistema.setReserva(loginCliente, reserva);
+                                    Reserva reserva = sistema.crearReserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
+                                            fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
+                                            seguroVehiculo, categoriaVehiculo, loginCliente);
+
+                                    sistema.setReserva(loginCliente, reserva);
+                                } else {
+
+                                }
 
                             } else if (opcion == 2) {
                                 Scanner scanner_modificar_reserva = new Scanner(System.in);
@@ -368,7 +375,9 @@ public class Interfaz {
                     System.out.println("Debe seleccionar uno de los números de las opciones.");
                 }
             }
+
         }
+
     }
 
     public String input(String mensaje) {
