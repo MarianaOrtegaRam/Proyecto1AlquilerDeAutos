@@ -36,7 +36,7 @@ public class Interfaz {
 					sistema.cargarInformacionSeguros();
 					sistema.cargarInformacionSedes();
 					sistema.cargarAdminSedes();
-					//sistema.printSede();
+					// sistema.printSede();
 
 					System.out.println(
 							"\n----------------------------------------------------------------------------------------");
@@ -91,11 +91,10 @@ public class Interfaz {
 
 								Reserva reserva = sistema.crearReserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
 										fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
-										seguroVehiculo, categoriaVehiculo,loginCliente);
+										seguroVehiculo, categoriaVehiculo, loginCliente);
 
 								sistema.setReserva(loginCliente, reserva);
-								
-								
+
 							} else if (opcion == 2) {
 								Scanner scanner_modificar_reserva = new Scanner(System.in);
 								System.out.println(
@@ -226,8 +225,6 @@ public class Interfaz {
 								String modeloVehiculo = scanner_auto.nextLine();
 								System.out.println("\nIngrese color: ");
 								String colorVehiculo = scanner_auto.nextLine();
-								System.out.println("\nIngrese caja: ");
-								String cajaVehiculo = scanner_auto.nextLine();
 								System.out.println("\nIngrese precio por dia: ");
 								String precioPorDiaVehiculo = scanner_auto.nextLine();
 								System.out.println("\nIngrese maletas: ");
@@ -238,10 +235,12 @@ public class Interfaz {
 								String categoriaVehiculo = scanner_auto.nextLine();
 								System.out.println("\nIngrese sede: ");
 								String sedeVehiculo = scanner_auto.nextLine();
+								System.out.println("\nIngrese ipo vehiculo: ");
+								String tipoVehiculo = scanner_auto.nextLine();
 								sistema.registrarNuevoVehiculo(placaVehiculo, marcaVehiculo, tamañoVehiculo,
-										modeloVehiculo, colorVehiculo, cajaVehiculo,
+										modeloVehiculo, colorVehiculo,
 										precioPorDiaVehiculo, maletasVehiculo, capacidadVehiculo, categoriaVehiculo,
-										sedeVehiculo);
+										sedeVehiculo, tipoVehiculo);
 
 							} else if (opcion == 3) {
 								Scanner scanner_seguro = new Scanner(System.in);
@@ -255,8 +254,7 @@ public class Interfaz {
 								System.out.println("\nIngrese beneficios: ");
 								String beneficiosVehiculo = scanner_seguro.nextLine();
 								sistema.nuevoSeguro(nombreSeguro, precioSeguro, beneficiosVehiculo);
-							}
-							else if (opcion == 4) {
+							} else if (opcion == 4) {
 								Scanner scanner_admin = new Scanner(System.in);
 								System.out.println(
 										"----------------------------------------------------------------------------------------");
@@ -271,15 +269,15 @@ public class Interfaz {
 								String contraseña = scanner_admin.nextLine();
 								System.out.println("\nIngrese sede: ");
 								String sede = scanner_admin.nextLine();
-								
-								sistema.registrarAdminSede(nombre, cedula, login, contraseña,sede);
-							}
-							}
 
-						} else {
-							System.out.println("\nUsuario o contraseña incorrectos");
+								sistema.registrarAdminSede(nombre, cedula, login, contraseña, sede);
+							}
 						}
-					
+
+					} else {
+						System.out.println("\nUsuario o contraseña incorrectos");
+					}
+
 					if (opcionSeleccionada == 4) {
 						Scanner scanner = new Scanner(System.in);
 						System.out.println(
@@ -289,27 +287,25 @@ public class Interfaz {
 						System.out.println("\nContraseña: ");
 						String contraseñaAdminSede = scanner.nextLine();
 						if (sistema.verificarAdminSede(loginAdminSede, contraseñaAdminSede)) {
-							
-						
-						System.out.println(
-								"----------------------------------------------------------------------------------------");
-						System.out.println("\nBienvenido ");
-						System.out.println("\n1. Ofrecer Seguros");
-						System.out.println("\n2. Cambiar de sede un vehiculo");
-						int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
 
-						if (opcion == 1) {
-							sistema.ofrecerSeguro();
-						} else if(opcion == 2) {
-							System.out.println("Ingrese la placa del vehiculo: ");
-							String placa = scanner.nextLine();
-							System.out.println("Ingrese la sede a la que va a ser ingresado: ");
-							String sede = scanner.nextLine();
-							sistema.cambiarVehiculoSede(placa,sede);
-						}
-						
-					}
-						else {
+							System.out.println(
+									"----------------------------------------------------------------------------------------");
+							System.out.println("\nBienvenido ");
+							System.out.println("\n1. Ofrecer Seguros");
+							System.out.println("\n2. Cambiar de sede un vehiculo");
+							int opcion = Integer.parseInt(input("\nPor favor seleccione una opcion"));
+
+							if (opcion == 1) {
+								sistema.ofrecerSeguro();
+							} else if (opcion == 2) {
+								System.out.println("Ingrese la placa del vehiculo: ");
+								String placa = scanner.nextLine();
+								System.out.println("Ingrese la sede a la que va a ser ingresado: ");
+								String sede = scanner.nextLine();
+								sistema.cambiarVehiculoSede(placa, sede);
+							}
+
+						} else {
 							System.out.println("\nUsuario o contraseña incorrectos");
 						}
 					}
@@ -342,9 +338,25 @@ public class Interfaz {
 						System.out.println("\nIngrese fecha de vencimiento(MM-AA): ");
 						String fechaVencimientoLicenciaCliente = scanner_nuevo_cliente.nextLine();
 
+						System.out.println(
+								"----------------------------------------------------------------------------------------");
+						System.out.println("\t\t\tDatos Metodo de Pago\n");
+						System.out.println("Ingrese el metodo de Pago: ");
+						String metodoDePago = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese el numero de tarjeta: ");
+						String numeroTarjeta = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese fecha de vencimiento(MM-AA): ");
+						String fechaVencimientoTarjeta = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese el codigo de seguridad: ");
+						String codSeg = scanner_nuevo_cliente.nextLine();
+						System.out.println("\nIngrese clave del MetodoDePago: ");
+						String claveMetodoString = scanner_nuevo_cliente.nextLine();
+
 						sistema.nuevoCliente(nombreCliente, datoContactoCliente, fechaNacimientoCliente,
 								nacionalidadCliente, loginCliente, contraseñaCliente, paisLicenciaCliente,
-								numeroLicenciaCliente, fechaVencimientoLicenciaCliente);
+								numeroLicenciaCliente, fechaVencimientoLicenciaCliente, metodoDePago,
+								Integer.parseInt(numeroTarjeta),
+								fechaVencimientoTarjeta, Integer.parseInt(codSeg), claveMetodoString);
 
 						System.out.println("\nDatos Cliente y Licencia registrados!");
 

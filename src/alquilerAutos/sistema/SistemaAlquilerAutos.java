@@ -118,14 +118,16 @@ public class SistemaAlquilerAutos {
 	}
 
 	public boolean registrarNuevoVehiculo(String placaVehiculo, String marcaVehiculo, String tamañoVehiculo,
-			String modeloVehiculo, String colorVehiculo, String cajaVehiculo, String precioPorDiaVehiculo,
-			String maletasVehiculo, String capacidadVehiculo, String categoriaVehiculo, String sedeVehiculo) {
+			String modeloVehiculo, String colorVehiculo, String precioPorDiaVehiculo,
+			String maletasVehiculo, String capacidadVehiculo, String categoriaVehiculo, String sedeVehiculo,
+			String tipoVehiculo) {
 
 		Administrador administrador = new Administrador();
 
 		Vehiculo vehiculo = administrador.registrarNuevoVehiculo(placaVehiculo, marcaVehiculo, tamañoVehiculo,
-				modeloVehiculo, colorVehiculo, cajaVehiculo,
-				precioPorDiaVehiculo, maletasVehiculo, capacidadVehiculo, categoriaVehiculo, sedeVehiculo);
+				modeloVehiculo, colorVehiculo,
+				precioPorDiaVehiculo, maletasVehiculo, capacidadVehiculo, categoriaVehiculo, sedeVehiculo,
+				tipoVehiculo);
 
 		if (vehiculo != null) {
 			this.vehiculos.add(vehiculo);
