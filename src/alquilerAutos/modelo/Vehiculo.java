@@ -11,7 +11,6 @@ public class Vehiculo {
 	private String tamaño;
 	private String modelo;
 	private String color;
-	private String caja;
 	private int precioPorDia;
 	private int maletas;
 	private int capacidad;
@@ -29,8 +28,8 @@ public class Vehiculo {
 		this.marca = marca;
 		this.tamaño = tamaño;
 		this.modelo = modelo;
-		// this.color = color;
-		this.caja = caja;
+		this.color = color;
+		// this.caja = caja;
 		this.precioPorDia = precioPorDia;
 		this.maletas = maletas;
 		this.capacidad = capacidad;

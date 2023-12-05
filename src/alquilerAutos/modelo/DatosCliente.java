@@ -18,7 +18,7 @@ public class DatosCliente {
 		this.datosBasicos = datosBasicos;
 		this.datosLicencia = datosLicencia;
 		try {
-			Class clase = Class.forName(claseMetodoPago);
+			Class clase = Class.forName("alquilerAutos.modelo." + claseMetodoPago);
 
 			this.metodoDePago = (MetodoDePago) clase
 					.getDeclaredConstructor(int.class, String.class, int.class, String.class)

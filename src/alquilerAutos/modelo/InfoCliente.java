@@ -83,7 +83,7 @@ public class InfoCliente {
 		FileWriter filewriter;
 		try {
 			filewriter = new FileWriter("./inventario/clientes.txt", true);
-			filewriter.write(texto.toLowerCase() + "\n");
+			filewriter.write(texto + "\n");
 			filewriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();

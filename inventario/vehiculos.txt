@@ -1,10 +1,10 @@
-ABC-123;Kia;pequeño;Picanto;rojo;1100000;1;4;true;economico;Aeropuerto Internacional
-STU-961;Renault;mediano;Twingo;gris;1800000;1;5;true;intermedio;Oficina Central
-ZAB-703;Ford;grande;Transit;blanco;2000000;8;10;true;transportemultiple;Oficina Central
-WXY-374;BMV;mediano;Serie 5;marron;3000000;1;5;true;vehiculolujo;Oficina Central
-POR-445;bmw;grande;Serie 7;azul;3700000;1;5;true;vehiculolujo;Zona Costera
-JKO-605;ford;pequeño;Fiesta Sedan;blanco;1150000;0;5;true;economico;Oficina Central
-ULM-882;nissan;pequenio;March;gris;1250000;1;5;true;economico;Zona Costera
-WWL-739;toyota;intermedio;Corolla;azul;1945000;2;5;true;intermedio;Aeropuerto Internacional
-UET-002;volkswagen;mediano;Voyage;gris;2750000;3;4;true;intermedio;Aeropuerto Internacional
-MOR-196;toyota;grande;Sienna;rojo;2900000;4;8;true;transportemultiple;Oficina Central
+ABC-123;Kia;pequeño;Picanto;rojo;1100000;1;4;true;economico;Aeropuerto Internacional;automovil
+STU-961;Renault;mediano;Twingo;gris;1800000;1;5;true;intermedio;Oficina Central;automovil
+ZAB-703;Ford;grande;Transit;blanco;2000000;8;10;true;transportemultiple;Oficina Central;automovil
+WXY-374;BMV;mediano;Serie 5;marron;3000000;1;5;true;vehiculolujo;Oficina Central;automovil
+POR-445;bmw;grande;Serie 7;azul;3700000;1;5;true;vehiculolujo;Zona Costera;automovil
+JKO-605;ford;pequeño;Fiesta Sedan;blanco;1150000;0;5;true;economico;Oficina Central;automovil
+ULM-882;nissan;pequenio;March;gris;1250000;1;5;true;economico;Zona Costera;automovil
+WWL-739;toyota;intermedio;Corolla;azul;1945000;2;5;true;intermedio;Aeropuerto Internacional;automovil
+UET-002;volkswagen;mediano;Voyage;gris;2750000;3;4;true;intermedio;Aeropuerto Internacional;automovil
+MOR-196;toyota;grande;Sienna;rojo;2900000;4;8;true;transportemultiple;Oficina Central;automovil
