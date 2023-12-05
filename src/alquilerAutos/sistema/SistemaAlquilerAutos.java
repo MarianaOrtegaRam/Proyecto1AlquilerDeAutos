@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import alquilerAutos.modelo.Administrador;
 import alquilerAutos.modelo.AdministradorSede;
@@ -591,6 +593,87 @@ public class SistemaAlquilerAutos {
 		Reserva reserva = new Reserva(tipoVehiculo, sedeRecogerVehiculo, sedeEntregarrVehiculo,
 				fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo, seguroVehiculo);
 		reserva.setLoginCliente(login);
+		Vehiculo vehiculoReserva = null;
+		if (tipoVehiculo.equals("moto")) {
+			ArrayList<String> listaPlacas = sedesMoto.get(sedeRecogerVehiculo);
+			for (int i = 0; i < listaPlacas.size(); i++) {
+				String unaPlaca = listaPlacas.get(i);
+				for (int j = 0; j < this.motos.size(); j++) {
+					Vehiculo unaMoto = motos.get(j);
+					String placaMoto = unaMoto.getPlaca();
+					if ((unaPlaca.equals(placaMoto)) & (unaMoto.getDisponibilidad())) {
+						vehiculoReserva = unaMoto;
+					}
+				}
+
+			}
+
+		} else if (tipoVehiculo.equals("motocicleta deportiva")) {
+			ArrayList<String> listaPlacas = sedesMotoDepor.get(sedeRecogerVehiculo);
+			for (int i = 0; i < listaPlacas.size(); i++) {
+				String unaPlaca = listaPlacas.get(i);
+				for (int j = 0; j < this.motoDeportiva.size(); j++) {
+					Vehiculo unaMotoD = motoDeportiva.get(j);
+					String placaMotoD = unaMotoD.getPlaca();
+					if ((unaPlaca.equals(placaMotoD)) & (unaMotoD.getDisponibilidad()))
+						vehiculoReserva = unaMotoD;
+				}
+			}
+
+		} else if (tipoVehiculo.equals("bicicleta")) {
+			ArrayList<String> listaPlacas = sedesBicicleta.get(sedeRecogerVehiculo);
+			for (int i = 0; i < listaPlacas.size(); i++) {
+				String unaPlaca = listaPlacas.get(i);
+				for (int j = 0; j < this.bicicleta.size(); j++) {
+					Vehiculo unaBici = bicicleta.get(j);
+					String placaBici = unaBici.getPlaca();
+					if ((unaPlaca.equals(placaBici)) & (unaBici.getDisponibilidad())) {
+						vehiculoReserva = unaBici;
+					}
+				}
+
+			}
+		} else if (tipoVehiculo.equals("bicicleta electrica")) {
+			ArrayList<String> listaPlacas = sedesBicicletaElec.get(sedeRecogerVehiculo);
+			for (int i = 0; i < listaPlacas.size(); i++) {
+				String unaPlaca = listaPlacas.get(i);
+				for (int j = 0; j < this.bicicletaElec.size(); j++) {
+					Vehiculo unaBiciE = bicicletaElec.get(j);
+					String placaBiciE = unaBiciE.getPlaca();
+					if ((unaPlaca.equals(placaBiciE)) & (unaBiciE.getDisponibilidad())) {
+						vehiculoReserva = unaBiciE;
+					}
+				}
+
+			}
+		} else if (tipoVehiculo.equals("patineta electrica")) {
+			ArrayList<String> listaPlacas = sedesPatinetaEle.get(sedeRecogerVehiculo);
+			for (int i = 0; i < listaPlacas.size(); i++) {
+				String unaPlaca = listaPlacas.get(i);
+				for (int j = 0; j < this.patinetaElec.size(); j++) {
+					Vehiculo unaPatineta = patinetaElec.get(j);
+					String placaPatineta = unaPatineta.getPlaca();
+					if ((unaPlaca.equals(placaPatineta)) & (unaPatineta.getDisponibilidad())) {
+						vehiculoReserva = unaPatineta;
+					}
+				}
+
+			}
+		}
+
+		int diasReserva = diasReserva(fechaHoraRecogerVehiculo, fechaEntregaVehiculo);
+		if (vehiculoReserva != null) {
+			reserva.setVehiculo(vehiculoReserva);
+			vehiculoReserva.setDisponible(false);
+			reserva.setCategoriaSeleccionada("na");
+			int precioFinalReserva = calucularTarifas("na", vehiculoReserva, diasReserva);
+			reserva.setPrecioFinal(precioFinalReserva);
+			// System.out.println("Reserva exitosa!");
+			reserva.registrarReserva(reserva);
+			reservas.add(reserva);
+			setReserva(login, reserva);
+		}
+		return reserva;
 	}
 
 	public Reserva crearReserva(String tipoVehiculo, String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
@@ -676,10 +759,10 @@ public class SistemaAlquilerAutos {
 
 	public int calucularTarifas(String nombreCategoria, Vehiculo carro, int dias) {
 
-		int precioInicial = (carro.getPrecioPorDia()) * dias;
+		int porcentajeAdicional = (carro.getTipoVehiculo()).getPorcentajeAdicional();
+		int precioInicial = ((carro.getPrecioPorDia()) * porcentajeAdicional) * dias;
 		int excedente = 0;
 		int precioFinal = 0;
-		// String nombreCategoria = categoria.getNombreCategoria();
 
 		if (nombreCategoria.equals("economico")) {
 			excedente += 50000;
@@ -693,6 +776,8 @@ public class SistemaAlquilerAutos {
 		} else if (nombreCategoria.equals("vehiculolujo")) {
 			excedente += 100000;
 			precioFinal = precioInicial + excedente;
+		} else if (nombreCategoria.equals("na")) {
+
 		}
 
 		return precioFinal;

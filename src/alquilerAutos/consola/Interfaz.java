@@ -88,13 +88,24 @@ public class Interfaz {
 								sistema.ofrecerSeguro();
 								System.out.println("\nIngrese seguro (Opcional): ");
 								String seguroVehiculo = scanner_reserva.nextLine();
+								System.out.println("\nIngrese Tipo Vehiculo: ");
+								String tipo = scanner_reserva.nextLine();
+								if (tipo.equals("automovil")) {
+									Reserva reserva = sistema.crearReserva(tipo, sedeRecogerVehiculo,
+											sedeEntregarrVehiculo,
+											fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
+											seguroVehiculo, categoriaVehiculo, loginCliente);
 
-								Reserva reserva = sistema.crearReserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
-										fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
-										seguroVehiculo, categoriaVehiculo, loginCliente);
+									sistema.setReserva(loginCliente, reserva);
+								} else {
+									Reserva reserva = sistema.crearReservaNoAuto(tipo, sedeRecogerVehiculo,
+											sedeEntregarrVehiculo,
+											fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
+											seguroVehiculo, categoriaVehiculo, loginCliente);
 
-								sistema.setReserva(loginCliente, reserva);
+									sistema.setReserva(loginCliente, reserva);
 
+								}
 							} else if (opcion == 2) {
 								Scanner scanner_modificar_reserva = new Scanner(System.in);
 								System.out.println(

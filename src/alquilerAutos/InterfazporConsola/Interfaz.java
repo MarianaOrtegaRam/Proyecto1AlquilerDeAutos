@@ -30,11 +30,13 @@ public class Interfaz {
             while (continuar) {
                 try {
                     sistema.cargarInformacionVehiculos();
+                    sistema.cargarInformacionOtros();
                     sistema.cargarInformacionCliente();
                     sistema.cargarInformacionEmpleado();
                     sistema.cargarInformacionCondicionesCategoria();
                     sistema.cargarInformacionSeguros();
                     sistema.cargarInformacionSedes();
+                    sistema.cargarInformacionSedesOtras();
                     sistema.cargarAdminSedes();
                     // sistema.printSede();
 
@@ -92,14 +94,41 @@ public class Interfaz {
                                     sistema.ofrecerSeguro();
                                     System.out.println("\nIngrese seguro (Opcional): ");
                                     String seguroVehiculo = scanner_reserva.nextLine();
-
-                                    Reserva reserva = sistema.crearReserva(sedeRecogerVehiculo, sedeEntregarrVehiculo,
+                                    Reserva reserva = sistema.crearReserva(tipo, sedeRecogerVehiculo,
+                                            sedeEntregarrVehiculo,
                                             fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
                                             seguroVehiculo, categoriaVehiculo, loginCliente);
-
-                                    sistema.setReserva(loginCliente, reserva);
+                                    if (reserva != null) {
+                                        sistema.setReserva(loginCliente, reserva);
+                                    } else {
+                                        System.err.println("Ocurrio un error, intente de nuevo");
+                                    }
                                 } else {
-
+                                    System.out.println("\nIngrese la categoria: ");
+                                    String categoriaVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese sede para recoger: ");
+                                    String sedeRecogerVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese sede para entregar: ");
+                                    String sedeEntregarrVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese fecha para recoger (DD-MM-AA): ");
+                                    String fechaHoraRecogerVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese un rango de hora para recoger (N-N): ");
+                                    String rangoHoraRecogerVehiculo = scanner_reserva.nextLine();
+                                    System.out.println("\nIngrese fecha para entrega (DD-MM-AA): ");
+                                    String fechaEntregaVehiculo = scanner_reserva.nextLine();
+                                    sistema.ofrecerSeguro();
+                                    System.out.println("\nIngrese seguro (Opcional): ");
+                                    String seguroVehiculo = scanner_reserva.nextLine();
+                                    Reserva reserva = sistema.crearReservaNoAuto(tipo, sedeRecogerVehiculo,
+                                            sedeEntregarrVehiculo,
+                                            fechaHoraRecogerVehiculo, rangoHoraRecogerVehiculo, fechaEntregaVehiculo,
+                                            seguroVehiculo, categoriaVehiculo, loginCliente);
+                                    if (reserva != null) {
+                                        sistema.setReserva(loginCliente, reserva);
+                                    } else {
+                                        System.err.println("Ocurrio un error, intente de nuevo");
+                                    }
+                                    sistema.setReserva(loginCliente, reserva);
                                 }
 
                             } else if (opcion == 2) {

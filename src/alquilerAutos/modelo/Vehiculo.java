@@ -80,6 +80,10 @@ public class Vehiculo {
 		return disponible;
 	}
 
+	public TipoVehiculo getTipoVehiculo() {
+		return tipoVehiculo;
+	}
+
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}

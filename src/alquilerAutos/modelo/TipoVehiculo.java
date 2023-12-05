@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class TipoVehiculo {
     String nombreTipo;
-    float porcentajeAdicional;
+    int porcentajeAdicional;
     int nivelPeligro;
 
     public TipoVehiculo(String nombreTipo) {
@@ -37,7 +37,7 @@ public class TipoVehiculo {
         }
     }
 
-    public float getPorcentajeAdicional() {
+    public int getPorcentajeAdicional() {
         return porcentajeAdicional;
     }
 
