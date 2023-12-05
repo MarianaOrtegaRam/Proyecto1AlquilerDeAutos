@@ -28,12 +28,24 @@ public class Administrador {
 			String maletasVehiculo,
 			String capacidadVehiculo, String categoriaVehiculo, String sedeVehiculo, String tipoVehiculo) {
 
-		guardarVehiculo(placaVehiculo + ";" + marcaVehiculo.toLowerCase() + ";" + tamañoVehiculo.toLowerCase() + ";"
-				+ modeloVehiculo + ";"
-				+ colorVehiculo + ";" + precioPorDiaVehiculo + ";" + maletasVehiculo + ";"
-				+ capacidadVehiculo + ";" + "true" + ";" + categoriaVehiculo.toLowerCase() + ";" + sedeVehiculo + ";"
-				+ tipoVehiculo);
-		guardarSede(sedeVehiculo + ";" + placaVehiculo);
+		if (tipoVehiculo.equals("automovil")) {
+			guardarVehiculo(placaVehiculo + ";" + marcaVehiculo.toLowerCase() + ";" + tamañoVehiculo.toLowerCase() + ";"
+					+ modeloVehiculo + ";"
+					+ colorVehiculo + ";" + precioPorDiaVehiculo + ";" + maletasVehiculo + ";"
+					+ capacidadVehiculo + ";" + "true" + ";" + categoriaVehiculo.toLowerCase() + ";" + sedeVehiculo
+					+ ";"
+					+ tipoVehiculo);
+			guardarSede(sedeVehiculo + ";" + placaVehiculo);
+		} else {
+			guardarOtros(placaVehiculo + ";" + marcaVehiculo.toLowerCase() + ";" + tamañoVehiculo.toLowerCase() + ";"
+					+ modeloVehiculo + ";"
+					+ colorVehiculo + ";" + precioPorDiaVehiculo + ";" + maletasVehiculo + ";"
+					+ capacidadVehiculo + ";" + "true" + ";" + categoriaVehiculo.toLowerCase() + ";" + sedeVehiculo
+					+ ";"
+					+ tipoVehiculo, tipoVehiculo);
+			guardarSedeOtro(sedeVehiculo + ";" + placaVehiculo, tipoVehiculo);
+
+		}
 
 		int precioPorDia = Integer.parseInt(precioPorDiaVehiculo);
 		int maletas = Integer.parseInt(maletasVehiculo);
@@ -85,6 +97,29 @@ public class Administrador {
 		FileWriter filewriter;
 		try {
 			filewriter = new FileWriter("./inventario/sedesvehiculos.txt", true);
+			filewriter.write("\n" + texto);
+			filewriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void guardarOtros(String texto, String tipo) {
+		FileWriter filewriter;
+
+		try {
+			filewriter = new FileWriter("./inventario/" + tipo + ".txt", true);
+			filewriter.write("\n" + texto);
+			filewriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void guardarSedeOtro(String texto, String tipo) {
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/sedes" + tipo + ".txt", true);
 			filewriter.write("\n" + texto);
 			filewriter.close();
 		} catch (IOException e) {

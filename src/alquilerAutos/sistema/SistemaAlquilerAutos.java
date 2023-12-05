@@ -26,10 +26,20 @@ public class SistemaAlquilerAutos {
 
 	public ArrayList<Reserva> reservas = new ArrayList<>();
 	public ArrayList<Vehiculo> vehiculos = new ArrayList<>();
+	public ArrayList<Vehiculo> motos = new ArrayList<>();
+	public ArrayList<Vehiculo> motoDeportiva = new ArrayList<>();
+	public ArrayList<Vehiculo> patinetaElec = new ArrayList<>();
+	public ArrayList<Vehiculo> bicicleta = new ArrayList<>();
+	public ArrayList<Vehiculo> bicicletaElec = new ArrayList<>();
 	public ArrayList<DatosCliente> clientes = new ArrayList<>();
 	public ArrayList<DatosBasicos> empleados = new ArrayList<>();
 	public ArrayList<Seguro> seguros = new ArrayList<>();
 	public Map<String, ArrayList<String>> sedes = new HashMap<>();
+	public Map<String, ArrayList<String>> sedesMoto = new HashMap<>();
+	public Map<String, ArrayList<String>> sedesMotoDepor = new HashMap<>();
+	public Map<String, ArrayList<String>> sedesPatinetaEle = new HashMap<>();
+	public Map<String, ArrayList<String>> sedesBicicleta = new HashMap<>();
+	public Map<String, ArrayList<String>> sedesBicicletaElec = new HashMap<>();
 	public Map<String, String[]> condicionesCategoria = new HashMap<>();
 	public Reserva reserva;
 	public ArrayList<AdministradorSede> adminsedes = new ArrayList<>();
@@ -306,6 +316,43 @@ public class SistemaAlquilerAutos {
 
 	}
 
+	public void cargarInformacionMoto() throws FileNotFoundException, IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./inventario/moto.txt"));
+		String linea = br.readLine();
+
+		while (linea != null) {
+
+			String[] partes = linea.split(";");
+			String placa = partes[0];
+			String marca = partes[1];
+			String tamaño = partes[2];
+			String modelo = partes[3];
+			String color = partes[4];
+			int precioPorDia = Integer.parseInt(partes[5]);
+			int maletas = Integer.parseInt(partes[6]);
+			int capacidad = Integer.parseInt(partes[7]);
+			boolean disponible;
+			String disponibilidadDoc = partes[8];
+			if (disponibilidadDoc.equals("true")) {
+				disponible = true;
+			} else {
+				disponible = false;
+			}
+			String categoria = partes[9];
+			String sede = partes[10];
+			String tipoVehiculo = partes[11];
+
+			Vehiculo elvehiculo = new Vehiculo(placa, marca, tamaño, modelo, color, precioPorDia, maletas,
+					capacidad, disponible, categoria, sede, tipoVehiculo);
+			this.vehiculos.add(elvehiculo);
+			linea = br.readLine();
+		}
+
+		br.close();
+
+	}
+
 	public void cargarInformacionCondicionesCategoria() throws FileNotFoundException, IOException {
 
 		BufferedReader br = new BufferedReader(new FileReader("./inventario/condicionesCategoria.txt"));
@@ -428,6 +475,8 @@ public class SistemaAlquilerAutos {
 		}
 
 	}
+
+	public Reserva crearReservaNoAuto()
 
 	public Reserva crearReserva(String tipoVehiculo, String sedeRecogerVehiculo, String sedeEntregarrVehiculo,
 			String fechaHoraRecogerVehiculo, String rangoHoraRecogerVehiculo, String fechaEntregaVehiculo,
