@@ -143,18 +143,87 @@ public class SistemaAlquilerAutos {
 				tipoVehiculo);
 
 		if (vehiculo != null) {
-			this.vehiculos.add(vehiculo);
-			String sede = vehiculo.getsede();
-
-			ArrayList<String> sedeExiste = sedes.get(sede);
-			if (sedeExiste == null) {
-				ArrayList<String> carros = new ArrayList<>();
-				carros.add(vehiculo.getPlaca());
-				sedes.put(sede, carros);
-			} else {
-				ArrayList<String> lista = sedes.get(sede);
-				lista.add(vehiculo.getPlaca());
+			this.todosLosVehiculos.add(vehiculo);// editar
+			if (tipoVehiculo.equals("automovil")) {
+				this.vehiculos.add(vehiculo);
+				String sede = vehiculo.getsede();
+				// CAMBIAR PARA CADA SEDE
+				ArrayList<String> sedeExiste = sedes.get(sede);
+				if (sedeExiste == null) {
+					ArrayList<String> carros = new ArrayList<>();
+					carros.add(vehiculo.getPlaca());
+					sedes.put(sede, carros);
+				} else {
+					ArrayList<String> lista = sedes.get(sede);
+					lista.add(vehiculo.getPlaca());
+				}
+			} else if (tipoVehiculo.equals("moto")) {
+				this.motos.add(vehiculo);
+				String sede = vehiculo.getsede();
+				// CAMBIAR PARA CADA SEDE
+				ArrayList<String> sedeExiste = sedesMoto.get(sede);
+				if (sedeExiste == null) {
+					ArrayList<String> motos = new ArrayList<>();
+					motos.add(vehiculo.getPlaca());
+					sedesMoto.put(sede, motos);
+				} else {
+					ArrayList<String> lista = sedesMoto.get(sede);
+					lista.add(vehiculo.getPlaca());
+				}
+			} else if (tipoVehiculo.equals("motocicleta deportiva")) {
+				this.motoDeportiva.add(vehiculo);
+				String sede = vehiculo.getsede();
+				// CAMBIAR PARA CADA SEDE
+				ArrayList<String> sedeExiste = sedesMotoDepor.get(sede);
+				if (sedeExiste == null) {
+					ArrayList<String> motosD = new ArrayList<>();
+					motosD.add(vehiculo.getPlaca());
+					sedesMotoDepor.put(sede, motosD);
+				} else {
+					ArrayList<String> lista = sedesMotoDepor.get(sede);
+					lista.add(vehiculo.getPlaca());
+				}
+			} else if (tipoVehiculo.equals("bicicleta")) {
+				this.bicicleta.add(vehiculo);
+				String sede = vehiculo.getsede();
+				// CAMBIAR PARA CADA SEDE
+				ArrayList<String> sedeExiste = sedesBicicleta.get(sede);
+				if (sedeExiste == null) {
+					ArrayList<String> bici = new ArrayList<>();
+					bici.add(vehiculo.getPlaca());
+					sedesBicicleta.put(sede, bici);
+				} else {
+					ArrayList<String> lista = sedesBicicleta.get(sede);
+					lista.add(vehiculo.getPlaca());
+				}
+			} else if (tipoVehiculo.equals("bicicleta electrica")) {
+				this.bicicletaElec.add(vehiculo);
+				String sede = vehiculo.getsede();
+				// CAMBIAR PARA CADA SEDE
+				ArrayList<String> sedeExiste = sedesBicicletaElec.get(sede);
+				if (sedeExiste == null) {
+					ArrayList<String> biciE = new ArrayList<>();
+					biciE.add(vehiculo.getPlaca());
+					sedesBicicletaElec.put(sede, biciE);
+				} else {
+					ArrayList<String> lista = sedesBicicletaElec.get(sede);
+					lista.add(vehiculo.getPlaca());
+				}
+			} else if (tipoVehiculo.equals("patineta electrica")) {
+				this.patinetaElec.add(vehiculo);
+				String sede = vehiculo.getsede();
+				// CAMBIAR PARA CADA SEDE
+				ArrayList<String> sedeExiste = sedesPatinetaEle.get(sede);
+				if (sedeExiste == null) {
+					ArrayList<String> patiE = new ArrayList<>();
+					patiE.add(vehiculo.getPlaca());
+					sedesPatinetaEle.put(sede, patiE);
+				} else {
+					ArrayList<String> lista = sedesPatinetaEle.get(sede);
+					lista.add(vehiculo.getPlaca());
+				}
 			}
+
 			return true; // Se registró exitosamente
 		} else {
 			return false; // No se pudo registrar (puedes agregar más lógica según sea necesario)
@@ -854,15 +923,38 @@ public class SistemaAlquilerAutos {
 		}
 	}
 
+	// CAMBAIRLO
 	public boolean cambiarVehiculoSede(String placa, String sede) {
-		for (int i = 0; i < adminsedes.size(); i++) {
-			String sede_ = adminsedes.get(i).getSede();
-			if (sede_.equals(sede)) {
-				AdministradorSede adminSede = adminsedes.get(i);
-				adminSede.cambiarSede(placa, sede, sedes);
-				return true;
+		for (Vehiculo vehiculoesp : todosLosVehiculos) {
+			String placaUna = vehiculoesp.getPlaca();
+			if (placaUna.equals(placa)) {
+				String tipoVehiculo = vehiculoesp.getTipoVehiculo().getNombreTipo();
+				for (int i = 0; i < adminsedes.size(); i++) {
+					String sede_ = adminsedes.get(i).getSede();
+					if (sede_.equals(sede)) {
+						AdministradorSede adminSede = adminsedes.get(i);
+						if (tipoVehiculo.equals("automovil")) {
+							adminSede.cambiarSede(placa, sede, sedes);
+							return true;
+						} else if (tipoVehiculo.equals("moto")) {
+							adminSede.cambiarSede(placa, sede, sedesMoto);
+							return true;
+						} else if (tipoVehiculo.equals("motocicleta deportiva")) {
+							adminSede.cambiarSede(placa, sede, sedesMotoDepor);
+							return true;
+						} else if (tipoVehiculo.equals("bicicleta")) {
+							adminSede.cambiarSede(placa, sede, sedesBicicleta);
+							return true;
+						} else if (tipoVehiculo.equals("bicicleta electrica")) {
+							adminSede.cambiarSede(placa, sede, sedesBicicletaElec);
+							return true;
+						} else if (tipoVehiculo.equals("patineta electrica")) {
+							adminSede.cambiarSede(placa, sede, sedesPatinetaEle);
+							return true;
+						}
+					}
+				}
 			}
-
 		}
 		return false;
 	}
