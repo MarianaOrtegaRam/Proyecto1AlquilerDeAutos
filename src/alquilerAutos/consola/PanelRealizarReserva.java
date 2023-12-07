@@ -1,6 +1,7 @@
 package alquilerAutos.consola;
 
 import java.awt.GridLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -90,6 +91,9 @@ public class PanelRealizarReserva extends JPanel {
         if (reserva != null) {
             ArrayList<String> datosReserva = sistema.getDatosReserva(reserva);
             new ReservaCorrecta(datosReserva);
+            String id = Integer.toString(reserva.getIdReserva());
+            sistema.crearReciboPDF(id,sedeRecoger,sedeEntrega,fechaRecoger,rangoHoraEntrega,fechaEntrega,seguro,categoriaDeseada);
+            
         } else {
             new ReservaIncorrecta();
 
