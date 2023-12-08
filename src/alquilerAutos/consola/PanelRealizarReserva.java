@@ -92,7 +92,7 @@ public class PanelRealizarReserva extends JPanel {
             ArrayList<String> datosReserva = sistema.getDatosReserva(reserva);
             new ReservaCorrecta(datosReserva);
             String id = Integer.toString(reserva.getIdReserva());
-            //sistema.crearReciboPDF(id,sedeRecoger,sedeEntrega,fechaRecoger,rangoHoraEntrega,fechaEntrega,seguro,categoriaDeseada);
+            sistema.crearReciboPDF(id,sedeRecoger,sedeEntrega,fechaRecoger,rangoHoraEntrega,fechaEntrega,seguro,categoriaDeseada);
             
         } else {
             new ReservaIncorrecta();

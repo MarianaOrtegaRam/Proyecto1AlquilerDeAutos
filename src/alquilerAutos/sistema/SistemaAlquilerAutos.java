@@ -2,6 +2,7 @@ package alquilerAutos.sistema;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,9 +26,12 @@ import alquilerAutos.modelo.Seguro;
 import alquilerAutos.modelo.Vehiculo;
 
 
-//import com.itextpdf.text.Document;
-//import com.itexpdf.text.DocumentException;
-//import com.itextpdf.text.pdf.pdfWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.awt.*;
+
 
 
 public class SistemaAlquilerAutos {
@@ -1030,28 +1034,28 @@ public class SistemaAlquilerAutos {
 
 	}
 	
-	/*
-	 * public void crearReciboPDF(String id, String sedeRecoger, String sedeEntrega,
-	 * String fechaRecoger, String rangoHoraEntrega, String fechaEntrega, String
-	 * seguro, String categoriaDeseada){ Document documento = new Document();
-	 * 
-	 * try {
-	 * 
-	 * PdfWriter.getInstance(documento, new
-	 * FileOutputStream("recibosPDF/recibo"+id+".pdf")); documento.open();
-	 * documento.add(new Paragraph("Sede Recoger: "+sedeRecoger)); documento.add(new
-	 * Paragraph("Sede Entrega: "+sedeEntrega)); documento.add(new
-	 * Paragraph("Fecha a recoger: "+fechaRecoger)); documento.add(new
-	 * Paragraph("Rango de horas entrega: "+rangoHoraEntrega)); documento.add(new
-	 * Paragraph("Fecha a entregar: "+fechaEntrega)); documento.add(new
-	 * Paragraph("Seguro: "+seguro)); documento.add(new
-	 * Paragraph("Categoria: "+categoriaDeseada));
-	 * 
-	 * 
-	 * } catch (DocumentException | FileNotFoundException e) { ((Throwable)
-	 * e).printStackTrace(); } finally { if (documento != null &&
-	 * documento.isOpen()) { documento.close(); } } }
-	 */
+	
+	  public void crearReciboPDF(String id, String sedeRecoger, String sedeEntrega,
+	  String fechaRecoger, String rangoHoraEntrega, String fechaEntrega, String
+	  seguro, String categoriaDeseada){ Document documento = new Document();
+	  
+	  try {
+	  
+	  PdfWriter.getInstance(documento, new
+	  FileOutputStream("recibosPDF/recibo"+id+".pdf")); documento.open();
+	  documento.add(new Paragraph("Sede Recoger: "+sedeRecoger)); documento.add(new
+	  Paragraph("Sede Entrega: "+sedeEntrega)); documento.add(new
+	  Paragraph("Fecha a recoger: "+fechaRecoger)); documento.add(new
+	  Paragraph("Rango de horas entrega: "+rangoHoraEntrega)); documento.add(new
+	  Paragraph("Fecha a entregar: "+fechaEntrega)); documento.add(new
+	  Paragraph("Seguro: "+seguro)); documento.add(new
+	  Paragraph("Categoria: "+categoriaDeseada));
+	  
+	  
+	  } catch (DocumentException | FileNotFoundException e) { ((Throwable)
+	  e).printStackTrace(); } finally { if (documento != null &&
+	  documento.isOpen()) { documento.close(); } } }
+	 
 
 	public ArrayList<String> getDatosReserva(Reserva reserva) {
 		String sedeRecoger = reserva.getSedeRecoger();
