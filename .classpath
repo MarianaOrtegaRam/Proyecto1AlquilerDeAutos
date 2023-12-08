@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/Alejandro Lancheros/OneDrive/Escritorio/2023-20/Dpo/Proyecto1AlquilerDeAutosT/driver-PDF/itext5-itextpdf-5.5.12.jar">
+	<classpathentry kind="lib" path="driver-PDF/itext5-itextpdf-5.5.12.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
