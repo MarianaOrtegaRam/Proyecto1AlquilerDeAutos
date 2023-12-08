@@ -1,5 +1,8 @@
 package alquilerAutos.modelo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,13 +24,23 @@ public class InfoEmpleado {
 	}
 
 	public void guardarEmpleado(String texto) {
-		FileWriter filewriter;
-		try {
-			filewriter = new FileWriter("./inventario/empleados.txt", true);
-			filewriter.write(texto.toLowerCase() + "\n");
-			filewriter.close();
+		StringBuilder contenidoAntiguo = new StringBuilder();
+		try (BufferedReader br = new BufferedReader(new FileReader("./inventario/empleados.txt"))) {
+		    String linea = br.readLine();
+		    while (linea != null) {
+		        contenidoAntiguo.append(linea).append("\n");
+		        linea = br.readLine();
+		    }
 		} catch (IOException e) {
-			e.printStackTrace();
+		    e.printStackTrace();
+		}
+
+		String contenidoNuevo = contenidoAntiguo.toString() + texto.toLowerCase();
+
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/empleados.txt"))) {
+		    bw.write(contenidoNuevo);
+		} catch (IOException e) {
+		    e.printStackTrace();
 		}
 	}
 }

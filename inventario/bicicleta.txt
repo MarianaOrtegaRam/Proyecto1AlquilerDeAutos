@@ -1,4 +1,3 @@
 PPP-183;trek;mediano;domane;rojo;80000;0;1;true;na;Aeropuerto Internacional;bicicleta
 LMU-021;giant;mediano;defy;gris;700000;0;1;true;na;Oficina Central;bicicleta
-ZXB-983;merida;mediano;scultura;blanco;600000;0;1;true;na;Oficina Central;bicicleta
 PBR-945;cube;mediano;agree;azul;700000;0;1;true;na;Zona Costera;bicicleta

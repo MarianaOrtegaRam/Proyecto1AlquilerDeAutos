@@ -1,5 +1,8 @@
 package alquilerAutos.modelo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,70 +85,128 @@ public class Administrador {
 	}
 
 	public void guardarVehiculo(String texto) {
-		FileWriter filewriter;
+	    StringBuilder contenidoAntiguo = new StringBuilder();
+	    try (BufferedReader br = new BufferedReader(new FileReader("./inventario/vehiculos.txt"))) {
+	        String linea = br.readLine();
+	        while (linea != null) {
+	            contenidoAntiguo.append(linea).append("\n");
+	            linea = br.readLine();
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 
-		try {
-			filewriter = new FileWriter("./inventario/vehiculos.txt", true);
-			filewriter.write("\n" + texto);
-			filewriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	    String contenidoNuevo = contenidoAntiguo.toString() + texto;
+
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/vehiculos.txt"))) {
+	        bw.write(contenidoNuevo);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	public void guardarSede(String texto) {
-		FileWriter filewriter;
-		try {
-			filewriter = new FileWriter("./inventario/sedesvehiculos.txt", true);
-			filewriter.write("\n" + texto);
-			filewriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		 StringBuilder contenidoAntiguo = new StringBuilder();
+		    try (BufferedReader br = new BufferedReader(new FileReader("./inventario/sedesvehiculos.txt"))) {
+		        String linea = br.readLine();
+		        while (linea != null) {
+		            contenidoAntiguo.append(linea).append("\n");
+		            linea = br.readLine();
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+
+		    String contenidoNuevo = contenidoAntiguo.toString() + texto;
+
+		    try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/sedesvehiculos.txt"))) {
+		        bw.write(contenidoNuevo);
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
 	}
 
 	public void guardarOtros(String texto, String tipo) {
-		FileWriter filewriter;
+		StringBuilder contenidoAntiguo = new StringBuilder();
+	    try (BufferedReader br = new BufferedReader(new FileReader("./inventario/" + tipo + ".txt"))) {
+	        String linea = br.readLine();
+	        while (linea != null) {
+	            contenidoAntiguo.append(linea).append("\n");
+	            linea = br.readLine();
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 
-		try {
-			filewriter = new FileWriter("./inventario/" + tipo + ".txt", true);
-			filewriter.write("\n" + texto);
-			filewriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	    String contenidoNuevo = contenidoAntiguo.toString() + texto;
+
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/" + tipo + ".txt"))) {
+	        bw.write(contenidoNuevo);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	public void guardarSedeOtro(String texto, String tipo) {
-		FileWriter filewriter;
-		try {
-			filewriter = new FileWriter("./inventario/sedes" + tipo + ".txt", true);
-			filewriter.write("\n" + texto);
-			filewriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		StringBuilder contenidoAntiguo = new StringBuilder();
+	    try (BufferedReader br = new BufferedReader(new FileReader("./inventario/sedes" + tipo + ".txt"))) {
+	        String linea = br.readLine();
+	        while (linea != null) {
+	            contenidoAntiguo.append(linea).append("\n");
+	            linea = br.readLine();
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    String contenidoNuevo = contenidoAntiguo.toString() + texto;
+
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/sedes" + tipo + ".txt"))) {
+	        bw.write(contenidoNuevo);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	public void guardarSeguro(String texto) {
-		FileWriter filewriter;
-		try {
-			filewriter = new FileWriter("./inventario/seguros.txt", true);
-			filewriter.write("\n" + texto.toLowerCase());
-			filewriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		StringBuilder contenidoAntiguo = new StringBuilder();
+	    try (BufferedReader br = new BufferedReader(new FileReader("./inventario/seguros.txt"))) {
+	        String linea = br.readLine();
+	        while (linea != null) {
+	            contenidoAntiguo.append(linea).append("\n");
+	            linea = br.readLine();
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    String contenidoNuevo = contenidoAntiguo.toString() + texto;
+
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/seguros.txt"))) {
+	        bw.write(contenidoNuevo);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	public void guardarAdminSede(String texto) {
-		FileWriter filewriter;
-		try {
-			filewriter = new FileWriter("./inventario/adminsedes.txt", true);
-			filewriter.write("\n" + texto);
-			filewriter.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		StringBuilder contenidoAntiguo = new StringBuilder();
+	    try (BufferedReader br = new BufferedReader(new FileReader("./inventario/adminsedes.txt"))) {
+	        String linea = br.readLine();
+	        while (linea != null) {
+	            contenidoAntiguo.append(linea).append("\n");
+	            linea = br.readLine();
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    String contenidoNuevo = contenidoAntiguo.toString() + texto;
+
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/adminsedes.txt"))) {
+	        bw.write(contenidoNuevo);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 }

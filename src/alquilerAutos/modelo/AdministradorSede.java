@@ -72,8 +72,32 @@ public class AdministradorSede {
 		this.contraseña = contraseña;
 	}
 
-	public void eliminarVehiculo(){
-		
+	public boolean eliminarVehiculo(String placa, String tipo ) {
+		 
+	    StringBuilder contenidoNuevo = new StringBuilder();
+	    boolean vehiculoEliminado = false;
+	    
+	    try (BufferedReader br = new BufferedReader(new FileReader("./inventario/"+tipo+".txt"))) {
+	        String linea = br.readLine();
+	        while (linea != null) {
+	       
+	            if (!linea.contains(placa)) {
+	                contenidoNuevo.append(linea).append("\n");
+	            }else {
+	            	vehiculoEliminado = true;
+	            }
+	            linea = br.readLine();
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/"+tipo+".txt"))) {
+	        bw.write(contenidoNuevo.toString().trim());  
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return vehiculoEliminado;
 	}
 
 }

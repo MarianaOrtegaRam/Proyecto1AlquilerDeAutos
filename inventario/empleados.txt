@@ -1,1 +1,3 @@
-geison galvis;geison@gmail.com;12-12-2000;colombiano;geisong;geisong;asdasd;asdasd;dasda;dasdsa;dasds;;;;;
+geison galvis;geison@gmail.com;12-12-2000;colombiano;geisong;geisong;asdasd;asdasd;dasda;dasdsa;dasds;
+sebastian;sebas.d@gmail.com;12-12-23;coloombiano;sebas;hola1
+andres;andres@gmail.com;23-12-02;argentino;andres;hola2

@@ -140,8 +140,9 @@ public class PanelRegistrarCliente extends JPanel{
                 String numeroLicencia = numeroField.getText();
                 String fechaVencimiento = fechaVencimientoField.getText();
                 
-                boolean nuevoCliente = sistema.nuevoCliente(nombre, contacto, nacimiento, nacionalidad, login, contraseña,
-                															paisLicencia, numeroLicencia, fechaVencimiento);
+                int flags = 0;
+				boolean nuevoCliente = sistema.nuevoCliente(nombre, contacto, nacimiento, nacionalidad, login, contraseña,
+                															paisLicencia, numeroLicencia, fechaVencimiento, fechaVencimiento, flags, fechaVencimiento, flags, fechaVencimiento);
 
                 // Mostrar una ventana emergente con el resultado
                 if (nuevoCliente) {
