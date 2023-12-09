@@ -2,3 +2,9 @@ Proteccion contra Robo;300000;Este seguro te protege en caso de que el vehiculo 
 Accidente Personal;250000;Ofrece cobertura en caso de lesiones personales o gastos medicos para ti y tus pasajeros en caso de un accidente
 Cobertura de neumaticos y parabrisas;130000; cubre daños a los neumaticos y al parabrisas
 Responsabilidad Civil;350000;Este seguro cubre daños a terceros y al vehículo alquilado en caso de un accidente
+Proteccion contra choque;300.324;protege contra cualquier choque involuntario
+Proteccion contra choque;300.324;protege contra cualquier choque involuntario
+Proteccion contra choque;300.324;protege contra cualquier choque involuntario
+Proteccion contra choque;300324;protege contra cualquier choque involuntario
+Proteccion contra choque;300324;protege contra cualquier choque involuntario
+Proteccion contra choque;300324;protege contra cualquier choque involuntario

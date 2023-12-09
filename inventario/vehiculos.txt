@@ -7,3 +7,6 @@ ULM-882;nissan;pequenio;March;gris;1250000;1;5;true;economico;Zona Costera;autom
 WWL-739;toyota;intermedio;Corolla;azul;1945000;2;5;true;intermedio;Aeropuerto Internacional;automovil
 UET-002;volkswagen;mediano;Voyage;gris;2750000;3;4;true;intermedio;Aeropuerto Internacional;automovil
 MOR-196;toyota;grande;Sienna;rojo;2900000;4;8;true;transportemultiple;Oficina Central;automovil
+AFG-124;kia;mediano;Sienna;azul;3490000;4;8;true;transportemultiple;Aeropuerto Internacional;automovil
+AFG-124;kia;mediano;Sienna;azul;3490000;4;8;true;transportemultiple;Aeropuerto Internacional;automovil
+AFG-124;kia;mediano;Sienna;azul;3490000;4;8;true;transportemultiple;Aeropuerto Internacional;automovil
