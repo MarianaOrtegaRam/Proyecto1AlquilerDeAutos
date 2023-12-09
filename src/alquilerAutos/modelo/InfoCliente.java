@@ -1,8 +1,5 @@
 package alquilerAutos.modelo;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,69 +56,38 @@ public class InfoCliente {
 	}
 
 	public void agregarClienteBasicos(String texto) {
-		StringBuilder contenidoAntiguo = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new FileReader("./inventario/clientes.txt"))) {
-		    String linea = br.readLine();
-		    while (linea != null) {
-		        contenidoAntiguo.append(linea).append("\n");
-		        linea = br.readLine();
-		    }
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/clientes.txt", true);
+			filewriter.write(texto.toLowerCase() + ";");
+			filewriter.close();
 		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-
-		String contenidoNuevo = contenidoAntiguo.toString() + texto.toLowerCase() + ";";
-
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/clientes.txt"))) {
-		    bw.write(contenidoNuevo);
-		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 
 	}
 
 	public void agregarClienteLicencias(String texto) {
-		StringBuilder contenidoAntiguo = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new FileReader("./inventario/clientes.txt"))) {
-		    String linea = br.readLine();
-		    while (linea != null) {
-		        contenidoAntiguo.append(linea).append("\n");
-		        linea = br.readLine();
-		    }
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/clientes.txt", true);
+			filewriter.write(texto.toLowerCase() + ";");
+			filewriter.close();
 		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-
-		String contenidoNuevo = contenidoAntiguo.toString() + texto.toLowerCase() + ";";
-
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/clientes.txt"))) {
-		    bw.write(contenidoNuevo);
-		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 
 	}
 
 	public void agregarClienteMetodoPago(String texto) {
-		StringBuilder contenidoAntiguo = new StringBuilder();
-		try (BufferedReader br = new BufferedReader(new FileReader("./inventario/clientes.txt"))) {
-		    String linea = br.readLine();
-		    while (linea != null) {
-		        contenidoAntiguo.append(linea).append("\n");
-		        linea = br.readLine();
-		    }
+		FileWriter filewriter;
+		try {
+			filewriter = new FileWriter("./inventario/clientes.txt", true);
+			filewriter.write(texto + "\n");
+			filewriter.close();
 		} catch (IOException e) {
-		    e.printStackTrace();
-		}
-
-		String contenidoNuevo = contenidoAntiguo.toString() + texto;
-
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter("./inventario/clientes.txt"))) {
-		    bw.write(contenidoNuevo);
-		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
 
 	}
 }
-

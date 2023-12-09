@@ -25,14 +25,11 @@ import alquilerAutos.modelo.Sede;
 import alquilerAutos.modelo.Seguro;
 import alquilerAutos.modelo.Vehiculo;
 
-
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.awt.*;
-
-
 
 public class SistemaAlquilerAutos {
 
@@ -973,22 +970,22 @@ public class SistemaAlquilerAutos {
 		AdministradorSede adminsede = new AdministradorSede("n", "n", "n", "n", "n");
 		String tipo = Tipo.toLowerCase();
 		boolean vehiculoEliminado = false;
-		
-		if("bicicleta".equals(tipo)) {
+
+		if ("bicicleta".equals(tipo)) {
 			vehiculoEliminado = adminsede.eliminarVehiculo(placa, "bicicleta");
-		}else if("bicicleta electrica".equals(tipo)){
+		} else if ("bicicleta electrica".equals(tipo)) {
 			vehiculoEliminado = adminsede.eliminarVehiculo(placa, "bicicleta electrica");
-		}else if("moto".equals(tipo)){
+		} else if ("moto".equals(tipo)) {
 			vehiculoEliminado = adminsede.eliminarVehiculo(placa, "moto");
-		}else if("motocicleta deportiva".equals(tipo)){
+		} else if ("motocicleta deportiva".equals(tipo)) {
 			vehiculoEliminado = adminsede.eliminarVehiculo(placa, "motocicleta deportiva");
-		}else if("patineta electrica".equals(tipo)){
+		} else if ("patineta electrica".equals(tipo)) {
 			vehiculoEliminado = adminsede.eliminarVehiculo(placa, "patineta electrica");
-		}else if("automovil".equals(tipo)){
+		} else if ("automovil".equals(tipo)) {
 			vehiculoEliminado = adminsede.eliminarVehiculo(placa, "vehiculos");
-	}
+		}
 		return vehiculoEliminado;
-}
+	}
 
 	public String input(String mensaje) {
 		try {
@@ -1017,8 +1014,6 @@ public class SistemaAlquilerAutos {
 		int diasTotales = diasEntregar - diasRecoger;
 		return diasTotales;
 	}
-	
-	
 
 	public DatosCliente getDatosCliente(String usuario) {
 		DatosCliente elCliente = null;
@@ -1033,29 +1028,32 @@ public class SistemaAlquilerAutos {
 		return elCliente;
 
 	}
-	
-	
-	  public void crearReciboPDF(String id, String sedeRecoger, String sedeEntrega,
-	  String fechaRecoger, String rangoHoraEntrega, String fechaEntrega, String
-	  seguro, String categoriaDeseada){ Document documento = new Document();
-	  
-	  try {
-	  
-	  PdfWriter.getInstance(documento, new
-	  FileOutputStream("recibosPDF/recibo"+id+".pdf")); documento.open();
-	  documento.add(new Paragraph("Sede Recoger: "+sedeRecoger)); documento.add(new
-	  Paragraph("Sede Entrega: "+sedeEntrega)); documento.add(new
-	  Paragraph("Fecha a recoger: "+fechaRecoger)); documento.add(new
-	  Paragraph("Rango de horas entrega: "+rangoHoraEntrega)); documento.add(new
-	  Paragraph("Fecha a entregar: "+fechaEntrega)); documento.add(new
-	  Paragraph("Seguro: "+seguro)); documento.add(new
-	  Paragraph("Categoria: "+categoriaDeseada));
-	  
-	  
-	  } catch (DocumentException | FileNotFoundException e) { ((Throwable)
-	  e).printStackTrace(); } finally { if (documento != null &&
-	  documento.isOpen()) { documento.close(); } } }
-	 
+
+	public void crearReciboPDF(String id, String sedeRecoger, String sedeEntrega,
+			String fechaRecoger, String rangoHoraEntrega, String fechaEntrega, String seguro, String categoriaDeseada) {
+		Document documento = new Document();
+
+		try {
+
+			PdfWriter.getInstance(documento, new FileOutputStream("recibosPDF/recibo" + id + ".pdf"));
+			documento.open();
+			documento.add(new Paragraph("Sede Recoger: " + sedeRecoger));
+			documento.add(new Paragraph("Sede Entrega: " + sedeEntrega));
+			documento.add(new Paragraph("Fecha a recoger: " + fechaRecoger));
+			documento.add(new Paragraph("Rango de horas entrega: " + rangoHoraEntrega));
+			documento.add(new Paragraph("Fecha a entregar: " + fechaEntrega));
+			documento.add(new Paragraph("Seguro: " + seguro));
+			documento.add(new Paragraph("Categoria: " + categoriaDeseada));
+
+		} catch (DocumentException | FileNotFoundException e) {
+			((Throwable) e).printStackTrace();
+		} finally {
+			if (documento != null &&
+					documento.isOpen()) {
+				documento.close();
+			}
+		}
+	}
 
 	public ArrayList<String> getDatosReserva(Reserva reserva) {
 		String sedeRecoger = reserva.getSedeRecoger();
@@ -1088,5 +1086,28 @@ public class SistemaAlquilerAutos {
 
 	public void printSede() {
 		System.out.print(sedes);
+	}
+
+	public Map<String, ArrayList<String>> getMapaSede(String sede, String tipo) {
+		Map<String, ArrayList<String>> sedeC = null;
+		if (tipo.equals("automovil")) {
+			sedeC = this.sedes;
+		} else if (tipo.equals("moto")) {
+			sedeC = this.sedesMoto;
+		} else if (tipo.equals("motocicleta deportiva")) {
+			sedeC = this.sedesMoto;
+		} else if (tipo.equals("bicicleta")) {
+			sedeC = this.sedesBicicleta;
+		} else if (tipo.equals("bicicleta electrica")) {
+			sedeC = this.sedesBicicletaElec;
+		} else if (tipo.equals("patineta electrica")) {
+			sedeC = this.sedesPatinetaEle;
+		}
+
+		return sedeC;
+	}
+
+	public ArrayList<Reserva> getReservasTot() {
+		return this.reservas;
 	}
 }

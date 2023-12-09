@@ -1,3 +1,4 @@
 automovil;Aeropuerto Internacional;Aeropuerto Internacional;12-10-2023;3-5;14-10-2023;Responsabilidad Civil;alejo7;ABC-123
 automovil;Aeropuerto Internacional;Aeropuerto Internacional;14-11-2023;8-9;18-11-2023;Cobertura de neumaticos y parabrisas;andreita;WWL-739
 bicicleta;Aeropuerto Internacional;Aeropuerto Internacional;18-12-2023;8-9;24-01-2024;Cobertura de neumaticos y parabrisas;josedomi82;PPP-183
+motocicleta deportiva;Oficina Central;Oficina Central;14-04-2024;8-9;25-04-2024;Proteccion contra Robo;manana2515;MMU-021
