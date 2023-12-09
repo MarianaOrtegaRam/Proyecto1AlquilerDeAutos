@@ -10,3 +10,6 @@ Aeropuerto Internacional;UET-002
 Oficina Central;MOR-196
 Oficina Central;ASD-342
 Oficina Central;ASD-342
+Aeropuerto Internacional;AFG-124
+Aeropuerto Internacional;AFG-124
+Aeropuerto Internacional;AFG-124

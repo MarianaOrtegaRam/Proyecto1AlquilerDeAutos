@@ -133,10 +133,9 @@ public class SistemaAlquilerAutos {
 
 		if (seguro != null) {
 			this.seguros.add(seguro);
-			return true; // Se configuró el seguro exitosamente
+			return true; 
 		} else {
-			return false; // No se pudo configurar el seguro (puedes agregar más lógica según sea
-							// necesario)
+			return false; 
 		}
 	}
 
