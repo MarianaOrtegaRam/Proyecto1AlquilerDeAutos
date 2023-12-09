@@ -51,7 +51,7 @@ public class InicioSesion extends JPanel {
 
         add(new JLabel(""));
         JLabel titulo = new JLabel("                   "
-                + "                                 Inicio de sesion Administrador General");
+                + "                                 Inicio de sesion Cliente");
         titulo.setFont(fuente);
         estePanel.add(titulo);
         estePanel.add(new JLabel(""));

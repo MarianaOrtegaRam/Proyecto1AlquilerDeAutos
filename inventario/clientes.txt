@@ -1,33 +1,3 @@
 alejandro;balh@gmail.com;14-05-2000;colombiano;alejo7;hola7;colombia;321312;19-02-2028;PayU;1151617;01/25;542;clave4
 mariana ortega;manan@hotmail.com;19-06-2004;colombiana;manana2515;seneca15;colombia;53153213;18-12-2024;PayPal;658741365;07/29;985;jaja39
 jose florez;jose@msn.com;14-02-1982;dominicano;josedomi82;laromana;republica dominicana;4569871;12/23;Stripe;23195;11/29;999;palabraMagica
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
-jose;jose.l@uniandes.edu.co;12-02-03;colombia;alejo7;tres56;
-colombia;10020303;27-02;
-PayU;2151617;01/25;124;clave4
